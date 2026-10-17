@@ -59,6 +59,8 @@ def detail(identity: str) -> dict[str, Any]:
             ],
             "holdout": read("holdout/report.json"),
         },
+        "live_checks": read("live-checks.json"),
+        "checks": read("checks.json"),
         "source": source.read_text() if source.exists() else None,
         "audits": [
             json.loads(p.read_text()) for p in sorted(directory.glob("*-audit.json"))
@@ -66,7 +68,11 @@ def detail(identity: str) -> dict[str, Any]:
     }
 
 
-def start(number: int, actor: str) -> dict[str, Any]:
+def start(number: int, actor: str, repository: str = REPOSITORY) -> dict[str, Any]:
+    from .profiles import for_repository
+    from .sql_pipeline import build as sql_build
+
+    profile = for_repository(repository)
     if not LOCK.acquire(blocking=False):
         raise RuntimeError("One feature job is already using the dedicated worker")
     identity = uuid.uuid4().hex[:16]
@@ -78,11 +84,17 @@ def start(number: int, actor: str) -> dict[str, Any]:
         status="running",
         stage="GitHub intake",
         issue_number=number,
+        target_repository=repository,
+        profile=profile["id"],
         started_at=now(),
         actor=actor,
         sandbox=WORKER,
     )
-    threading.Thread(target=build, args=(number, directory), daemon=True).start()
+    threading.Thread(
+        target=sql_build if profile["id"] == "crusoe-repository-analyst" else build,
+        args=(number, directory),
+        daemon=True,
+    ).start()
     return value
 
 

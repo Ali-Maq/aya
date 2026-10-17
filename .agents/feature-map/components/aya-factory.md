@@ -8,13 +8,13 @@ The verification includes the AYA working changes on this base.
 
 ## 1. What the user experiences
 
-An administrator opens the Factory view in Onyx. It reads ready GitHub requests and displays real job records.
+An administrator opens the Factory view in Onyx. It creates GitHub requests from a repository, feature description, and reference URL, then displays real job records. The reviewed Fireworks-to-Crusoe preset runs immediately; changed requirements become proposals.
 Each request names a target repository. Onyx is the factory interface.
 
 ## 2. Surfaces
 
 The page uses the authenticated proxy in `web/src/app/api/aya/[...path]/route.ts`.
-The host controller exposes requests, runs, and run details. A separate token protects the component endpoint.
+The host controller exposes request creation, runs, run details, SQL deployment identity, and a real Crusoe query endpoint. A separate token protects the component endpoint.
 The token names and local ports are defined in `aya/aya_factory/server.py:Handler`.
 
 ## 3. Data model
@@ -28,6 +28,7 @@ Secrets and run records are excluded by `aya/.gitignore`.
 `aya/aya_factory/intake.py:snapshot` freezes the issue, approved contract, and target commit.
 `aya/aya_factory/pipeline.py:build` calls Crusoe, dispatches NemoHermes, and requires REA binary evidence.
 `aya/aya_factory/evaluate.py:verify` compares candidate results with the pinned jq executable in isolated containers.
+`aya/aya_factory/sql_pipeline.py:build` handles source/runtime migration from Fireworks into the Crusoe Developer Hub fork. `aya/aya_factory/sql_eval.py` checks SQLite behavior and `aya/aya_factory/sql_client.py` performs actual Crusoe tool calls. `aya/aya_factory/sql_runtime.py` executes only the accepted module digest against fresh GitHub data.
 Passing candidates create a target pull request. CI must pass before local activation.
 
 ## 5. Contracts and invariants
@@ -61,6 +62,7 @@ Start a real issue, inspect native evidence, inspect CI, then export an uploaded
 
 ## 9. Footguns
 
+The SQL contract supports one read-only query over a bounded repository dataset. It excludes Fireworks training and embeddings. The interface exposes raw receipts only in collapsed details.
 The first contract supports a bounded jq recipe subset. It does not implement arbitrary jq programs.
 The OpenShell runtime reports Landlock unavailable on this Docker Desktop host.
 Container and egress controls apply; a Landlock boundary is not verified.

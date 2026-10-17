@@ -27,8 +27,8 @@ async function forward(request: NextRequest, context: RouteContext) {
   const endpoint = path.join("/");
   const allowed =
     request.method === "GET"
-      ? /^(requests|runs|runs\/[a-f0-9]{16})$/.test(endpoint)
-      : request.method === "POST" && endpoint === "run";
+      ? /^(requests|deployment|runs|runs\/[a-f0-9]{16})$/.test(endpoint)
+      : request.method === "POST" && /^(run|requests|ask)$/.test(endpoint);
   if (!allowed)
     return NextResponse.json(
       { error: "Unknown factory operation" },
@@ -51,7 +51,7 @@ async function forward(request: NextRequest, context: RouteContext) {
       { status: 503 }
     );
   const body = request.method === "POST" ? await request.text() : undefined;
-  if (body && body.length > 2048)
+  if (body && body.length > 12000)
     return NextResponse.json({ error: "Request too large" }, { status: 413 });
   try {
     const upstream = await fetch(
@@ -65,7 +65,7 @@ async function forward(request: NextRequest, context: RouteContext) {
           "Content-Type": "application/json",
           "X-AYA-User": user.id,
         },
-        signal: AbortSignal.timeout(45000),
+        signal: AbortSignal.timeout(endpoint === "ask" ? 240000 : 45000),
       }
     );
     return new NextResponse(await upstream.text(), {

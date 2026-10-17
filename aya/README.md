@@ -3,7 +3,11 @@
 AYA recovers a bounded capability from existing software and delivers a tested module into another product.
 Onyx is the factory frontend. A GitHub issue names the target repository and its versioned contract.
 
-The first target is **Saved JSON Export Recipes for Open WebUI**.
+The current example ports **Fireworks SQL tools into a Crusoe repository analyst**.
+[Demo and architecture](DEMO.md) explains the workflow, evidence, provider research, and fine-tuning scope.
+The live request is [Crusoe Developer Hub #1](https://github.com/Ali-Maq/crusoe-developer-hub/issues/1).
+
+The first completed target is **Saved JSON Export Recipes for Open WebUI**.
 Hermes inspects the installed jq 1.8.2 library through REA and Ghidra.
 It then writes a Python component and tests inside OpenShell, using Crusoe inference.
 The delivered component has no jq runtime dependency.
@@ -170,3 +174,9 @@ Other coding agents can use the same protocol. No unsupported comparison claims 
 
 Onyx's original source, license, and Git history remain in this fork.
 REA, Hermes, OpenShell, Ghidra, jq, and Open WebUI retain their own licenses and attribution.
+
+## Prepare the SQL reference
+
+From `aya/`, run `python -m aya_factory.prepare_sql` with Python 3.12, GitHub CLI authentication, and network access. This downloads pinned Fireworks files, checks their digests, copies the replay harness, and fetches actual GitHub metadata. The existing REA container reads `.state/reference` through its read-only mount. Run preparation before a factory build, never during one.
+
+The generated cookbook is portable: its `run.py` accepts a question and reads `CRUSOE_API_KEY` from the environment. The browser demo uses the same client and the accepted SQL module in a restricted executor. The public fork preserves Crusoe's original repository and licenses.

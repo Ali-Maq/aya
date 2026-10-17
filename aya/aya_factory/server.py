@@ -9,8 +9,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
-from . import intake, pipeline
-from .core import ROOT, STATE, sha
+from . import intake, pipeline, sql_runtime
+from .core import REPOSITORY, ROOT, STATE, sha
 from .evaluate import isolated
 
 EXPORT_SLOTS = threading.BoundedSemaphore(2)
@@ -63,6 +63,8 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if self.path == "/requests":
                 value = intake.requests()
+            elif self.path == "/deployment":
+                value = sql_runtime.deployment()
             elif self.path == "/runs":
                 value = pipeline.list_runs()
             elif re.fullmatch(r"/runs/[a-f0-9]{16}", self.path):
@@ -80,6 +82,13 @@ class Handler(BaseHTTPRequestHandler):
         if not self.authorized("AYA_RUNTIME_TOKEN" if runtime else "AYA_FACTORY_TOKEN"):
             return
         try:
+            if not runtime and self.path == "/requests":
+                return self.send_json(intake.create_request(self.body(12000)), 201)
+            if not runtime and self.path == "/ask":
+                value = self.body(6000)
+                if not isinstance(value, dict):
+                    raise ValueError("Supply a question")
+                return self.send_json(sql_runtime.ask(value.get("question")))
             if not runtime and self.path == "/run":
                 value = self.body(2048)
                 if not isinstance(value, dict) or type(value.get("number")) is not int:
@@ -88,6 +97,7 @@ class Handler(BaseHTTPRequestHandler):
                     pipeline.start(
                         value["number"],
                         self.headers.get("X-AYA-User", "local-operator"),
+                        value.get("repository", REPOSITORY),
                     ),
                     202,
                 )
