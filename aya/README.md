@@ -18,6 +18,30 @@ The delivered component has no jq runtime dependency.
 These URLs use a separate demo profile. Existing local applications and their data are preserved.
 Sign in with the demo accounts configured on this machine. Credentials are excluded from Git.
 
+## Verified demonstration
+
+Run `91ae22817df040e7` completed on October 17, 2026, in 8 minutes and 10 seconds.
+It used real Crusoe responses, native Hermes sessions, REA decompilation, jq execution, and GitHub Actions.
+
+| Gate | Observed result |
+|---|---|
+| First candidate | 207/210 independent checks; delivery blocked |
+| Agent repair | 210/210 development checks |
+| Fresh held-out seed | 210/210 checks |
+| Target test suite | 62 tests, including 57 agent-written tests |
+| GitHub delivery | [Generated PR and CI](https://github.com/Ali-Maq/aya-data-recipes/pull/2) |
+| Product export | Real CSV download; exact bytes checked |
+| Persistence | Saved recipe reused after reload in a new chat |
+| File access | Another signed-in user received HTTP 404 for the exported file |
+
+The first candidate mishandled scalar records, empty columns, and non-scalar fallbacks.
+These were actual failures caught outside the agent's test suite.
+Hermes repaired them and retained its own red/green test output.
+
+[Run records](demo/evidence/91ae22817df040e7) include the rejected cases, verification seeds, native agent lineage, and downloaded CSV bytes.
+They document the completed run. Live builds do not read them or substitute them for service calls.
+The component digest is `58962c252d7c35a92ee45f0ca7bb7f41b2dfa64e52c819d98f94cf60dbf503bf`.
+
 ## What the run does
 
 ```mermaid

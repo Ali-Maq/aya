@@ -1,0 +1,7 @@
+{
+  "admin_login": 204,
+  "admin_requests": 200,
+  "anonymous_requests": 403,
+  "viewer_requests": 403,
+  "viewer_runs": 403
+}

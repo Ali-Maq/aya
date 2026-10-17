@@ -55,7 +55,7 @@ def plan(spec: dict[str, Any], directory: Path, journal: Journal) -> dict[str, A
 
 AUDIT = """import sqlite3,json
 c=sqlite3.connect("file:/sandbox/.hermes/state.db?mode=ro",uri=True);c.row_factory=sqlite3.Row
-rows=[dict(r) for r in c.execute("SELECT id,source,parent_session_id,tool_call_count,input_tokens,output_tokens,api_call_count FROM sessions ORDER BY started_at DESC LIMIT 200")]
+rows=[dict(r) for r in c.execute("SELECT id,source,model,billing_provider,parent_session_id,tool_call_count,input_tokens,output_tokens,api_call_count FROM sessions ORDER BY started_at DESC LIMIT 200")]
 for row in rows:
  names=set()
  for message in c.execute("SELECT tool_name,tool_calls FROM messages WHERE session_id=?",(row["id"],)):

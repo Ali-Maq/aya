@@ -51,7 +51,14 @@ def detail(identity: str) -> dict[str, Any]:
         "snapshot": read("snapshot.json"),
         "plan": read("plan.json"),
         "evidence": read("evidence.json"),
-        "report": read("report.json"),
+        "report": {
+            "latest": read("report.json"),
+            "attempts": [
+                json.loads(path.read_text())
+                for path in sorted(directory.glob("candidate-*-report.json"))
+            ],
+            "holdout": read("holdout/report.json"),
+        },
         "source": source.read_text() if source.exists() else None,
         "audits": [
             json.loads(p.read_text()) for p in sorted(directory.glob("*-audit.json"))
@@ -204,8 +211,10 @@ def build(number: int, directory: Path) -> None:
             validate_source(source)
             (directory / f"candidate-{attempt + 1}.py").write_text(source)
             (directory / "agent_tests.py").write_text(tests)
+            (directory / f"candidate-{attempt + 1}-tests.py").write_text(tests)
             state(directory, stage="Independent verification")
             report = verify(source, directory, secrets.randbits(64))
+            save(directory / f"candidate-{attempt + 1}-report.json", report)
             journal.emit(
                 "candidate_evaluated",
                 attempt=attempt + 1,

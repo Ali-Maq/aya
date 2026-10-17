@@ -1,0 +1,8 @@
+{
+  "initial_csv_sha256": "e1f062e9106b8abb0d7ba56757ea9a2032dadbc5c057a995566043045f04e84c",
+  "reused_csv_sha256": "aa6b7178e43d1239583aa2506df29a2c40900487f8543eb9f6d568b9f1596741",
+  "recipe_unchanged_after_reload_and_new_chat": true,
+  "other_user_download_status": 404,
+  "first_chat": "http://localhost:3032/c/8cbe07bb-d95e-41ec-8eb0-992fc91dbd88",
+  "reuse_chat": "http://localhost:3032/c/9bdba400-d0ef-45f7-bec2-a9325cea5309"
+}
