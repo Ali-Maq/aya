@@ -1,0 +1,31 @@
+{
+  "acceptance_authority": "independent controller evaluator",
+  "action": "compare",
+  "backend": "hosted-chat",
+  "completed_at": "2026-10-17T23:23:55.657950+00:00",
+  "endpoint": "https://api.inference.crusoecloud.com/v1",
+  "immutable_sha256": {
+    "contract": "a30826986451ae523170674f5fd4df572b19ab113426fcd2e785efff1650b66e",
+    "dataset": "f532d6ebe04eb3195867cc351b8eb51fb932ef799721fdc80e9c5f7e601ac33d",
+    "evaluator": "dbf310aae359ecb81ec2396ce0c0859ede1adcf0e27e9151e861a5a4fe66c166",
+    "task_file": "0a341618350658a1205e09585022d57c47b139c4e87b1d02a32ff8ce4d99ed41"
+  },
+  "model": "deepseek-ai/DeepSeek-V4-Pro",
+  "retained": {
+    "beats_reference": false,
+    "last_evaluated_version": 1,
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "version": null
+  },
+  "retained_workflow_path": "<private_state>/mass/db5f5b51190a4b97/rhi/retained_workflow.json",
+  "rhi_dir": "<private_state>/mass/db5f5b51190a4b97/rhi",
+  "task": 1001,
+  "version": 1,
+  "weight_update": false,
+  "workspace_sha256": {
+    "public-tasks.json": "f532d6ebe04eb3195867cc351b8eb51fb932ef799721fdc80e9c5f7e601ac33d",
+    "queries.json": "b0129031e3a2d9e277faa9894939ba60e7654a7703a7172046bd413d4045ca13",
+    "results.json": "50ea48d326e936b257f44ed82f92631fde0a701d8b797c00967d34bfc71f8e19",
+    "run_status.json": "ac393be355964bd258808c675b2fc366bef678b82f0d5b5aaf235fff47461a4a"
+  }
+}

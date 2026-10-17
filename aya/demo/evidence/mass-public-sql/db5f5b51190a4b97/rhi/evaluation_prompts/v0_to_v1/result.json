@@ -1,0 +1,18 @@
+{
+  "base_url": "https://api.inference.crusoecloud.com/v1",
+  "call_metrics": {
+    "cost_estimate_note": "Hosted inference; token usage is recorded, but API cost was not estimated.",
+    "estimated_cost_usd": null,
+    "response_id": "2c4ce954ccd149458fca9416a7ac8b9c",
+    "served_model": "deepseek-ai/DeepSeek-V4-Pro",
+    "usage": {
+      "input_tokens": 8963,
+      "output_tokens": 1875,
+      "total_tokens": 10838
+    }
+  },
+  "created_at_utc": "2026-10-17T23:18:11.956486+00:00",
+  "improvement": "multi-agent-design-v0 -> multi-agent-design-v1",
+  "llm_backend": "hosted-chat",
+  "model": "deepseek-ai/DeepSeek-V4-Pro"
+}

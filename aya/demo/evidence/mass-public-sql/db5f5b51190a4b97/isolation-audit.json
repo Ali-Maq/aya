@@ -1,0 +1,101 @@
+{
+  "audit_limitations": [
+    "Some UI trace payloads were truncated; full-call-audit.json inspects complete SQLite tool_calls metadata for those calls.",
+    "No episode input-only isolation claim is supported by this run.",
+    "Independent generated-SQL evaluation used a separate restricted Docker executor; this does not isolate the native worker filesystem.",
+    "The baseline used one direct Crusoe request with no native worker filesystem access."
+  ],
+  "current_benchmark_gold": "Current Spider reference SQL remained in the host-owned evaluator. A read-only SQLite audit inspected complete tool-call arguments for all four recorded development sessions. It found no current annotation path or external-fetch marker. This is not a complete runtime absence-of-access proof.",
+  "findings": [
+    {
+      "episode": "v0",
+      "event_id": "769:0",
+      "operation": "cross-episode read in tool arguments",
+      "targets": [
+        {
+          "episode": "76f46a90fc23427d-v1",
+          "file": "queries.json",
+          "previous_fixture_heldout": false
+        }
+      ],
+      "tool": "read_file"
+    },
+    {
+      "episode": "v0",
+      "event_id": "769:1",
+      "operation": "cross-episode read in tool arguments",
+      "targets": [
+        {
+          "episode": "76f46a90fc23427d-heldout",
+          "file": "queries.json",
+          "previous_fixture_heldout": true
+        }
+      ],
+      "tool": "read_file"
+    },
+    {
+      "episode": "v1",
+      "event_id": "787:0",
+      "operation": "cross-episode read in tool arguments",
+      "targets": [
+        {
+          "episode": "76f46a90fc23427d-heldout",
+          "file": "queries.json",
+          "previous_fixture_heldout": true
+        },
+        {
+          "episode": "76f46a90fc23427d-heldout",
+          "file": "validate.py",
+          "previous_fixture_heldout": true
+        },
+        {
+          "episode": "db5f5b51190a4b97-v0",
+          "file": "queries.json",
+          "previous_fixture_heldout": false
+        }
+      ],
+      "tool": "terminal"
+    }
+  ],
+  "native_episode_filesystem_isolation": false,
+  "public_benchmark_familiarity": {
+    "answer_familiarity_claim_observed": true,
+    "description": "v1 code comments explicitly claimed recall of known Spider reference query patterns. No reference SQL is included here. This is evidence of possible memorization, not proof that these were reference answers or caused the score.",
+    "events": [
+      "799:0",
+      "801:0",
+      "803:0"
+    ]
+  },
+  "scope": "The native worker shared prior episode directories. Both development episodes read historical fixture output, including held-out answers from that different benchmark. v1 also read the current v0 output.",
+  "source_trace_hashes": [
+    {
+      "episode": "v0",
+      "sha256": "a941c9e6efe6af9a9019aaad629d97de5473de23ce391b89510521a999666230",
+      "trace_truncated": false
+    },
+    {
+      "episode": "v1",
+      "sha256": "253eeca880ec0f7c9cb3c23b4cdd322d6528a2cbdf0195e169d3e49dbafba762",
+      "trace_truncated": false
+    }
+  ],
+  "status": "boundary_violation_observed",
+  "truncated_call_payloads": [
+    {
+      "episode": "v0",
+      "event_id": "774:0",
+      "tool": "execute_code"
+    },
+    {
+      "episode": "v1",
+      "event_id": "793:0",
+      "tool": "execute_code"
+    },
+    {
+      "episode": "v1",
+      "event_id": "795:0",
+      "tool": "execute_code"
+    }
+  ]
+}

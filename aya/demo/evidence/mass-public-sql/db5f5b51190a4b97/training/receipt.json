@@ -1,0 +1,12 @@
+{
+  "deployment_status": "required",
+  "error": null,
+  "fine_tuned_model": "ftmodel-2ac55e69-6a3c-4b2d-a3d1-0fd93bf5455a",
+  "id": "ftjob-3f54c5ea7cee4dbcb1819004d2c1d7a9",
+  "model": "Qwen/Qwen3.5-9B",
+  "promotion": "blocked until tuned inference passes independent evaluation",
+  "status": "succeeded",
+  "trained_tokens": 26624,
+  "updated_at": "2026-10-17T23:27:50.118500+00:00",
+  "url": "https://console.crusoecloud.com/foundry/fine-tuning/jobs/ftjob-3f54c5ea7cee4dbcb1819004d2c1d7a9/overview"
+}

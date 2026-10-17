@@ -1,0 +1,13 @@
+{
+  "criterion": "strict development score improvement; ties retain prior workflow",
+  "mass_judgment": {
+    "beats_reference": false,
+    "last_evaluated_version": 1,
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "version": null
+  },
+  "selected": "v0",
+  "v0_passed": 11,
+  "v1_passed": 11,
+  "workflow_sha256": "b87ec6340a9e786947a7784029766f1319f9cfa746411c5435d901ad559ef6ec"
+}

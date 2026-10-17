@@ -1,0 +1,39 @@
+{
+  "created_at": 1792279554,
+  "error": null,
+  "fine_tuned_model": "ftmodel-2ac55e69-6a3c-4b2d-a3d1-0fd93bf5455a",
+  "finished_at": 1792279667,
+  "hyperparameters": null,
+  "id": "ftjob-3f54c5ea7cee4dbcb1819004d2c1d7a9",
+  "method": {
+    "dpo": null,
+    "reinforcement": null,
+    "supervised": {
+      "hyperparameters": {
+        "batch_size": "auto",
+        "checkpoint_steps": null,
+        "early_stopping_patience": null,
+        "eval_steps_per_epoch": null,
+        "expert_lora_sharing": null,
+        "learning_rate": 0.0001,
+        "learning_rate_multiplier": "auto",
+        "lora_alpha": 32,
+        "lora_dropout": null,
+        "lora_rank": 16,
+        "lora_variant": "lora",
+        "lr_scheduler": "cosine",
+        "n_epochs": 1,
+        "overlong_row_behavior": "error",
+        "quant_lora_method": null,
+        "top_k_gating": null,
+        "warmup_ratio": null,
+        "weight_decay": null
+      }
+    },
+    "type": "supervised"
+  },
+  "model": "model-qwen-qwen3-5-9b-2ce94bd8",
+  "seed": 42,
+  "status": "succeeded",
+  "trained_tokens": 26624
+}

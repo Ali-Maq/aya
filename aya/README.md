@@ -12,7 +12,8 @@ The SQL example connects both paths, but neither path replaces the other.
 
 - [Factory](http://localhost:3021/app/factory)
 - [Live MASS feature request](https://github.com/Ali-Maq/aya/issues/2)
-- [Feature contract](specs/mass-sql.json)
+- [Public benchmark feature contract](specs/mass-public-sql.json)
+- [Earlier fixture contract](specs/mass-sql.json)
 - [Public Spider benchmark](PUBLIC_SQL.md)
 - [Delivered Crusoe SQL component and CI](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2)
 - [Actual MASS adapter and CI](https://github.com/Ali-Maq/mass/pull/1)
@@ -29,7 +30,22 @@ A whitespace-only query failed. The repaired component passed all 118 checks and
 All 54 target tests passed. Four real Crusoe questions returned correct SQL results.
 [Migration evidence](demo/evidence/492e2ca7851347f5) records the failure, repair, reference comparisons, and delivery.
 
-MASS run `76f46a90fc23427d` measured the workflow around that fixed component:
+Public Spider run [`db5f5b51190a4b97`](demo/evidence/mass-public-sql/db5f5b51190a4b97) used 12 development questions and six held-out questions.
+The direct Crusoe baseline passed 12/12 development questions. Native v0 and MASS-proposed v1 each passed 11/12.
+The controller kept v0 among native workflows. It passed 3/6 questions on held-out databases.
+The upstream judges preferred the direct baseline. This run shows no workflow accuracy improvement.
+
+The selector rechecked Langfuse and chose the 12 passing baseline answers for a separate supervised test.
+It exported ten training rows, two fixed validation rows, and no held-out rows.
+The [provider receipt](demo/evidence/mass-public-sql/db5f5b51190a4b97/training/receipt.json) records actual training status.
+Crusoe reported training success and 26,624 trained tokens. The new checkpoint still requires deployment and independent evaluation.
+
+The native trace also exposed cross-episode directory reads, including older fixture held-out answers.
+The direct baseline had no worker filesystem access. This run cannot support an episode filesystem isolation claim.
+Public benchmark familiarity is another limitation; these scores do not establish generalization.
+The evidence preserves these findings and the earlier HTTP 429 attempt.
+
+Earlier fixture MASS run `76f46a90fc23427d` measured the workflow around that fixed component:
 
 | Episode | Independent checks | Result |
 | --- | --- | --- |
@@ -86,7 +102,7 @@ Errors remain visible. Retained evidence is labeled; live runs do not substitute
 2. Ask a real repository question. Show the SQL and result table from the accepted component.
 3. Open the generated PR. Show the failed check, repair, and successful CI.
 4. Open the completed MASS run. Show the changed workflow and native execution records.
-5. Show the independent tie and the decision to retain v0. Then show the live training status.
+5. Show the native tie, the stronger direct baseline, and the 3/6 held-out result. Then show training status.
 
 A new native build can exceed three minutes. Start it before presenting and label it as a recorded run.
 Do not describe a pending training job as a deployed model or a tied evaluation as an improvement.
@@ -132,7 +148,9 @@ Run the repository pre-commit checks on changed files before publishing.
 OpenShell reports Landlock unavailable on this Docker Desktop host. We do not claim that boundary.
 The native configuration limits child concurrency and depth to one, child duration to 90 seconds, and parent turns to 40.
 A total limit of one child is also a prompt rule. Inspect the native audit before making a stronger claim.
-The completed MASS v0 and v1 episodes each recorded zero child sessions.
+The earlier fixture v0 and v1 episodes each recorded zero child sessions. Public Spider v0 and v1 each recorded one.
+The public run exposed shared native episode directories. Separate work directories were not a filesystem isolation boundary.
+Generated SQL evaluation used a separate restricted Docker executor. That does not isolate native episode files.
 
 The current demo is local. It is not a public multi-tenant deployment.
 Other coding agents can use the same protocol. These results do not prove general superiority over them.

@@ -1,0 +1,51 @@
+{
+  "files": {
+    "training": "2846135616058556c030e632d1757a883bf09576f4ab1a8efa2b6c45804e00bc",
+    "validation": "099468bdfe2719841785d71aeee64162bfc1f4d83d8c5ffdd592900b54ca4a14"
+  },
+  "format": "assistant-only supervised chat",
+  "heldout_rows": 0,
+  "kind": "distilled final SQL outputs from ranked verified trajectories",
+  "limitations": "Small final-answer corpus; no full tool-trajectory training or model-improvement claim",
+  "mass_eligibility": "Includes non-winning sources; final-answer distillation, not a MASS winning-teacher round",
+  "mass_winning_teacher_sources": [],
+  "mode": "supervised integration smoke test",
+  "question_ids": {
+    "training": [
+      "spider-dev-0176",
+      "spider-dev-0177",
+      "spider-dev-0278",
+      "spider-dev-0293",
+      "spider-dev-0426",
+      "spider-dev-0427",
+      "spider-dev-0843",
+      "spider-dev-0856",
+      "spider-dev-0896",
+      "spider-dev-0900"
+    ],
+    "validation": [
+      "spider-dev-0667",
+      "spider-dev-0684"
+    ]
+  },
+  "selection_rule": "Independent question pass rate, then measured episode API calls, tokens, latency, stable run ID",
+  "selection_sha256": "82525dd318fdf8b56b526c4cc5381871164b1e71dfbb368b6619d362df8e7470",
+  "source_readback": [
+    {
+      "run_id": "db5f5b51190a4b97-baseline",
+      "trace_id": "2b4a2864da8a7660c35556732f6245b0",
+      "trajectory_revision": "a8b32f778a735507c0edd283c69863268a038bd9ac2aab773653aaa9f719a559"
+    }
+  ],
+  "source_runs": [
+    "db5f5b51190a4b97-baseline"
+  ],
+  "student": "Qwen/Qwen3.5-9B",
+  "submission_eligible": true,
+  "submission_gate": "At least ten passing training tasks and two preassigned passing validation tasks",
+  "teacher": "deepseek-ai/DeepSeek-V4-Pro",
+  "training_rows": 10,
+  "validation_rows": 2,
+  "verified_at": "2026-10-17T23:25:45.908183+00:00",
+  "workflow_sha256": "cff98d9905afef42cb94a65581d11a5bef2236c510ec0aacfbe463e779ed0f8d"
+}
