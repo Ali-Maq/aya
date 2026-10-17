@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
+import { getSourceDisplayName } from "@/lib/connectors/utils";
 import type {
   BooleanOption,
   TabOption,
@@ -18,17 +19,20 @@ import {
 import { useField, useFormikContext } from "formik";
 import * as GeneralLayouts from "@/layouts/general-layouts";
 import { Content, InputHorizontal, InputVertical, Label } from "@opal/layouts";
-import { InputCheckboxField, InputSingleSelectField } from "@opal/form";
+import {
+  InputCheckboxField,
+  InputMultiUploadField,
+  InputSingleSelectField,
+  InputSingleUploadField,
+  InputSwitchField,
+} from "@opal/form";
 import type { IconFunctionComponent, RichStr } from "@opal/types";
-import SwitchField from "@/refresh-components/form/SwitchField";
 import TextListField from "@/refresh-components/form/TextListField";
-import FileDropzoneField from "@/refresh-components/form/FileDropzoneField";
 import { FormikField } from "@/refresh-components/form/FormikField";
 import InputTextAreaField from "@/refresh-components/form/InputTextAreaField";
 import InputTypeInField from "@/refresh-components/form/InputTypeInField";
 import FindingListField from "@/views/admin/connectors/AddConnectorPage/form/FindingListField";
 import type { StoredReportScope } from "@/lib/connectors/checks/findings";
-import { getSourceDisplayName } from "@/lib/sources";
 import { markdown } from "@opal/utils";
 
 // Define a general type for form values
@@ -252,7 +256,7 @@ function ToggleField({ name, label, description, disabled }: ToggleFieldProps) {
       title={label}
       description={description}
     >
-      <SwitchField name={name} disabled={disabled} />
+      <InputSwitchField name={name} disabled={disabled} />
     </InputHorizontal>
   );
 }
@@ -330,9 +334,9 @@ export const RenderField: FC<RenderFieldProps> = ({
 
   const fieldContent = (
     <>
-      {field.type === "zip" || field.type === "file" ? (
-        // The field name ties the label to the file input's id and shows the
-        // field's Formik error under it.
+      {field.type === "file" ? (
+        // The field name ties the label to the upload and shows the field's
+        // Formik error under it.
         <InputVertical
           withLabel={field.name}
           disabled={disabled}
@@ -340,12 +344,20 @@ export const RenderField: FC<RenderFieldProps> = ({
           subDescription={richDescription}
           suffix={optionalSuffix}
         >
-          <FileDropzoneField
-            name={field.name}
-            isZip={field.type === "zip"}
-            aria-label={label}
-            disabled={disabled}
-          />
+          {field.multiple === false ? (
+            <InputSingleUploadField
+              name={field.name}
+              mode="file"
+              accept={field.accept}
+              variant={disabled ? "disabled" : undefined}
+            />
+          ) : (
+            <InputMultiUploadField
+              name={field.name}
+              accept={field.accept}
+              variant={disabled ? "disabled" : undefined}
+            />
+          )}
         </InputVertical>
       ) : field.type === "list" ? (
         <InputVertical

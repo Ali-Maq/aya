@@ -2,24 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import {
-  Button,
-  Divider,
-  Fold,
-  InputTypeIn,
-  SelectCard,
-  Tabs,
-} from "@opal/components";
-import {
-  Content,
-  ContentAction,
-  InputVertical,
-  Section,
-  toast,
-} from "@opal/layouts";
+import { Button, Divider, Fold, SelectCard, Tabs } from "@opal/components";
+import { Content, ContentAction, Section, toast } from "@opal/layouts";
 import { Disabled } from "@opal/core";
 import { cn } from "@opal/utils";
-import { FormikField } from "@/refresh-components/form/FormikField";
 import { SvgExpand, SvgFold, SvgListTree, SvgPlusCircle } from "@opal/icons";
 import type {
   Credential,
@@ -34,7 +20,7 @@ import { useSettings } from "@/lib/settings/hooks";
 import CreateCredential from "@/lib/credentials/components/CreateCredential";
 import { CredentialFieldsRenderer } from "@/lib/credentials/components/CredentialFieldsRenderer";
 import { ShareAccountField } from "@/lib/credentials/components/ShareAccountField";
-import { updateCredentialSharing } from "@/lib/credentials/svc";
+import { AccountNameField } from "@/lib/credentials/components/AccountNameField";
 import { getIn, useFormikContext } from "formik";
 import { useTierAtLeast } from "@/lib/tiers/hooks";
 import { Tier } from "@/lib/tiers/types";
@@ -46,11 +32,13 @@ import {
   type NewAccountValues,
 } from "@/views/admin/connectors/AddConnectorPage/newAccount";
 import { OAuthSignInRow } from "@/lib/credentials/components/OAuthSignInRow";
+import OwnAccountSetup from "@/views/admin/connectors/AddConnectorPage/form/OwnAccountSetup";
 import { CreateStdOAuthCredential } from "@/lib/credentials/components/CreateStdOAuthCredential";
 import {
   credentialMatchesBoundFields,
   getCredentialSpec,
   isDraftCredential,
+  isOwnSetupMethod,
   realmFields,
   shouldRedirectToOAuth,
   toCredentialRef,
@@ -83,6 +71,8 @@ interface AuthenticationAccountSectionProps {
   checksLocked: boolean;
   /** Set when the form edits this pair: the checks are dry runs of it. */
   editCCPairId?: number | null;
+  /** Each increment opens the checks card and scrolls it into view. */
+  expandChecksRequest?: number;
 }
 
 /**
@@ -100,9 +90,9 @@ export default function AuthenticationAccountSection({
   checkedCredential,
   checksLocked,
   editCCPairId = null,
+  expandChecksRequest = 0,
 }: AuthenticationAccountSectionProps) {
   const t = useTranslations("admin.connectorsList");
-  const tCreate = useTranslations("admin.credentials.create");
   const newAccountNameField = `${NEW_ACCOUNT_FIELD}.${NEW_ACCOUNT_NAME_FIELD}`;
   const settings = useSettings();
   const {
@@ -117,6 +107,7 @@ export default function AuthenticationAccountSection({
     selectMethod,
     close,
     remove,
+    saveSharing,
     refresh,
     authorize,
     isAuthorizing,
@@ -125,9 +116,21 @@ export default function AuthenticationAccountSection({
   // Expanded, the section lists every account. Folded, only the chosen one
   // (or the new-account card when nothing is chosen) stays.
   const [accountsExpanded, setAccountsExpanded] = useState<boolean>(true);
-  /** Folds the section. The new-account card closes too; expanding leaves it closed. */
+  const hasSavedAccounts: boolean = (credentials?.length ?? 0) > 0;
+  // With no saved account there is nothing to fold away, so the section
+  // stays expanded whatever folded it (starting the checks does).
+  const sectionExpanded: boolean = accountsExpanded || !hasSavedAccounts;
+  // The saved accounts whose details are open.
+  const [openDetailIds, setOpenDetailIds] = useState<ReadonlySet<number>>(
+    () => new Set()
+  );
+  /**
+   * Folds the section. Every card's details close too, the new account's
+   * form and each saved account's; expanding leaves them closed.
+   */
   function foldAccounts() {
     close();
+    setOpenDetailIds(new Set());
     setAccountsExpanded(false);
   }
 
@@ -152,6 +155,10 @@ export default function AuthenticationAccountSection({
     values,
     NEW_ACCOUNT_FIELD
   );
+  const newAccountMethod: string | undefined =
+    typeof newAccountValues?.authentication_method === "string"
+      ? newAccountValues.authentication_method
+      : undefined;
 
   // The credential-bound fields filled in first above, such as the realm,
   // restrict the saved accounts to the ones that work with them.
@@ -258,42 +265,31 @@ export default function AuthenticationAccountSection({
             source={connector}
             spec={typedSpec}
             namePrefix={NEW_ACCOUNT_FIELD}
+            // Sent with the account's other values, as the draft holds it.
+            fileValues="base64"
             // Asked for above this section, first.
             exclude={realmKeys}
-            authMethod={
-              typeof newAccountValues?.authentication_method === "string"
-                ? newAccountValues.authentication_method
-                : undefined
-            }
+            authMethod={newAccountMethod}
+            renderOwnSetup={() => <OwnAccountSetup source={connector} />}
           />
-          <Divider paddingParallel={0} paddingPerpendicular={0} />
-          {/* Opens once the account's own fields are valid. */}
-          <Disabled disabled={!newAccountReady}>
-            <Section alignItems="stretch" gap={4}>
-              <InputVertical
-                withLabel={newAccountNameField}
-                title={tCreate("nameField.title")}
-                suffix="optional"
-              >
-                <FormikField<string>
-                  name={newAccountNameField}
-                  render={(formikField) => (
-                    <InputTypeIn
-                      {...formikField}
-                      id={newAccountNameField}
-                      value={formikField.value ?? ""}
-                      placeholder={tCreate("nameField.placeholder")}
-                    />
-                  )}
-                />
-              </InputVertical>
-              <ShareAccountField
-                namePrefix={NEW_ACCOUNT_FIELD}
-                disabled={!newAccountReady}
-                groupsLocked={!businessTier}
-              />
-            </Section>
-          </Disabled>
+          {/* A method that saves the account itself names and shares
+          nothing here. */}
+          {!isOwnSetupMethod(typedSpec, newAccountMethod) && (
+            <>
+              <Divider paddingParallel={0} paddingPerpendicular={0} />
+              {/* Opens once the account's own fields are valid. */}
+              <Disabled disabled={!newAccountReady}>
+                <Section alignItems="stretch" gap={4}>
+                  <AccountNameField name={newAccountNameField} />
+                  <ShareAccountField
+                    namePrefix={NEW_ACCOUNT_FIELD}
+                    disabled={!newAccountReady}
+                    groupsLocked={!businessTier}
+                  />
+                </Section>
+              </Disabled>
+            </>
+          )}
         </Section>
       );
     }
@@ -364,27 +360,25 @@ export default function AuthenticationAccountSection({
         selectable={isSelectable(credential)}
         // Folded, the pick is the only card shown: it keeps a light look,
         // and a click opens the section rather than dropping the pick.
-        quietSelection={!accountsExpanded}
+        quietSelection={!sectionExpanded}
         onSelect={() => onSwap(credential)}
         onDeselect={() =>
-          accountsExpanded
-            ? onCredentialChange(null)
-            : setAccountsExpanded(true)
+          sectionExpanded ? onCredentialChange(null) : setAccountsExpanded(true)
         }
         onDelete={() => onDeleteCredential(credential)}
+        detailsOpen={openDetailIds.has(credential.id)}
+        onDetailsOpenChange={(open) =>
+          setOpenDetailIds((ids) => {
+            const next = new Set(ids);
+            if (open) next.add(credential.id);
+            else next.delete(credential.id);
+            return next;
+          })
+        }
         checkReport={checkReports.reportFor(credential.id)}
         onRerunChecks={() => checkReports.rerun(credential.id)}
         groupsLocked={!businessTier}
-        onUpdateSharing={async (sharing) => {
-          const response = await updateCredentialSharing(
-            credential.id,
-            sharing
-          );
-          if (!response.ok) throw new Error(await response.text());
-          const saved: SimilarCredential = await response.json();
-          refresh();
-          return saved;
-        }}
+        onSaveAccount={(update) => saveSharing(credential.id, update)}
       />
     );
   }
@@ -498,19 +492,23 @@ export default function AuthenticationAccountSection({
                 width="fit"
               />
             </Section>
-            <Button
-              icon={accountsExpanded ? SvgFold : SvgExpand}
-              prominence="tertiary"
-              aria-label={
-                accountsExpanded
-                  ? t("add.savedAccounts.collapseButton.ariaLabel")
-                  : t("add.savedAccounts.expandButton.ariaLabel")
-              }
-              aria-expanded={accountsExpanded}
-              onClick={() =>
-                accountsExpanded ? foldAccounts() : setAccountsExpanded(true)
-              }
-            />
+            {/* Folding hides the saved accounts that are not the pick; with
+            none, it would do nothing, so the button is left out. */}
+            {hasSavedAccounts && (
+              <Button
+                icon={accountsExpanded ? SvgFold : SvgExpand}
+                prominence="tertiary"
+                aria-label={
+                  accountsExpanded
+                    ? t("add.savedAccounts.collapseButton.ariaLabel")
+                    : t("add.savedAccounts.expandButton.ariaLabel")
+                }
+                aria-expanded={accountsExpanded}
+                onClick={() =>
+                  accountsExpanded ? foldAccounts() : setAccountsExpanded(true)
+                }
+              />
+            )}
           </Section>
         }
       />
@@ -528,7 +526,7 @@ export default function AuthenticationAccountSection({
             {credentials.map((credential, index) => (
               <Fold
                 key={credential.id}
-                open={accountsExpanded || credential.id === selectedSavedId}
+                open={sectionExpanded || credential.id === selectedSavedId}
                 keepMounted
               >
                 <div className={cn(index > 0 && "pt-2")}>
@@ -537,7 +535,7 @@ export default function AuthenticationAccountSection({
               </Fold>
             ))}
             {canAuthorize && (
-              <Fold open={accountsExpanded} keepMounted>
+              <Fold open={sectionExpanded} keepMounted>
                 <div className={cn(credentials.length > 0 && "pt-2")}>
                   <Section flexDirection="row" justifyContent="start" gap={1}>
                     <Button
@@ -558,7 +556,7 @@ export default function AuthenticationAccountSection({
             {/* Shown unless a saved account is the pick. Its own fold (the
             form) is independent of the section's. */}
             <Fold
-              open={accountsExpanded || selectedSavedId === null}
+              open={sectionExpanded || selectedSavedId === null}
               keepMounted
             >
               <div
@@ -578,6 +576,7 @@ export default function AuthenticationAccountSection({
             // Starting the checks completes the account step, so it folds.
             onStart={foldAccounts}
             ccPairId={editCCPairId}
+            expandRequest={expandChecksRequest}
           />
         </Section>
       )}

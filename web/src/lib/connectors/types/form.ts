@@ -23,7 +23,6 @@ export interface Option {
   description?:
     | string
     | ((currentCredential: CredentialValues | null) => string);
-  query?: string;
   optional?: boolean;
   hidden?: boolean;
   visibleCondition?: (
@@ -106,6 +105,10 @@ export interface BooleanOption extends Option {
 export interface FileOption extends Option {
   type: "file";
   default?: string;
+  /** Takes many files (tags) or one. @default true */
+  multiple?: boolean;
+  /** The picker's filter, as the HTML `accept` attribute, e.g. `".zip"`. */
+  accept?: string;
 }
 
 export interface StringTabOption extends Option {
