@@ -12,6 +12,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.error
 import urllib.request
 import uuid
 from pathlib import Path
@@ -286,7 +287,9 @@ def request_snapshot(benchmark: str = "repository-fixture") -> dict[str, Any]:
     }
 
 
-def completion(messages: list[dict[str, str]], model: str = MODEL) -> dict[str, Any]:
+def completion(
+    messages: list[dict[str, str]], model: str = MODEL, journal: Journal | None = None
+) -> dict[str, Any]:
     payload = {
         "model": model,
         "messages": messages,
@@ -301,8 +304,36 @@ def completion(messages: list[dict[str, str]], model: str = MODEL) -> dict[str, 
             "Content-Type": "application/json",
         },
     )
-    with urllib.request.urlopen(request, timeout=150) as response:  # noqa: S310 — fixed provider endpoint
-        result = json.load(response)
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=150) as response:  # noqa: S310 — fixed provider endpoint
+                result = json.load(response)
+            break
+        except urllib.error.HTTPError as exc:
+            detail = trace.redact(exc.read(4000).decode(errors="replace"))
+            if exc.code != 429:
+                raise RuntimeError(f"Crusoe HTTP {exc.code}: {detail}") from exc
+            try:
+                delay = min(
+                    60.0,
+                    max(1.0, float(exc.headers.get("Retry-After", 30 * (attempt + 1)))),
+                )
+            except ValueError:
+                delay = 30.0 * (attempt + 1)
+            if journal:
+                journal.emit(
+                    "provider_rate_limited",
+                    status=429,
+                    attempt=attempt + 1,
+                    retry_seconds=delay if attempt < 2 else None,
+                    detail=detail,
+                )
+            if attempt == 2 or any(
+                word in str(detail).lower()
+                for word in ("insufficient_quota", "insufficient credits", "billing")
+            ):
+                raise RuntimeError(f"Crusoe HTTP 429: {detail}") from exc
+            time.sleep(delay)
     message = result["choices"][0]["message"]
     # Only public assistant content is retained; private reasoning is not exported.
     return {
@@ -310,6 +341,7 @@ def completion(messages: list[dict[str, str]], model: str = MODEL) -> dict[str, 
         "response_id": result.get("id"),
         "model": result.get("model", model),
         "usage": result.get("usage", {}),
+        "http_attempts": attempt + 1,
     }
 
 
@@ -419,7 +451,7 @@ def episode(
             {"role": "system", "content": SYSTEM},
             {"role": "user", "content": prompt},
         ]
-        response = completion(messages)
+        response = completion(messages, journal=journal)
         save(target / "crusoe.json", response)
         answers = parse_answers(response["content"])
         usage = {
