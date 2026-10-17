@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:09,800
+Software is cheaper to generate. But a feature is more than a prompt. It must match the behavior you need, fit your product, and survive tests.
+
+2
+00:00:10,000 --> 00:00:19,800
+AYA starts with your repository and a reference. Here, the request is concrete: bring Fireworks SQL tools into a working Crusoe cookbook.
+
+3
+00:00:20,000 --> 00:00:32,800
+Native Hermes investigates pinned reference behavior through REA in OpenShell, then implements the contract. This SQL example uses source and runtime analysis. Each action becomes inspectable evidence.
+
+4
+00:00:33,000 --> 00:00:42,800
+The first component passed one hundred seventeen checks. One failure blocked delivery. A repair passed all one hundred eighteen, including a fresh evaluation.
+
+5
+00:00:43,000 --> 00:00:54,800
+The result is a real GitHub pull request with passing continuous integration and fifty four target tests. The delivered component powers actual Crusoe queries over live repository data.
+
+6
+00:00:55,000 --> 00:01:09,800
+Now improve the factory itself. MASS proposed a new workflow. On public SQL development tasks, the bare model scored twelve of twelve. Both native workflows scored eleven. The retained workflow passed three of six held out.
+
+7
+00:01:10,000 --> 00:01:21,800
+The evidence selected all twelve verified baseline answers. One call instead of twenty two on development. Ten training answers and two validation answers produced a real Crusoe student checkpoint.
+
+8
+00:01:22,000 --> 00:01:33,800
+MASS alternates workflow search with training, then repeats with updated weights. We demonstrated search, verified answer selection, and training. Serving and evaluation are next. No recursive improvement is claimed.
