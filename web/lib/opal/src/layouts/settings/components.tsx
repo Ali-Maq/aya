@@ -70,6 +70,8 @@ export interface SettingsHeaderProps {
   descriptionTag?: TagProps;
   /** The title can be edited in place, as `Content` does it. */
   editable?: boolean;
+  /** When the editable title shows its pencil: on hover, or at rest too. Default: `"hover"`. */
+  editButton?: "hover" | "rest";
   /** Called when the user commits a title edit. */
   onTitleChange?: (newTitle: string) => void;
   children?: React.ReactNode;
@@ -100,6 +102,7 @@ function SettingsHeader({
   description,
   descriptionTag,
   editable,
+  editButton,
   onTitleChange,
   children,
   actions,
@@ -190,6 +193,7 @@ function SettingsHeader({
               description={description}
               descriptionTag={descriptionTag}
               editable={editable}
+              editButton={editButton}
               onTitleChange={onTitleChange}
               sizePreset="headline"
               variant="heading"
