@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "benchmark": "public-sql",
+  "dataset_version": "spider-aya-v1",
+  "source": {
+    "repository": "xlangai/spider",
+    "revision": "6232cc3fad6d54c62b3ba23a364083a98ff36a17",
+    "url": "https://huggingface.co/datasets/xlangai/spider/resolve/6232cc3fad6d54c62b3ba23a364083a98ff36a17/data/spider.zip",
+    "bytes": 99736136,
+    "sha256": "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1",
+    "license": "CC-BY-SA-4.0",
+    "homepage": "https://yale-lily.github.io/spider",
+    "citation": "Yu et al. (2018). Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task."
+  },
+  "selection": {
+    "seed": "aya-spider-v1",
+    "source_split": "official Spider development split",
+    "rule": "Order database IDs by SHA256(seed + colon + db_id). Exclude SQLite files over 1 MB. Take first nine databases with one JOIN query and a distinct nested SELECT query. For each category, maximize 5*extra_SELECT + 3*JOIN + 2*HAVING + GROUP_BY + set_operation; break ties by SHA256(seed + colon + question). First six databases are development; next three are heldout.",
+    "selected_before_model_execution": true,
+    "preflight_exclusions": {
+      "source_indices": {
+        "66": "Question requests name only; reference SQL also selects age.",
+        "175": "Question says more than 3 car makers; reference SQL counts cars."
+      },
+      "database_ids": {
+        "real_estate_properties": "Only four questions; one refers to an unspecified code and another has an ambiguous conjunction. Insufficient two well-defined complex tasks."
+      }
+    },
+    "development_databases": [
+      "orchestra",
+      "employee_hire_evaluation",
+      "network_1",
+      "museum_visit",
+      "car_1",
+      "poker_player"
+    ],
+    "heldout_databases": [
+      "pets_1",
+      "world_1",
+      "student_transcripts_tracking"
+    ]
+  },
+  "splits": {
+    "development": [
+      {
+        "id": "spider-dev-0843",
+        "source_index": 843,
+        "db_id": "orchestra",
+        "structural_score": 6
+      },
+      {
+        "id": "spider-dev-0856",
+        "source_index": 856,
+        "db_id": "orchestra",
+        "structural_score": 6
+      },
+      {
+        "id": "spider-dev-0278",
+        "source_index": 278,
+        "db_id": "employee_hire_evaluation",
+        "structural_score": 4
+      },
+      {
+        "id": "spider-dev-0293",
+        "source_index": 293,
+        "db_id": "employee_hire_evaluation",
+        "structural_score": 6
+      },
+      {
+        "id": "spider-dev-0900",
+        "source_index": 900,
+        "db_id": "network_1",
+        "structural_score": 12
+      },
+      {
+        "id": "spider-dev-0896",
+        "source_index": 896,
+        "db_id": "network_1",
+        "structural_score": 9
+      },
+      {
+        "id": "spider-dev-0426",
+        "source_index": 426,
+        "db_id": "museum_visit",
+        "structural_score": 18
+      },
+      {
+        "id": "spider-dev-0427",
+        "source_index": 427,
+        "db_id": "museum_visit",
+        "structural_score": 8
+      },
+      {
+        "id": "spider-dev-0177",
+        "source_index": 177,
+        "db_id": "car_1",
+        "structural_score": 18
+      },
+      {
+        "id": "spider-dev-0176",
+        "source_index": 176,
+        "db_id": "car_1",
+        "structural_score": 18
+      },
+      {
+        "id": "spider-dev-0667",
+        "source_index": 667,
+        "db_id": "poker_player",
+        "structural_score": 3
+      },
+      {
+        "id": "spider-dev-0684",
+        "source_index": 684,
+        "db_id": "poker_player",
+        "structural_score": 5
+      }
+    ],
+    "heldout": [
+      {
+        "id": "spider-dev-0059",
+        "source_index": 59,
+        "db_id": "pets_1",
+        "structural_score": 18
+      },
+      {
+        "id": "spider-dev-0065",
+        "source_index": 65,
+        "db_id": "pets_1",
+        "structural_score": 17
+      },
+      {
+        "id": "spider-dev-0744",
+        "source_index": 744,
+        "db_id": "world_1",
+        "structural_score": 17
+      },
+      {
+        "id": "spider-dev-0747",
+        "source_index": 747,
+        "db_id": "world_1",
+        "structural_score": 12
+      },
+      {
+        "id": "spider-dev-0549",
+        "source_index": 549,
+        "db_id": "student_transcripts_tracking",
+        "structural_score": 12
+      },
+      {
+        "id": "spider-dev-0575",
+        "source_index": 575,
+        "db_id": "student_transcripts_tracking",
+        "structural_score": 12
+      }
+    ]
+  },
+  "archive_members": {
+    "private/dev.json": "spider/dev.json",
+    "databases/orchestra.sqlite": "spider/database/orchestra/orchestra.sqlite",
+    "databases/employee_hire_evaluation.sqlite": "spider/database/employee_hire_evaluation/employee_hire_evaluation.sqlite",
+    "databases/network_1.sqlite": "spider/database/network_1/network_1.sqlite",
+    "databases/museum_visit.sqlite": "spider/database/museum_visit/museum_visit.sqlite",
+    "databases/car_1.sqlite": "spider/database/car_1/car_1.sqlite",
+    "databases/poker_player.sqlite": "spider/database/poker_player/poker_player.sqlite",
+    "databases/pets_1.sqlite": "spider/database/pets_1/pets_1.sqlite",
+    "databases/world_1.sqlite": "spider/database/world_1/world_1.sqlite",
+    "databases/student_transcripts_tracking.sqlite": "spider/database/student_transcripts_tracking/student_transcripts_tracking.sqlite"
+  },
+  "files": {
+    "private/dev.json": "30d64a3fccde493226df79687aed9e4a1c0129525baf44f29c0573d914d758a4",
+    "databases/orchestra.sqlite": "13b64af1cf6fcbd34953a44f951b2bf79bedc000b344549212dac1a9345e2f86",
+    "databases/employee_hire_evaluation.sqlite": "760fec5cc872ef0cdf99242614f05c93dbd00d422ac9da87ea64fcf555be7373",
+    "databases/network_1.sqlite": "bec92cd9a68d6f23469a0df246429299f44caaf75eab12275784e0bb7d0aa9ca",
+    "databases/museum_visit.sqlite": "3217aee38d8e3661d374bf025591b7164a1179c568ef5d20f3c338035fc6e1dd",
+    "databases/car_1.sqlite": "9d851e396e02997a1de073ae982fe1e4b1769fdffce2fac6e325857a3a938709",
+    "databases/poker_player.sqlite": "63fffd7b68524f07a742a74b74b95a4ba178e6419f3574b9ee78b8dda1df46ba",
+    "databases/pets_1.sqlite": "8ffe0ea9b3b034ca8860a2f18300a98c7583ce2522ea195726a04803f675e5bb",
+    "databases/world_1.sqlite": "17b986695f16786d58d66f85e49dba87bdfe72953207ab9b1b49da9d2301ef65",
+    "databases/student_transcripts_tracking.sqlite": "5a1f4928a1fd36f6edb31c4f054203b2e2fab6b18e5951c4f5633628f82a8e56"
+  },
+  "validation_ids": [
+    "spider-dev-0667",
+    "spider-dev-0684"
+  ],
+  "training_ids": [
+    "spider-dev-0843",
+    "spider-dev-0856",
+    "spider-dev-0278",
+    "spider-dev-0293",
+    "spider-dev-0900",
+    "spider-dev-0896",
+    "spider-dev-0426",
+    "spider-dev-0427",
+    "spider-dev-0177",
+    "spider-dev-0176"
+  ],
+  "validation_selection": "Both questions from the last development database in the frozen database order. They are excluded from gradient-training export; this is development validation, not final heldout."
+}

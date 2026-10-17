@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "id": "mass-public-sql-v1",
+  "benchmark": "public-sql",
+  "title": "Measured MASS workflow search on real Spider databases",
+  "issue_url": "https://github.com/Ali-Maq/aya/issues/2",
+  "target_repository": "Ali-Maq/aya",
+  "frontend": "Onyx factory",
+  "source": {
+    "repository": "xlangai/spider",
+    "revision": "6232cc3fad6d54c62b3ba23a364083a98ff36a17",
+    "url": "https://huggingface.co/datasets/xlangai/spider/resolve/6232cc3fad6d54c62b3ba23a364083a98ff36a17/data/spider.zip",
+    "bytes": 99736136,
+    "sha256": "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1",
+    "license": "CC-BY-SA-4.0",
+    "homepage": "https://yale-lily.github.io/spider",
+    "citation": "Yu et al. (2018). Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task."
+  },
+  "selection_manifest": {
+    "path": "aya/specs/spider-benchmark.json",
+    "sha256": "e372da054ff1028d336d28830454ef4c9900c1a064f11c35970777e809a3a4b0"
+  },
+  "execution_contract": {
+    "executor_path": "aya/aya_factory/public_db_executor.py",
+    "executor_sha256": "8a7c2bd181dd974afce8d17ea49d00449700c6eeeda6a49dbb815a4ac8a18ae2",
+    "evaluator_path": "aya/aya_factory/public_sql_benchmark.py",
+    "evaluator_sha256": "dbf310aae359ecb81ec2396ce0c0859ede1adcf0e27e9151e861a5a4fe66c166",
+    "fixed_during_run": true,
+    "network": "none",
+    "root_filesystem": "read-only",
+    "database_mount": "read-only",
+    "user": "65534:65534",
+    "memory_mb": 256,
+    "cpu": 1,
+    "tmpfs_mb": 16,
+    "query_timeout_seconds": 3,
+    "query_vm_steps": 3000000,
+    "sql_characters": 20000,
+    "result_rows": 1000,
+    "result_bytes": 131072,
+    "allowed_actions": "SQLite SELECT, READ, RECURSIVE and approved functions",
+    "prohibited": [
+      "writes",
+      "ATTACH",
+      "PRAGMA",
+      "extension loading",
+      "host execution of generated SQL"
+    ]
+  },
+  "public_inputs": [
+    "question IDs and text",
+    "database IDs",
+    "CREATE TABLE schemas",
+    "at most two public sample rows per table"
+  ],
+  "private_inputs": [
+    "upstream reference SQL",
+    "reference result rows",
+    "heldout context during workflow search"
+  ],
+  "output": {
+    "filename": "queries.json",
+    "shape": "JSON object keyed by every supplied question ID; each value has exactly one sql string",
+    "extra_ids_allowed": false
+  },
+  "development": {
+    "questions": 12,
+    "database_ids": [
+      "orchestra",
+      "employee_hire_evaluation",
+      "network_1",
+      "museum_visit",
+      "car_1",
+      "poker_player"
+    ],
+    "question_ids": [
+      "spider-dev-0843",
+      "spider-dev-0856",
+      "spider-dev-0278",
+      "spider-dev-0293",
+      "spider-dev-0900",
+      "spider-dev-0896",
+      "spider-dev-0426",
+      "spider-dev-0427",
+      "spider-dev-0177",
+      "spider-dev-0176",
+      "spider-dev-0667",
+      "spider-dev-0684"
+    ]
+  },
+  "heldout": {
+    "questions": 6,
+    "database_ids": [
+      "pets_1",
+      "world_1",
+      "student_transcripts_tracking"
+    ],
+    "question_ids": [
+      "spider-dev-0059",
+      "spider-dev-0065",
+      "spider-dev-0744",
+      "spider-dev-0747",
+      "spider-dev-0549",
+      "spider-dev-0575"
+    ],
+    "disjoint_databases": true,
+    "used_for_search_or_training": false
+  },
+  "evaluation": {
+    "metric": "single-database execution agreement; not official Spider test-suite accuracy",
+    "comparison": "same column count and row bag including duplicates; ordered rows only for top-level source ORDER BY",
+    "invalid_envelope": "zero score",
+    "selection": "strict development improvement; ties retain v0",
+    "oracle_errors": "fail the benchmark, do not count as candidate failures",
+    "failure_report": "IDs and failure categories only; no gold SQL or rows"
+  },
+  "mass": {
+    "repository": "Ali-Maq/mass",
+    "revision": "1af6caf0cafa0a7761f4d3d286a27b1bc45a062a",
+    "pull_request": "https://github.com/Ali-Maq/mass/pull/1",
+    "native_provider": "Crusoe",
+    "native_model": "deepseek-ai/DeepSeek-V4-Pro",
+    "public_context": "development public-tasks.json in frozen RHI artifact bundle",
+    "budgets": {
+      "max_total_children_prompt": 1,
+      "max_concurrent_children": 1,
+      "max_spawn_depth": 1,
+      "child_timeout_seconds": 90,
+      "coordinator_max_turns": 40
+    }
+  },
+  "training_export": {
+    "source": "existing and new development Langfuse episodes with verified API readback",
+    "quality": "independently passing SQL only; same immutable dataset, evaluator, and executor hashes",
+    "ranking": "quality first, then provider calls, tokens, and latency; preserve source trace identity",
+    "training_ids": [
+      "spider-dev-0843",
+      "spider-dev-0856",
+      "spider-dev-0278",
+      "spider-dev-0293",
+      "spider-dev-0900",
+      "spider-dev-0896",
+      "spider-dev-0426",
+      "spider-dev-0427",
+      "spider-dev-0177",
+      "spider-dev-0176"
+    ],
+    "validation_ids": [
+      "spider-dev-0667",
+      "spider-dev-0684"
+    ],
+    "heldout_ids_allowed": false,
+    "automatic_training_submission": false,
+    "claim": "curated final-answer distillation; no full-trajectory or accuracy-improvement claim before measurement"
+  },
+  "limitations": [
+    "18 public questions are not a representative leaderboard result",
+    "public dataset may have appeared in model training",
+    "this subset has no explicit NULL-predicate questions",
+    "single database execution can miss coincidental equivalence",
+    "native Landlock unavailable on this Docker Desktop host",
+    "child total limit is prompt-only; audit actual descendant count"
+  ],
+  "recorded_model_results": null,
+  "dependencies": {
+    "mass_repository": "Ali-Maq/mass",
+    "mass_revision": "1af6caf0cafa0a7761f4d3d286a27b1bc45a062a",
+    "mass_pull_request": "https://github.com/Ali-Maq/mass/pull/1",
+    "native_worker": "Installed NemoClaw/NemoHermes in OpenShell",
+    "inference_provider": "Crusoe",
+    "trajectory_store": "Langfuse with verified API readback"
+  }
+}
