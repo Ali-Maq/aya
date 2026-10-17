@@ -77,7 +77,7 @@ preparation receipt. The UI marks the benchmark ready only when the receipt and 
 selected file hashes match the manifest. Each evaluation verifies the file hashes again.
 
 The live contract is [mass-public-sql.json](specs/mass-public-sql.json).
-MASS adapter revision `1af6caf0cafa0a7761f4d3d286a27b1bc45a062a` includes public
+MASS adapter revision `2818e476eafd415d573c27d94b3335391a194605` includes public
 context in the evidence bundle and the immutable runtime budget in its optimizer prompt.
 It does not place development questions in the workflow that later runs held-out tasks.
 Historical MASS receipts retain their original adapter revision.

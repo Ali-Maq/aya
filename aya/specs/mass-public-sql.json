@@ -116,7 +116,7 @@
   },
   "mass": {
     "repository": "Ali-Maq/mass",
-    "revision": "1af6caf0cafa0a7761f4d3d286a27b1bc45a062a",
+    "revision": "2818e476eafd415d573c27d94b3335391a194605",
     "pull_request": "https://github.com/Ali-Maq/mass/pull/1",
     "native_provider": "Crusoe",
     "native_model": "deepseek-ai/DeepSeek-V4-Pro",
@@ -174,7 +174,7 @@
   "recorded_model_results": null,
   "dependencies": {
     "mass_repository": "Ali-Maq/mass",
-    "mass_revision": "1af6caf0cafa0a7761f4d3d286a27b1bc45a062a",
+    "mass_revision": "2818e476eafd415d573c27d94b3335391a194605",
     "mass_pull_request": "https://github.com/Ali-Maq/mass/pull/1",
     "native_worker": "Installed NemoClaw/NemoHermes in OpenShell",
     "inference_provider": "Crusoe",
