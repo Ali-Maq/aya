@@ -1,5 +1,6 @@
 """Real Crusoe planning and the installed NemoHermes worker."""
 
+import base64
 import fcntl
 import json
 import os
@@ -9,7 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from . import trace
-from .core import MODEL, STATE, WORKER, Journal, run, save
+from .core import MODEL, STATE, WORKER, Journal, run, save, sha
 
 
 def plan(spec: dict[str, Any], directory: Path, journal: Journal) -> dict[str, Any]:
@@ -101,7 +102,94 @@ def worker_busy() -> bool:
             return True
 
 
-def worker(prompt: str, directory: Path, journal: Journal, role: str) -> dict[str, Any]:
+STAGE_PUBLIC_INPUTS = """import base64,hashlib,json,os,pathlib,sys
+workspace=pathlib.Path(sys.argv[1])
+raw=base64.b64decode(sys.argv[2],validate=True)
+if len(raw)>65536:raise ValueError('Public input bundle exceeds size limit')
+files=json.loads(raw)
+names={'public-tasks.json','dataset.json','contract.json'}
+if not isinstance(files,dict) or set(files)!=names or any(not isinstance(v,dict) for v in files.values()):
+ raise ValueError('Exactly three allowlisted JSON objects are required')
+if not workspace.is_absolute() or any(p.is_symlink() for p in [workspace,*workspace.parents]):
+ raise ValueError('Workspace must be an absolute path without symlinks')
+payloads={name:json.dumps(value,sort_keys=True,ensure_ascii=False,allow_nan=False).encode() for name,value in files.items()}
+workspace.mkdir(parents=True,exist_ok=True)
+directory=os.open(workspace,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+try:
+ for name in names:
+  try:os.stat(name,dir_fd=directory,follow_symlinks=False)
+  except FileNotFoundError:continue
+  raise FileExistsError('Refusing to replace an existing episode input: '+name)
+ for name,content in payloads.items():
+  fd=os.open(name,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400,dir_fd=directory)
+  with os.fdopen(fd,'wb') as stream:stream.write(content);stream.flush();os.fsync(stream.fileno())
+ verified={}
+ for name,content in payloads.items():
+  fd=os.open(name,os.O_RDONLY|os.O_NOFOLLOW,dir_fd=directory)
+  with os.fdopen(fd,'rb') as stream:actual=stream.read(65537)
+  if actual!=content:raise ValueError('Staged input did not match controller bytes')
+  verified[name]=hashlib.sha256(actual).hexdigest()
+ print(json.dumps({'workspace':str(workspace),'files':verified,'verified':True}))
+finally:os.close(directory)
+"""
+
+
+def stage_public_inputs(
+    workspace: str, files: dict[str, Any], directory: Path, journal: Journal, role: str
+) -> None:
+    if set(files) != {"public-tasks.json", "dataset.json", "contract.json"} or any(
+        not isinstance(value, dict) for value in files.values()
+    ):
+        raise ValueError("Exactly three allowlisted JSON objects are required")
+    encoded = json.dumps(
+        files, sort_keys=True, ensure_ascii=False, allow_nan=False
+    ).encode()
+    if len(encoded) > 65_536:
+        raise ValueError("Public input bundle exceeds size limit")
+    output = run(
+        [
+            "nemohermes",
+            WORKER,
+            "exec",
+            "--timeout",
+            "20",
+            "--no-stdin",
+            "--",
+            "python3",
+            "-c",
+            STAGE_PUBLIC_INPUTS,
+            workspace,
+            base64.b64encode(encoded).decode(),
+        ],
+        timeout=40,
+    )
+    receipt = json.loads(output)
+    expected = {
+        name: sha(
+            json.dumps(value, sort_keys=True, ensure_ascii=False, allow_nan=False)
+        )
+        for name, value in files.items()
+    }
+    if (
+        receipt.get("verified") is not True
+        or receipt.get("workspace") != workspace
+        or receipt.get("files") != expected
+    ):
+        raise RuntimeError(
+            "Native public input staging receipt does not match the controller"
+        )
+    save(directory / f"{role}-inputs.json", receipt)
+    journal.emit("worker_inputs_staged", role=role, **receipt)
+
+
+def worker(
+    prompt: str,
+    directory: Path,
+    journal: Journal,
+    role: str,
+    *,
+    public_files: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     with (STATE / "worker.lock").open("a") as lease:
         try:
             fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -109,11 +197,16 @@ def worker(prompt: str, directory: Path, journal: Journal, role: str) -> dict[st
             raise RuntimeError(
                 "The native worker is busy with another recovery command"
             ) from exc
-        return _worker(prompt, directory, journal, role)
+        return _worker(prompt, directory, journal, role, public_files=public_files)
 
 
 def _worker(
-    prompt: str, directory: Path, journal: Journal, role: str
+    prompt: str,
+    directory: Path,
+    journal: Journal,
+    role: str,
+    *,
+    public_files: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     before = {r["id"] for r in audit()}
     workspace = "/sandbox/aya/" + directory.name
@@ -132,6 +225,8 @@ def _worker(
         ],
         timeout=40,
     )
+    if public_files is not None:
+        stage_public_inputs(workspace, public_files, directory, journal, role)
     journal.emit(
         "worker_started",
         role=role,

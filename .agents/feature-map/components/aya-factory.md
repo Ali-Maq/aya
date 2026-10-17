@@ -16,6 +16,7 @@ Each request names a target repository. Onyx is the factory interface.
 The page uses the authenticated proxy in `web/src/app/api/aya/[...path]/route.ts`.
 The host controller exposes request creation, runs, run details, SQL deployment identity, and a real Crusoe query endpoint. GET `/mass` and `/mass/{id}` expose experiments. GET `/mass/catalog` exposes verified benchmark readiness. GET `/mass/trajectories` exposes the latest verified trajectory selection. POST `/mass` accepts a benchmark identity and starts a background experiment.
 The token names and local ports are defined in `aya/aya_factory/server.py:Handler`.
+`MassExperiment.tsx` renders real experiment and training states, including skipped training when too few verified answers pass. `StoredTrajectories.tsx` handles both preparing and ready API responses. `RunTrace.tsx` labels model usage as pending while an active native session has not persisted its counters; it renders reported counts without estimating them.
 
 ## 3. Data model
 
@@ -42,7 +43,7 @@ Stored trajectory selection uses actual Langfuse API readback and independent re
 - The browser never receives the host token, inference key, or GitHub credentials.
 - Intake accepts only the configured owner's ready requests and a reviewed contract digest.
 - GitHub failure cannot fall back to local fixtures.
-- Each job owns a fresh directory. One job uses the dedicated feature worker at a time.
+- Each job owns a fresh directory. One job uses the shared feature worker at a time; cross-run filesystem isolation is not enforced.
 - Expected answers stay in the evaluator. The candidate receives input cases only.
 - Activation binds to the source hash and the commit whose CI passed.
 - MASS selection requires comparable development datasets, evaluator contracts, and executor hashes. Held-out questions cannot influence search or training.
@@ -76,6 +77,8 @@ The SQL contract supports one read-only query over a bounded repository dataset.
 The first contract supports a bounded jq recipe subset. It does not implement arbitrary jq programs.
 The OpenShell runtime reports Landlock unavailable on this Docker Desktop host.
 Container and egress controls apply; a Landlock boundary is not verified.
+The first public SQL v0 and v1 traces accessed unrelated earlier fixture files from sibling workspaces. No current Spider reference SQL was observed. Fresh workspace directories do not constitute per-job filesystem isolation; the separate SQL executor containers enforce their own restrictions.
+That run received public inputs in its prompt, although its workflow referred to local input files. Future native episodes stage only the current split's public questions, data, and minimal contract before Hermes starts. The controller verifies file hashes and records a staging receipt. It rejects existing files and symlinks. This fixes missing inputs, not the shared worker filesystem boundary.
 The agent audit reports descendant calls. No aggregate token budget is enforced across descendants.
 A failed SQL job can resume a native worker checkpoint before delivery. The controller rechecks GitHub identity and reruns acceptance; it preserves failure and resume events. Native status parsing only normalizes one extra closing brace after a complete JSON object, with an explicit journal entry.
 The source-recovery examples use fixed model weights. MASS strategy search also keeps weights fixed. The optional Crusoe supervised job is a separate weight-training operation. A small smoke test does not establish generalization or recursive model improvement. There is no automatic tuned-model promotion before serving and evaluation succeed.

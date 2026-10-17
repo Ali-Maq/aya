@@ -386,6 +386,33 @@ def choose_workflow(v0: dict[str, Any], v1: dict[str, Any]) -> str:
     return "v1" if v1["passed"] > v0["passed"] else "v0"
 
 
+def episode_files(
+    benchmark: str, split: str, public: dict[str, Any], task: str
+) -> dict[str, Any]:
+    """Stage only the current split's public input and a minimal task contract."""
+    if split not in {"development", "heldout"} or public != public_input(
+        benchmark, split
+    ):
+        raise ValueError("Native public files must match the current episode split")
+    return {
+        "public-tasks.json": public,
+        "dataset.json": public,
+        "contract.json": {
+            "task": task,
+            "split": split,
+            "output": (
+                'queries.json: object keyed by question ID; each value is {"sql":"..."}'
+                + (' or {"refused":true}' if benchmark == "repository-fixture" else "")
+            ),
+            "budgets": {
+                "max_child_agents": 1,
+                "max_spawn_depth": 1,
+                "subprocess_timeout_seconds": 15,
+            },
+        },
+    }
+
+
 def episode(
     directory: Path,
     name: str,
@@ -439,6 +466,9 @@ def episode(
             target,
             journal,
             name,
+            public_files=episode_files(
+                benchmark, split, public, (directory / "task.txt").read_text()
+            ),
         )
         answers = result.get("answers")
         audit = json.loads((target / f"{name}-audit.json").read_text())

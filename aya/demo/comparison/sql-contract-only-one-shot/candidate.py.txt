@@ -1,0 +1,232 @@
+import json
+import math
+import re
+import sqlite3
+from collections import OrderedDict
+from typing import Any, Dict, List, Optional, Tuple, Union
+
+
+class _QueryLimits:
+    MAX_RECORDS = 500
+    MAX_SQL_LENGTH = 4096
+    MAX_STRING_LENGTH = 4000
+    MAX_RESULT_ROWS = 100
+    MAX_RESULT_COLUMNS = 20
+    MAX_INTEGER = 2**53 - 1
+
+
+_ALLOWED_COLUMNS = {
+    "repo",
+    "owner",
+    "stars",
+    "forks",
+    "issues",
+    "license",
+    "description",
+    "url",
+}
+
+_COLUMN_ORDER = [
+    "repo",
+    "owner",
+    "stars",
+    "forks",
+    "issues",
+    "license",
+    "description",
+    "url",
+]
+
+
+def _validate_record(record: Any) -> Optional[str]:
+    if not isinstance(record, dict):
+        return "invalid_request"
+
+    if set(record.keys()) != _ALLOWED_COLUMNS:
+        return "invalid_request"
+
+    for key in _COLUMN_ORDER:
+        value = record[key]
+        if key in ("stars", "forks", "issues"):
+            if isinstance(value, bool) or not isinstance(value, int):
+                return "invalid_request"
+            if value < 0 or value > _QueryLimits.MAX_INTEGER:
+                return "invalid_request"
+        else:
+            if value is not None and not isinstance(value, str):
+                return "invalid_request"
+            if isinstance(value, str) and len(value) > _QueryLimits.MAX_STRING_LENGTH:
+                return "invalid_request"
+
+    return None
+
+
+def _validate_payload(payload: Any) -> Tuple[Optional[List[Dict[str, Any]]], Optional[str], Optional[str]]:
+    if not isinstance(payload, dict):
+        return None, None, "invalid_request"
+
+    if set(payload.keys()) != {"records", "sql"}:
+        return None, None, "invalid_request"
+
+    records = payload.get("records")
+    sql = payload.get("sql")
+
+    if not isinstance(records, list):
+        return None, None, "invalid_request"
+
+    if len(records) > _QueryLimits.MAX_RECORDS:
+        return None, None, "limit_exceeded"
+
+    validated_records: List[Dict[str, Any]] = []
+    for record in records:
+        error = _validate_record(record)
+        if error:
+            return None, None, error
+        validated_records.append(record)
+
+    if not isinstance(sql, str):
+        return None, None, "invalid_request"
+
+    if len(sql) == 0:
+        return None, None, "invalid_request"
+
+    if len(sql) > _QueryLimits.MAX_SQL_LENGTH:
+        return None, None, "limit_exceeded"
+
+    return validated_records, sql, None
+
+
+def _build_database(records: List[Dict[str, Any]]) -> sqlite3.Connection:
+    conn = sqlite3.connect(":memory:")
+    conn.execute(
+        """
+        CREATE TABLE repositories (
+            repo TEXT,
+            owner TEXT,
+            stars INTEGER,
+            forks INTEGER,
+            issues INTEGER,
+            license TEXT,
+            description TEXT,
+            url TEXT
+        )
+        """
+    )
+
+    insert_sql = """
+        INSERT INTO repositories (repo, owner, stars, forks, issues, license, description, url)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """
+
+    rows = [
+        (
+            record["repo"],
+            record["owner"],
+            record["stars"],
+            record["forks"],
+            record["issues"],
+            record["license"],
+            record["description"],
+            record["url"],
+        )
+        for record in records
+    ]
+
+    conn.executemany(insert_sql, rows)
+    conn.commit()
+    return conn
+
+
+def _install_authorizer(conn: sqlite3.Connection) -> None:
+    def authorizer(action: int, arg1: Optional[str], arg2: Optional[str], db_name: Optional[str], trigger: Optional[str]) -> int:
+        # SQLITE_SELECT = 21, SQLITE_READ = 20, SQLITE_FUNCTION = 31
+        if action == sqlite3.SQLITE_SELECT:
+            return sqlite3.SQLITE_OK
+        if action == sqlite3.SQLITE_READ:
+            return sqlite3.SQLITE_OK
+        if action == sqlite3.SQLITE_FUNCTION:
+            # Deny dangerous functions explicitly; allow all others.
+            dangerous = {
+                "load_extension",
+                "readfile",
+                "writefile",
+                "sqlite_compileoption_used",
+                "sqlite_compileoption_get",
+                "fts3_tokenizer",
+                "fts5",
+            }
+            func_name = (arg2 or "").lower()
+            if func_name in dangerous:
+                return sqlite3.SQLITE_DENY
+            return sqlite3.SQLITE_OK
+        # Deny everything else: INSERT, UPDATE, DELETE, DDL, PRAGMA, ATTACH, DETACH, transactions, etc.
+        return sqlite3.SQLITE_DENY
+
+    conn.set_authorizer(authorizer)
+
+
+def _install_progress_handler(conn: sqlite3.Connection) -> None:
+    def progress_handler() -> int:
+        # Returning non-zero aborts the query.
+        return 1
+
+    conn.set_progress_handler(progress_handler, 1000)
+
+
+def _execute_query(conn: sqlite3.Connection, sql: str) -> Tuple[Optional[List[str]], Optional[List[List[Any]]], Optional[str]]:
+    try:
+        cursor = conn.execute(sql)
+    except sqlite3.DatabaseError:
+        return None, None, "query_error"
+    except sqlite3.OperationalError:
+        return None, None, "query_error"
+    except Exception:
+        return None, None, "query_error"
+
+    try:
+        columns = [description[0] for description in cursor.description] if cursor.description else []
+    except Exception:
+        return None, None, "query_error"
+
+    if len(columns) > _QueryLimits.MAX_RESULT_COLUMNS:
+        return None, None, "limit_exceeded"
+
+    rows: List[List[Any]] = []
+    try:
+        for row in cursor:
+            if len(rows) >= _QueryLimits.MAX_RESULT_ROWS:
+                return None, None, "limit_exceeded"
+            rows.append(list(row))
+    except sqlite3.DatabaseError:
+        return None, None, "query_error"
+    except sqlite3.OperationalError:
+        return None, None, "query_error"
+    except Exception:
+        return None, None, "query_error"
+
+    return columns, rows, None
+
+
+def execute(payload: Any) -> Dict[str, Any]:
+    records, sql, error = _validate_payload(payload)
+    if error:
+        return {"error": error}
+
+    assert records is not None
+    assert sql is not None
+
+    conn = _build_database(records)
+    try:
+        _install_authorizer(conn)
+        _install_progress_handler(conn)
+
+        columns, rows, query_error = _execute_query(conn, sql)
+        if query_error:
+            return {"error": query_error}
+
+        assert columns is not None
+        assert rows is not None
+
+        return {"columns": columns, "rows": rows}
+    finally:
+        conn.close()

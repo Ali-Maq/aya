@@ -1,9 +1,13 @@
-# AYA — software recovery factory
+# AYA
 
-AYA turns a live GitHub feature request into a verified component for another application.
-It uses Onyx as the factory frontend, Hermes through NemoClaw/OpenShell, REA/Ghidra, and Crusoe inference.
+AYA recovers software capabilities and measures improvements to the agents that build them.
+Its Onyx frontend has two peer tabs: Reverse engineering and Agent improvement.
+Hermes runs through NemoClaw/OpenShell, with REA/Ghidra for reference analysis and Crusoe for inference and training.
 
-Start with [the AYA guide](aya/README.md). The first target is [Saved JSON Export Recipes for Open WebUI](https://github.com/Ali-Maq/aya-data-recipes).
+Start with [the AYA guide](aya/README.md).
+The SQL example connects a [tested Fireworks-to-Crusoe component](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2)
+to [actual MASS workflow search](https://github.com/Ali-Maq/mass/pull/1), a [public Spider benchmark](aya/PUBLIC_SQL.md),
+and verified Langfuse trajectory selection. Independent results control acceptance; no general superiority is claimed.
 
 The original Onyx source and history are retained below. AYA additions are in `aya/` and the Factory view.
 

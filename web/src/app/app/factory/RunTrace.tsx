@@ -42,6 +42,10 @@ export default function RunTrace({
       .includes(filter.toLowerCase())
   );
   const sessions = trace?.sessions || [];
+  const calls = sessions.reduce(
+    (total, session) => total + (session.api_call_count || 0),
+    0
+  );
   const children = new Set(
     sessions
       .filter((session) => session.parent_session_id)
@@ -55,11 +59,8 @@ export default function RunTrace({
             {t("traceTitle")}
           </Text>
           <Text as="p" font="secondary-body" color="text-03">
-            {t("traceCounts", {
-              calls: sessions.reduce(
-                (total, session) => total + (session.api_call_count || 0),
-                0
-              ),
+            {t(running && calls === 0 ? "traceCountsPending" : "traceCounts", {
+              calls,
               children: children.size,
               events: trace?.entries.length || 0,
             })}
