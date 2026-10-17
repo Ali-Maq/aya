@@ -1,0 +1,17 @@
+{
+ admin off
+ skip_install_trust
+ auto_https disable_redirects
+ storage file_system {$REA_CADDY_DATA}
+}
+https://{$REA_MCP_HOST}:8444 {
+ bind {$REA_MCP_HOST}
+ tls internal
+ route {
+  @unauthorized not header Authorization "Bearer {$REA_MCP_TOKEN}"
+  respond @unauthorized "unauthorized" 401
+  reverse_proxy 127.0.0.1:8766 {
+   flush_interval -1
+  }
+ }
+}

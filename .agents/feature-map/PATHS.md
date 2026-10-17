@@ -233,3 +233,5 @@ The component is unmapped. Do two things:
 2. Say in the PR that you verified against an unmapped area, and add the path here.
 
 Never treat "not in the map" as "low risk".
+
+| `aya/`, `web/src/app/app/factory/`, `web/src/app/api/aya/` | aya-factory |

@@ -1,3 +1,14 @@
+# AYA — software recovery factory
+
+AYA turns a live GitHub feature request into a verified component for another application.
+It uses Onyx as the factory frontend, Hermes through NemoClaw/OpenShell, REA/Ghidra, and Crusoe inference.
+
+Start with [the AYA guide](aya/README.md). The first target is [Saved JSON Export Recipes for Open WebUI](https://github.com/Ali-Maq/aya-data-recipes).
+
+The original Onyx source and history are retained below. AYA additions are in `aya/` and the Factory view.
+
+---
+
 <a name="readme-top"></a>
 
 <h2 align="center">

@@ -1,0 +1,6 @@
+[
+  {"customer":{"name":"Mina, Inc."},"amount":0,"approved":false,"region":null},
+  {"customer":{"name":"Luca \"Studio\""},"amount":42,"approved":true,"region":"EU"},
+  {"customer":{"name":"東京"},"amount":17,"approved":false},
+  {"customer":{"name":"Aster"},"amount":125,"approved":true,"region":"US"}
+]

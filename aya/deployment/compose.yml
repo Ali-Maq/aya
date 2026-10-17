@@ -1,0 +1,48 @@
+name: aya
+services:
+  database:
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD: ${AYA_DB_PASSWORD:?Set AYA_DB_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql/data
+  onyx:
+    image: onyxdotapp/onyx-backend@sha256:108870d7b6b3937f2aaf2da3d3700f79bb14286e0d1e21fc64fa33424520f94b
+    command: /bin/sh -c 'alembic upgrade head && uvicorn onyx.main:app --host 0.0.0.0 --port 8080'
+    depends_on:
+      - database
+    ports:
+      - '127.0.0.1:8082:8080'
+    environment:
+      POSTGRES_HOST: database
+      POSTGRES_PASSWORD: ${AYA_DB_PASSWORD:?Set AYA_DB_PASSWORD}
+      POSTGRES_DB: postgres
+      DISABLE_VECTOR_DB: 'true'
+      FILE_STORE_BACKEND: postgres
+      CACHE_BACKEND: postgres
+      AUTH_BACKEND: postgres
+      AUTH_TYPE: basic
+      USER_AUTH_SECRET: ${AYA_AUTH_SECRET:?Set AYA_AUTH_SECRET}
+      WEB_DOMAIN: http://localhost:3021
+      ENABLE_CRAFT: 'false'
+      DISABLE_TELEMETRY: 'true'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+  webui:
+    image: ghcr.io/open-webui/open-webui@sha256:1e834205e71a97812c8e3e8cbf05e7ab40887143a65aa78b85fe7930d5892f0d
+    ports:
+      - '127.0.0.1:3032:8080'
+    environment:
+      WEBUI_SECRET_KEY: ${AYA_WEBUI_SECRET:?Set AYA_WEBUI_SECRET}
+      ENABLE_OLLAMA_API: 'false'
+      ENABLE_SIGNUP: 'true'
+      AYA_RUNTIME_URL: http://host.docker.internal:8772/export
+      AYA_RUNTIME_TOKEN: ${AYA_RUNTIME_TOKEN:?Set AYA_RUNTIME_TOKEN}
+      OFFLINE_MODE: 'true'
+    volumes:
+      - webui:/app/backend/data
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+volumes:
+  database:
+  webui:

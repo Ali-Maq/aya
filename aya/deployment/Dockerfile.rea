@@ -1,0 +1,10 @@
+FROM python:3.12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends openjdk-21-jre-headless nodejs npm build-essential zlib1g-dev && rm -rf /var/lib/apt/lists/*
+COPY ghidra /opt/ghidra
+RUN make -C /opt/ghidra/Ghidra/Features/Decompiler/src/decompile/cpp -j6 ghidra_opt ARCH_TYPE= OSDIR=linux_arm_64 && mkdir -p /opt/ghidra/Ghidra/Features/Decompiler/os/linux_arm_64 && cp /opt/ghidra/Ghidra/Features/Decompiler/src/decompile/cpp/ghidra_opt /opt/ghidra/Ghidra/Features/Decompiler/os/linux_arm_64/decompile
+RUN npm install --prefix /opt/rea rea-agents@6.5.0 && pip install --no-cache-dir mcp-proxy==0.13.0
+RUN sed -i 's|http://deb.debian.org|https://deb.debian.org|g' /etc/apt/sources.list.d/debian.sources && apt-get -o Acquire::https::Timeout=30 update && apt-get -o Acquire::https::Timeout=30 install -y --no-install-recommends openjdk-21-jdk-headless && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends procps && rm -rf /var/lib/apt/lists/*
+ENV GHIDRA_INSTALL_DIR=/opt/ghidra HOME=/tmp/rea
+USER 65532:65532
+ENTRYPOINT ["mcp-proxy", "--host", "0.0.0.0", "--port", "8766", "-e", "GHIDRA_INSTALL_DIR", "/opt/ghidra", "-e", "REA_MCP_OUTPUT_SCHEMA_PROFILE", "off", "-e", "REA_MCP_INPUT_SCHEMA_PROFILE", "compact", "--", "/opt/rea/node_modules/.bin/rea", "mcp"]
