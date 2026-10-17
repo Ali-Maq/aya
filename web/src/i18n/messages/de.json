@@ -17341,7 +17341,7 @@
         "title": "Beste gespeicherte Verläufe",
         "selected": "{count} ausgewählte Antworten · {heldout} zurückgehaltene Zeilen",
         "rule": "Auswahlreihenfolge: Korrektheit, dann Modellaufrufe und Tokens der Episode, dann Latenz. Die Kosten gelten für die gesamte Episode, nicht für einzelne Antworten.",
-        "preview": "Vorschau für den nächsten Trainingsdatensatz. Es wird kein Auftrag erstellt und früheres Training bleibt unverändert.",
+        "preview": "Verifizierte Auswahl. Jobübermittlungen und Anbieterstatus stehen unter Crusoe-Training.",
         "loading": "Gespeicherte Nachweise werden geladen…",
         "candidate": "{episode} · {count} ausgewählte Antworten",
         "usage": "Episode: {passed}/{total} Prüfungen · {calls} Aufrufe · {tokens} Tokens · {seconds} s",

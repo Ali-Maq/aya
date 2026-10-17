@@ -17341,7 +17341,7 @@
         "title": "Mejores trayectorias guardadas",
         "selected": "{count} respuestas seleccionadas · {heldout} filas reservadas",
         "rule": "Orden: corrección, luego llamadas y tokens del episodio, después latencia. Los costes corresponden al episodio completo, no a cada respuesta.",
-        "preview": "Vista previa del próximo conjunto de entrenamiento. No envía un trabajo ni cambia datos de entrenamientos anteriores.",
+        "preview": "Instantánea de selección verificada. Los envíos de trabajos y el estado del proveedor aparecen en Entrenamiento de Crusoe.",
         "loading": "Cargando evidencias guardadas…",
         "candidate": "{episode} · {count} respuestas seleccionadas",
         "usage": "Episodio: {passed}/{total} pruebas · {calls} llamadas · {tokens} tokens · {seconds} s",

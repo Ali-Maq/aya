@@ -61,7 +61,9 @@ describe("stored trajectory evidence", () => {
       screen.getByText(/No selected trajectory is a winning MASS teacher/)
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/does not submit a job or change earlier training data/)
+      screen.getByText(
+        /Job submissions and provider status appear under Crusoe training/
+      )
     ).toBeInTheDocument();
   });
 });

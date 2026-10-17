@@ -17341,7 +17341,7 @@
         "title": "Meilleures trajectoires enregistrées",
         "selected": "{count} réponses sélectionnées · {heldout} lignes réservées",
         "rule": "Ordre : exactitude, puis appels et tokens de l’épisode, puis latence. Les coûts portent sur l’épisode entier, pas sur chaque réponse.",
-        "preview": "Aperçu du prochain jeu d’entraînement. Aucun travail n’est soumis et les données des entraînements précédents restent inchangées.",
+        "preview": "Instantané de la sélection vérifiée. Les tâches soumises et l’état du fournisseur figurent dans Entraînement Crusoe.",
         "loading": "Chargement des preuves…",
         "candidate": "{episode} · {count} réponses sélectionnées",
         "usage": "Épisode : {passed}/{total} tests · {calls} appels · {tokens} tokens · {seconds} s",

@@ -17341,7 +17341,7 @@
         "title": "Best stored trajectories",
         "selected": "{count} selected answers · {heldout} held-out rows",
         "rule": "Selection order: correctness, then episode model calls and tokens, then latency. Costs are measured for the whole episode, not each answer.",
-        "preview": "Preview for the next training set. This does not submit a job or change earlier training data.",
+        "preview": "Verified selection snapshot. Job submissions and provider status appear under Crusoe training.",
         "loading": "Loading stored evidence…",
         "candidate": "{episode} · {count} selected answers",
         "usage": "Episode: {passed}/{total} checks · {calls} calls · {tokens} tokens · {seconds} s",

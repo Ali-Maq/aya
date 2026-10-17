@@ -24,6 +24,19 @@ const activeTrace: NativeTrace = {
 };
 
 describe("native trace usage", () => {
+  test("shows measured baseline calls without creating a native session", () => {
+    render(
+      <RunTrace
+        trace={{ sessions: [], entries: [] }}
+        running={false}
+        measuredCalls={1}
+      />
+    );
+    expect(
+      screen.getByText("1 model calls · 0 child agents · 0 observable events")
+    ).toBeInTheDocument();
+  });
+
   test("waits for persisted usage instead of presenting zero calls while active", () => {
     const { rerender } = render(<RunTrace trace={activeTrace} running />);
     expect(

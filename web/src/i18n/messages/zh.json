@@ -17341,7 +17341,7 @@
         "title": "最佳已存储轨迹",
         "selected": "已选 {count} 个答案 · {heldout} 行留出数据",
         "rule": "选择顺序：正确性，然后是整轮模型调用数与 token 数，最后是延迟。成本为整轮测量值，不是每个答案的成本。",
-        "preview": "下一份训练集的预览。不会提交任务，也不会更改之前的训练数据。",
+        "preview": "已验证的选择快照。作业提交和提供商状态显示在“Crusoe 训练”下。",
         "loading": "正在加载已存储证据…",
         "candidate": "{episode} · 已选 {count} 个答案",
         "usage": "轮次：{passed}/{total} 项检查 · {calls} 次调用 · {tokens} token · {seconds} 秒",

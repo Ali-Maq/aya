@@ -453,6 +453,7 @@ export default function MassExperiment() {
             <RunTrace
               key={`${identity}-${episode.name}`}
               trace={episode.trace}
+              measuredCalls={episode.usage?.api_calls}
               running={current?.status === "running" && !episode.results}
             />
           </div>

@@ -17341,7 +17341,7 @@
         "title": "Melhores trajetórias salvas",
         "selected": "{count} respostas selecionadas · {heldout} linhas reservadas",
         "rule": "Ordem: correção, depois chamadas e tokens do episódio, depois latência. Os custos são do episódio inteiro, não de cada resposta.",
-        "preview": "Prévia do próximo conjunto de treinamento. Não envia um trabalho nem altera dados de treinamentos anteriores.",
+        "preview": "Registro da seleção verificada. Envios de tarefas e status do provedor aparecem em Treinamento Crusoe.",
         "loading": "Carregando evidências salvas…",
         "candidate": "{episode} · {count} respostas selecionadas",
         "usage": "Episódio: {passed}/{total} testes · {calls} chamadas · {tokens} tokens · {seconds} s",

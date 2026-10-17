@@ -28,9 +28,11 @@ export interface NativeTrace {
 export default function RunTrace({
   trace,
   running,
+  measuredCalls,
 }: {
   trace?: NativeTrace;
   running: boolean;
+  measuredCalls?: number;
 }) {
   const t = useTranslations("aya");
   const format = useFormatter();
@@ -42,10 +44,15 @@ export default function RunTrace({
       .includes(filter.toLowerCase())
   );
   const sessions = trace?.sessions || [];
-  const calls = sessions.reduce(
-    (total, session) => total + (session.api_call_count || 0),
-    0
-  );
+  const calls =
+    measuredCalls !== undefined &&
+    Number.isFinite(measuredCalls) &&
+    measuredCalls >= 0
+      ? measuredCalls
+      : sessions.reduce(
+          (total, session) => total + (session.api_call_count || 0),
+          0
+        );
   const children = new Set(
     sessions
       .filter((session) => session.parent_session_id)
