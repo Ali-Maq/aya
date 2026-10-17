@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import useSWR from "swr";
+import MinimalMarkdown from "@/components/chat/MinimalMarkdown";
 import { useTranslations, useFormatter } from "next-intl";
 import { Button, Text, InputTypeIn, InputTextArea } from "@opal/components";
 import { SvgBranch, SvgArrowRight, SvgCheckCircle } from "@opal/icons";
@@ -50,7 +51,7 @@ interface Detail {
   snapshot: unknown;
   evidence?: unknown;
   source?: string;
-  report?: unknown;
+  report?: { attempts: { passed: number; total: number }[] };
   audits: unknown[];
   live_checks?: unknown;
   checks?: { html_url: string; name: string; conclusion: string }[];
@@ -141,7 +142,7 @@ export default function FactoryPage() {
         events.has("reference_investigated") ||
         events.has("binary_investigated"),
     },
-    { key: "stepBuild", done: events.has("candidate_evaluated") },
+    { key: "stepBuild", done: events.has("acceptance_passed") },
     { key: "stepVerify", done: events.has("target_tests_passed") },
     { key: "stepDeliver", done: events.has("ci_passed") },
   ] as const;
@@ -342,6 +343,17 @@ export default function FactoryPage() {
                 </article>
               ))}
             </div>
+            {queue && (
+              <Text font="secondary-body" color="text-03">
+                {t("fetched", {
+                  time: format.dateTime(new Date(queue.fetched_at), {
+                    hour: "numeric",
+                    minute: "numeric",
+                    second: "numeric",
+                  }),
+                })}
+              </Text>
+            )}
             <div className="mt-auto border-t border-border-01 pt-4">
               <Text as="p" font="secondary-action">
                 {t("engine")}
@@ -415,6 +427,16 @@ export default function FactoryPage() {
                     {t("ciPassed")}
                   </Button>
                 ))}
+              {detail.run.status === "complete" &&
+                detail.run.profile !== "crusoe-repository-analyst" && (
+                  <Button
+                    size="sm"
+                    prominence="tertiary"
+                    href="http://localhost:3032"
+                  >
+                    {t("openProduct")}
+                  </Button>
+                )}
               {detail.run.error && (
                 <Text color="status-error-05">{detail.run.error}</Text>
               )}
@@ -422,6 +444,30 @@ export default function FactoryPage() {
           ) : (
             <Text color="text-03">{t("startHint")}</Text>
           )}
+          <div className="flex flex-wrap gap-4">
+            {detail?.report?.attempts.map((attempt, index) => (
+              <Text
+                key={index}
+                font="secondary-body"
+                color={
+                  attempt.passed === attempt.total
+                    ? "text-03"
+                    : "status-error-05"
+                }
+              >
+                {t("attemptResult", {
+                  attempt: index + 1,
+                  passed: attempt.passed,
+                  total: attempt.total,
+                  status: t(
+                    attempt.passed === attempt.total
+                      ? "checksPassed"
+                      : "checksRejected"
+                  ),
+                })}
+              </Text>
+            ))}
+          </div>
           <details>
             <summary className="cursor-pointer">
               <Text font="secondary-action">{t("history")}</Text>
@@ -463,7 +509,12 @@ export default function FactoryPage() {
           </div>
           {answer && (
             <div className="flex min-w-0 flex-col gap-4">
-              <Text>{answer.answer}</Text>
+              <details>
+                <summary className="cursor-pointer">
+                  <Text font="secondary-action">{t("modelExplanation")}</Text>
+                </summary>
+                <MinimalMarkdown content={answer.answer} />
+              </details>
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>

@@ -91,12 +91,17 @@ def live_checks(source: str, directory: Path) -> dict[str, Any]:
     return report
 
 
-def build(number: int, directory: Path) -> None:
+def build(number: int, directory: Path, resume: bool = False) -> None:
     from .pipeline import LOCK, state
 
     journal = Journal(directory)
     try:
-        frozen = intake.snapshot(number, SQL_REPOSITORY)
+        frozen = (
+            json.loads((directory / "snapshot.json").read_text())
+            if resume
+            else intake.snapshot(number, SQL_REPOSITORY)
+        )
+        intake.assert_current(frozen)
         save(directory / "snapshot.json", frozen)
         journal.emit(
             "request_frozen",
@@ -106,26 +111,34 @@ def build(number: int, directory: Path) -> None:
             base_commit=frozen["target_base"],
         )
         state(directory, stage="Crusoe planning")
-        plan = agents.plan(frozen["spec"], directory, journal)
+        plan = (
+            json.loads((directory / "plan.json").read_text())
+            if resume
+            else agents.plan(frozen["spec"], directory, journal)
+        )
         reference = STATE / "reference/fireworks-sql/sql_tools.py"
         if sha(reference.read_bytes()) != SOURCE_SHA:
             raise RuntimeError("Fireworks reference digest mismatch")
         state(directory, stage="REA source investigation")
-        investigation = agents.worker(
-            "Read the reverse-engineer-anything skill. Investigate the supplied Fireworks SQL source and capture its actual behavior through REA. "
-            'This is source/runtime adaptation, NOT binary decompilation. Call the rea MCP capture_process_scenario tool with executable=/usr/local/bin/python3, arguments=["-B","/reference/fireworks-sql/probe.py"], working_directory=/tmp, timeout_ms=10000, limits={"output_bytes":30000}. '
-            "These paths are on the REA server, not your local filesystem. The prepared probe executes selected unmodified upstream AST functions on a real SQLite snapshot; training and embeddings are excluded. "
-            "The tool result is canonical evidence. Keep the returned evidence_id. Explain query result ordering, schema inspection, and the stricter read-only target boundary. "
-            "Return JSON {observations:[strings],evidence_ids:[strings],limitations:[strings]}. Do not install packages or fetch other source. "
-            "Pinned source URL: "
-            + SOURCE_URL
-            + "\nSource:\n"
-            + reference.read_text()
-            + "\nContract:\n"
-            + json.dumps(frozen["spec"]),
-            directory,
-            journal,
-            "investigation",
+        investigation = (
+            json.loads((directory / "investigation-result.json").read_text())
+            if resume
+            else agents.worker(
+                "Read the reverse-engineer-anything skill. Investigate the supplied Fireworks SQL source and capture its actual behavior through REA. "
+                'This is source/runtime adaptation, NOT binary decompilation. Call the rea MCP capture_process_scenario tool with executable=/usr/local/bin/python3, arguments=["-B","/reference/fireworks-sql/probe.py"], working_directory=/tmp, timeout_ms=10000, limits={"output_bytes":30000}. '
+                "These paths are on the REA server, not your local filesystem. The prepared probe executes selected unmodified upstream AST functions on a real SQLite snapshot; training and embeddings are excluded. "
+                "The tool result is canonical evidence. Keep the returned evidence_id. Explain query result ordering, schema inspection, and the stricter read-only target boundary. "
+                "Return JSON {observations:[strings],evidence_ids:[strings],limitations:[strings]}. Do not install packages or fetch other source. "
+                "Pinned source URL: "
+                + SOURCE_URL
+                + "\nSource:\n"
+                + reference.read_text()
+                + "\nContract:\n"
+                + json.dumps(frozen["spec"]),
+                directory,
+                journal,
+                "investigation",
+            )
         )
         audit = json.loads((directory / "investigation-audit.json").read_text())
         if not any(
@@ -183,33 +196,47 @@ def build(number: int, directory: Path) -> None:
         )
         feedback = ""
         source = ""
-        for attempt in range(3):
+        previous_attempts = (
+            len(list(directory.glob("candidate-*-report.json"))) if resume else 0
+        )
+        for attempt in range(previous_attempts, 3):
             state(
                 directory,
                 stage="Hermes implementation" if attempt == 0 else "Hermes repair",
             )
-            agents.worker(
-                "Build query.py implementing execute(payload), tests/test_agent_query.py, and README.md in the current workspace. "
-                "Read the test-driven-development skill. Write and run real unit tests using python3 -m unittest discover -s tests -v, with red/green steps. "
-                "Use delegate_task once for a focused edge-case review; child must not delegate. No dependencies. "
-                "query.py imports only sqlite3,json,re,typing,collections,math; no file IO, network, subprocess, dynamic execution or object internals. "
-                "Use sqlite3.connect(':memory:') only. Initialize data, then query_only plus a SQLite authorizer to deny writes, PRAGMA, attach/detach, transactions and load_extension. Literal words in strings must remain legal. "
-                "A progress handler must terminate expensive recursive queries with limit_exceeded. Reject >100 rows and >20 columns. Return errors exactly as contract defines. "
-                "Tests may import unittest and query. README must explain the real Crusoe client, CRUSOE_API_KEY, run.py usage, dependencies (stdlib), read-only contract, Apache-2.0 attribution with pinned source URL, and excluded Fireworks training/embeddings. "
-                "Return JSON {summary:string,tests_run:string}; actual files stay on disk.\nContract:"
-                + json.dumps(frozen["spec"])
-                + "\nReference:"
-                + SOURCE_URL
-                + "\nInvestigation:"
-                + json.dumps(investigation)
-                + "\nPlan:"
-                + json.dumps(plan)
-                + "\nDevelopment feedback:"
-                + feedback,
-                directory,
-                journal,
-                f"implementation-{attempt + 1}",
-            )
+            role = f"implementation-{attempt + 1}"
+            retained_log = directory / f"{role}.stdout.log"
+            if (
+                resume
+                and retained_log.exists()
+                and (directory / f"{role}-audit.json").exists()
+            ):
+                agents.parse_result(retained_log.read_text(), directory, journal, role)
+                journal.emit("worker_checkpoint_resumed", role=role)
+            else:
+                agents.worker(
+                    "Build query.py implementing execute(payload), tests/test_agent_query.py, and README.md in the current workspace. "
+                    "Read the test-driven-development skill. Write and run real unit tests using python3 -m unittest discover -s tests -v, with red/green steps. "
+                    "Use delegate_task once for a focused edge-case review; child must not delegate. No dependencies. "
+                    "query.py imports only sqlite3,json,re,typing,collections,math; no file IO, network, subprocess, dynamic execution or object internals. "
+                    "Use sqlite3.connect(':memory:') only. Initialize data, then query_only plus a SQLite authorizer to deny writes, PRAGMA, attach/detach, transactions and load_extension. Literal words in strings must remain legal. "
+                    "A progress handler must terminate expensive recursive queries with limit_exceeded. Reject >100 rows and >20 columns. Return errors exactly as contract defines. "
+                    "Tests may import unittest and query. README must explain the real Crusoe client, CRUSOE_API_KEY, run.py usage, dependencies (stdlib), read-only contract, Apache-2.0 attribution with pinned source URL, and excluded Fireworks training/embeddings. "
+                    'The existing run.py accepts a positional natural-language question, fetches six live GitHub repositories, and invokes client.ask with query.execute. Document python3 run.py "Which three repositories have the most stars?". It does not read JSON from stdin. '
+                    "Return JSON {summary:string,tests_run:string}; actual files stay on disk.\nContract:"
+                    + json.dumps(frozen["spec"])
+                    + "\nReference:"
+                    + SOURCE_URL
+                    + "\nInvestigation:"
+                    + json.dumps(investigation)
+                    + "\nPlan:"
+                    + json.dumps(plan)
+                    + "\nDevelopment feedback:"
+                    + feedback,
+                    directory,
+                    journal,
+                    f"implementation-{attempt + 1}",
+                )
             source = read_worker(directory, "query.py")
             sql_eval.validate(source)
             (directory / f"candidate-{attempt + 1}.py").write_text(source)

@@ -1,0 +1,17 @@
+{
+  "generated_commit": "8c25ac624af5c913e3f15479414335fbf322c586",
+  "documentation_commit": "ba54faddb83c5cb851f6feb5f16dd307ca7de9c9",
+  "module_and_agent_tests_unchanged": true,
+  "checks": [
+    {
+      "name": "aya-sql",
+      "conclusion": "success",
+      "url": "https://github.com/Ali-Maq/crusoe-developer-hub/actions/runs/39074125506/job/117517642462"
+    },
+    {
+      "name": "aya-sql",
+      "conclusion": "success",
+      "url": "https://github.com/Ali-Maq/crusoe-developer-hub/actions/runs/39074122437/job/117517632832"
+    }
+  ]
+}

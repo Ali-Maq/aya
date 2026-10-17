@@ -17242,6 +17242,10 @@
     "detail_source": "생성된 모듈",
     "detail_report": "독립 검사",
     "detail_audits": "네이티브 Hermes 세션",
-    "detail_live_checks": "실제 Crusoe 검증"
+    "detail_live_checks": "실제 Crusoe 검증",
+    "attemptResult": "시도 {attempt}: {passed}/{total} — {status}",
+    "checksPassed": "통과",
+    "checksRejected": "거부됨",
+    "modelExplanation": "모델 설명"
   }
 }

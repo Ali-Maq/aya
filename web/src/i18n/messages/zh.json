@@ -17242,6 +17242,10 @@
     "detail_source": "生成的模块",
     "detail_report": "独立检查",
     "detail_audits": "原生 Hermes 会话",
-    "detail_live_checks": "真实 Crusoe 验证"
+    "detail_live_checks": "真实 Crusoe 验证",
+    "attemptResult": "第 {attempt} 次尝试：{passed}/{total} — {status}",
+    "checksPassed": "通过",
+    "checksRejected": "未通过",
+    "modelExplanation": "模型解释"
   }
 }

@@ -89,6 +89,20 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(value, dict):
                     raise ValueError("Supply a question")
                 return self.send_json(sql_runtime.ask(value.get("question")))
+            if not runtime and self.path == "/resume":
+                value = self.body(2048)
+                if (
+                    not isinstance(value, dict)
+                    or not isinstance(value.get("id"), str)
+                    or not re.fullmatch(r"[a-f0-9]{16}", value["id"])
+                ):
+                    raise ValueError("Supply a valid run identity")
+                return self.send_json(
+                    pipeline.resume(
+                        value["id"], self.headers.get("X-AYA-User", "local-operator")
+                    ),
+                    202,
+                )
             if not runtime and self.path == "/run":
                 value = self.body(2048)
                 if not isinstance(value, dict) or type(value.get("number")) is not int:

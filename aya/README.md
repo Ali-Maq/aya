@@ -22,7 +22,16 @@ The delivered component has no jq runtime dependency.
 These URLs use a separate demo profile. Existing local applications and their data are preserved.
 Sign in with the demo accounts configured on this machine. Credentials are excluded from Git.
 
-## Verified demonstration
+## Verified Crusoe cookbook migration
+
+Run `492e2ca7851347f5` delivered [Crusoe Developer Hub PR 2](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2).
+Native Hermes wrote the SQL module and 50 tests. The first submitted candidate passed 117/118 independent cases; a whitespace-only query exposed a validation gap. The repaired candidate passed 118/118 development checks, 118/118 checks with a fresh seed, three comparisons with the captured upstream behavior, and four real Crusoe questions. All 54 target tests passed locally and in GitHub Actions.
+
+The run paused when native status output contained an extra closing brace. The controller preserved the failed event, normalized that metadata with an explicit receipt, and resumed the same checkpoint. It reran acceptance before creating the PR. The complete recorded run took about eight minutes, including this recovery.
+
+The browser returned real result tables and executed SQL, and the standalone cookbook command returned the correct count through actual Crusoe tool calls. [Evidence](demo/evidence/492e2ca7851347f5) includes rejected cases, upstream comparisons, model receipts, native agent lineage, browser results, and access checks. A documentation review corrected the generated README's driver instructions; the generated SQL module and tests remained unchanged.
+
+## Verified JSON export demonstration
 
 Run `91ae22817df040e7` completed on October 17, 2026, in 8 minutes and 10 seconds.
 It used real Crusoe responses, native Hermes sessions, REA decompilation, jq execution, and GitHub Actions.

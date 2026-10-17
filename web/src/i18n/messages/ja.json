@@ -17242,6 +17242,10 @@
     "detail_source": "生成されたモジュール",
     "detail_report": "独立チェック",
     "detail_audits": "ネイティブHermesセッション",
-    "detail_live_checks": "実際のCrusoe検証"
+    "detail_live_checks": "実際のCrusoe検証",
+    "attemptResult": "試行 {attempt}: {passed}/{total} — {status}",
+    "checksPassed": "合格",
+    "checksRejected": "不合格",
+    "modelExplanation": "モデルの説明"
   }
 }

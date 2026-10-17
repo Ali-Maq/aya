@@ -17242,6 +17242,10 @@
     "detail_source": "Module généré",
     "detail_report": "Contrôles indépendants",
     "detail_audits": "Sessions Hermes natives",
-    "detail_live_checks": "Vérification Crusoe réelle"
+    "detail_live_checks": "Vérification Crusoe réelle",
+    "attemptResult": "Tentative {attempt} : {passed}/{total} — {status}",
+    "checksPassed": "réussie",
+    "checksRejected": "rejetée",
+    "modelExplanation": "Explication du modèle"
   }
 }

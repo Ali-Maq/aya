@@ -17242,6 +17242,10 @@
     "detail_source": "الوحدة المولدة",
     "detail_report": "الفحوصات المستقلة",
     "detail_audits": "جلسات Hermes الأصلية",
-    "detail_live_checks": "تحقق Crusoe الحقيقي"
+    "detail_live_checks": "تحقق Crusoe الحقيقي",
+    "attemptResult": "المحاولة {attempt}: {passed}/{total} — {status}",
+    "checksPassed": "نجحت",
+    "checksRejected": "مرفوضة",
+    "modelExplanation": "شرح النموذج"
   }
 }

@@ -1,0 +1,15 @@
+{
+  "anonymous_requests": 403,
+  "anonymous_deployment": 403,
+  "anonymous_runs": 403,
+  "viewer_login": 204,
+  "viewer_requests": 403,
+  "viewer_deployment": 403,
+  "viewer_runs": 403,
+  "viewer_ask": 403,
+  "admin_login": 204,
+  "admin_requests": 200,
+  "missing_origin": 403,
+  "invalid_origin": 403,
+  "invalid_request": 400
+}

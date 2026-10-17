@@ -1,0 +1,286 @@
+[
+  {
+    "at": "2026-10-17T22:03:55.586494+00:00",
+    "event": "request_frozen",
+    "issue": "https://github.com/Ali-Maq/crusoe-developer-hub/issues/1",
+    "target": "Ali-Maq/crusoe-developer-hub",
+    "contract_sha256": "7c56492fc8333c3a770e2b692ee8df12652266bd6bb768dec1cde2486b2a5ee6",
+    "base_commit": "278a79d033078157e51916c7a596194e1edd191d"
+  },
+  {
+    "at": "2026-10-17T22:04:02.999407+00:00",
+    "event": "plan_completed",
+    "provider": "Crusoe",
+    "endpoint": "https://api.inference.crusoecloud.com/v1",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "response_id": "0706aa877c83441ea66b4f2186b34dce",
+    "usage": {
+      "prompt_tokens": 626,
+      "total_tokens": 1582,
+      "completion_tokens": 956,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "reasoning_tokens": 0
+    }
+  },
+  {
+    "at": "2026-10-17T22:04:04.669808+00:00",
+    "event": "worker_started",
+    "role": "investigation",
+    "sandbox": "aya-feature",
+    "workspace": "/sandbox/aya/492e2ca7851347f5",
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T22:04:30.174402+00:00",
+    "event": "worker_completed",
+    "role": "investigation",
+    "sessions": [
+      {
+        "id": "20261017_220407_c9d312",
+        "source": "cli",
+        "model": "deepseek-ai/DeepSeek-V4-Pro",
+        "billing_provider": "custom",
+        "parent_session_id": null,
+        "tool_call_count": 7,
+        "input_tokens": 19041,
+        "output_tokens": 3111,
+        "api_call_count": 7,
+        "tools": [
+          "mcp__rea__capture_process_scenario",
+          "search_files",
+          "skill_view",
+          "skills_list",
+          "terminal",
+          "tool_call",
+          "tool_describe",
+          "write_file"
+        ]
+      }
+    ],
+    "child_sessions": 0,
+    "api_calls": 7,
+    "input_tokens": 19041,
+    "output_tokens": 3111
+  },
+  {
+    "at": "2026-10-17T22:04:30.189829+00:00",
+    "event": "reference_investigated",
+    "reference_sha256": "3d362c60eb258dba706b838092dc41cc892dee00b541c9ff1b924c35bd2e9b64",
+    "evidence_ids": [
+      "ev_fab70ae1c547dd39d8851375494d37afa49472b3a14967c181bffc6aeee15c8d"
+    ]
+  },
+  {
+    "at": "2026-10-17T22:04:31.632723+00:00",
+    "event": "worker_started",
+    "role": "implementation-1",
+    "sandbox": "aya-feature",
+    "workspace": "/sandbox/aya/492e2ca7851347f5",
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T22:07:25.221258+00:00",
+    "event": "worker_completed",
+    "role": "implementation-1",
+    "sessions": [
+      {
+        "id": "20261017_220529_63133a",
+        "source": "subagent",
+        "model": "deepseek-ai/DeepSeek-V4-Pro",
+        "billing_provider": "custom",
+        "parent_session_id": "20261017_220434_c9662b",
+        "tool_call_count": 13,
+        "input_tokens": 24316,
+        "output_tokens": 10417,
+        "api_call_count": 13,
+        "tools": [
+          "execute_code",
+          "read_file"
+        ]
+      },
+      {
+        "id": "20261017_220434_c9662b",
+        "source": "cli",
+        "model": "deepseek-ai/DeepSeek-V4-Pro",
+        "billing_provider": "custom",
+        "parent_session_id": null,
+        "tool_call_count": 35,
+        "input_tokens": 38100,
+        "output_tokens": 15865,
+        "api_call_count": 33,
+        "tools": [
+          "delegate_task",
+          "execute_code",
+          "patch",
+          "read_file",
+          "skill_view",
+          "terminal",
+          "write_file"
+        ]
+      }
+    ],
+    "child_sessions": 1,
+    "api_calls": 46,
+    "input_tokens": 62416,
+    "output_tokens": 26282
+  },
+  {
+    "at": "2026-10-17T22:07:27.665524+00:00",
+    "event": "candidate_evaluated",
+    "attempt": 1,
+    "passed": 117,
+    "total": 118,
+    "source_sha256": "3882baba1585d157db25602e82a54e7ca34339677503e373bc14ed49e22be803"
+  },
+  {
+    "at": "2026-10-17T22:07:29.113655+00:00",
+    "event": "worker_started",
+    "role": "implementation-2",
+    "sandbox": "aya-feature",
+    "workspace": "/sandbox/aya/492e2ca7851347f5",
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T22:09:53.964129+00:00",
+    "event": "worker_completed",
+    "role": "implementation-2",
+    "sessions": [
+      {
+        "id": "20261017_220818_229b52",
+        "source": "subagent",
+        "model": "deepseek-ai/DeepSeek-V4-Pro",
+        "billing_provider": "custom",
+        "parent_session_id": "20261017_220731_282eb8",
+        "tool_call_count": 14,
+        "input_tokens": 26210,
+        "output_tokens": 11664,
+        "api_call_count": 14,
+        "tools": [
+          "execute_code",
+          "read_file"
+        ]
+      },
+      {
+        "id": "20261017_220731_282eb8",
+        "source": "cli",
+        "model": "deepseek-ai/DeepSeek-V4-Pro",
+        "billing_provider": "custom",
+        "parent_session_id": null,
+        "tool_call_count": 33,
+        "input_tokens": 29869,
+        "output_tokens": 11379,
+        "api_call_count": 30,
+        "tools": [
+          "delegate_task",
+          "patch",
+          "read_file",
+          "search_files",
+          "skill_view",
+          "terminal"
+        ]
+      }
+    ],
+    "child_sessions": 1,
+    "api_calls": 44,
+    "input_tokens": 56079,
+    "output_tokens": 23043
+  },
+  {
+    "at": "2026-10-17T22:09:53.966803+00:00",
+    "event": "run_failed",
+    "error": "Extra data: line 1 column 1014 (char 1013)"
+  },
+  {
+    "at": "2026-10-17T22:11:04.096963+00:00",
+    "event": "run_resumed",
+    "previous_error": "Extra data: line 1 column 1014 (char 1013)"
+  },
+  {
+    "at": "2026-10-17T22:11:06.278136+00:00",
+    "event": "request_frozen",
+    "issue": "https://github.com/Ali-Maq/crusoe-developer-hub/issues/1",
+    "target": "Ali-Maq/crusoe-developer-hub",
+    "contract_sha256": "7c56492fc8333c3a770e2b692ee8df12652266bd6bb768dec1cde2486b2a5ee6",
+    "base_commit": "278a79d033078157e51916c7a596194e1edd191d"
+  },
+  {
+    "at": "2026-10-17T22:11:06.316913+00:00",
+    "event": "reference_investigated",
+    "reference_sha256": "3d362c60eb258dba706b838092dc41cc892dee00b541c9ff1b924c35bd2e9b64",
+    "evidence_ids": [
+      "ev_fab70ae1c547dd39d8851375494d37afa49472b3a14967c181bffc6aeee15c8d"
+    ]
+  },
+  {
+    "at": "2026-10-17T22:11:06.317719+00:00",
+    "event": "worker_result_normalized",
+    "role": "implementation-2",
+    "reason": "Removed one extra closing brace after a complete JSON object"
+  },
+  {
+    "at": "2026-10-17T22:11:06.318048+00:00",
+    "event": "worker_checkpoint_resumed",
+    "role": "implementation-2"
+  },
+  {
+    "at": "2026-10-17T22:11:09.175570+00:00",
+    "event": "candidate_evaluated",
+    "attempt": 2,
+    "passed": 118,
+    "total": 118,
+    "source_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff"
+  },
+  {
+    "at": "2026-10-17T22:11:09.633036+00:00",
+    "event": "reference_parity_passed",
+    "passed": 3,
+    "total": 3
+  },
+  {
+    "at": "2026-10-17T22:11:09.633426+00:00",
+    "event": "acceptance_passed",
+    "checks": 118,
+    "source_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff",
+    "split": "fresh held-out seed"
+  },
+  {
+    "at": "2026-10-17T22:11:28.119322+00:00",
+    "event": "live_calls_passed",
+    "passed": 4,
+    "total": 4,
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T22:11:36.851712+00:00",
+    "event": "target_tests_passed",
+    "command": "python -m unittest discover -s tests -v"
+  },
+  {
+    "at": "2026-10-17T22:11:41.111484+00:00",
+    "event": "pull_request_created",
+    "url": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2",
+    "commit": "8c25ac624af5c913e3f15479414335fbf322c586"
+  },
+  {
+    "at": "2026-10-17T22:12:00.674245+00:00",
+    "event": "ci_passed",
+    "commit": "8c25ac624af5c913e3f15479414335fbf322c586",
+    "checks": [
+      "https://github.com/Ali-Maq/crusoe-developer-hub/actions/runs/39074056597/job/117517440208",
+      "https://github.com/Ali-Maq/crusoe-developer-hub/actions/runs/39074052978/job/117517429220"
+    ]
+  },
+  {
+    "at": "2026-10-17T22:12:00.680163+00:00",
+    "event": "module_activated",
+    "commit": "8c25ac624af5c913e3f15479414335fbf322c586",
+    "source_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff",
+    "product": "http://localhost:3021/app/factory"
+  }
+]

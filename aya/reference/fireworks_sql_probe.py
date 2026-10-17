@@ -3,6 +3,7 @@ import hashlib
 import json
 import pathlib
 import sqlite3
+import typing
 
 root = pathlib.Path(__file__).parent
 source = (root / "sql_tools.py").read_text()
@@ -57,7 +58,9 @@ functions = [
         "run_sql_against_database",
     }
 ]
-ns = dict(globals(), Path=pathlib.Path)
+ns = dict(
+    globals(), Path=pathlib.Path, Any=typing.Any, List=typing.List, Tuple=typing.Tuple
+)
 exec(  # noqa: S102 — pinned functions execute only in the network-isolated REA container
     compile(
         ast.Module(body=functions, type_ignores=[]),

@@ -171,6 +171,12 @@ except subprocess.TimeoutExpired:
             journal.emit("agent_audit_unavailable", role=role, error=str(exc))
     if not (directory / f"{role}-audit.json").exists():
         raise RuntimeError("Native agent audit is missing; delivery is blocked")
+    return parse_result(output, directory, journal, role)
+
+
+def parse_result(
+    output: str, directory: Path, journal: Journal, role: str
+) -> dict[str, Any]:
     lines = [
         line[len("FACTORY_RESULT:") :].strip()
         for line in output.splitlines()
@@ -180,6 +186,17 @@ except subprocess.TimeoutExpired:
         raise RuntimeError(
             "Hermes did not return one structured result; inspect its retained run log"
         )
-    value = json.loads(lines[0])
+    value, end = json.JSONDecoder().raw_decode(lines[0])
+    trailing = lines[0][end:].strip()
+    if trailing:
+        if trailing != "}":
+            raise RuntimeError("Unexpected content after the native worker result")
+        journal.emit(
+            "worker_result_normalized",
+            role=role,
+            reason="Removed one extra closing brace after a complete JSON object",
+        )
+    if not isinstance(value, dict):
+        raise RuntimeError("Native worker result must be an object")
     save(directory / f"{role}-result.json", value)
     return value

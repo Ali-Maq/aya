@@ -17242,6 +17242,10 @@
     "detail_source": "Generiertes Modul",
     "detail_report": "Unabhängige Prüfungen",
     "detail_audits": "Native Hermes-Sitzungen",
-    "detail_live_checks": "Echte Crusoe-Verifizierung"
+    "detail_live_checks": "Echte Crusoe-Verifizierung",
+    "attemptResult": "Versuch {attempt}: {passed}/{total} — {status}",
+    "checksPassed": "bestanden",
+    "checksRejected": "abgelehnt",
+    "modelExplanation": "Erläuterung des Modells"
   }
 }

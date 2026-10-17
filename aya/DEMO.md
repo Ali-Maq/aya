@@ -8,6 +8,8 @@ The user requests a repository analyst inspired by Fireworks' SQL tool workflow.
 
 The reference is [Fireworks' SQL tools at a pinned commit](https://github.com/fw-ai/cookbook/blob/6ada4081cf7bdb5cec7dcf066dd29d784f55b232/training/case-studies/agentic_rl_text2sql/sql_tools.py). The original case study includes reinforcement learning and embeddings; this feature ports its SQL interaction pattern. REA executes selected unchanged upstream functions in an isolated process capture. This is source and behavior analysis. The earlier jq example demonstrates native binary decompilation separately.
 
+The completed [pull request](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2) includes the generated module, 50 agent tests, and verification receipts. The independent gate caught a whitespace-only query that the agent tests missed: 117/118 checks became 118/118 after repair. All four real Crusoe questions and 54 target tests passed.
+
 The concrete opportunity is a missing standalone cookbook. [Crusoe's Cookbooks index](https://github.com/crusoecloud/crusoe-developer-hub/tree/main/examples/cookbooks) describes that section as planned content. Crusoe already has other substantial examples and integrations. AYA can help extend those resources; claiming that Crusoe has no examples would misrepresent the platform.
 
 ## Show the product in three minutes
@@ -23,7 +25,7 @@ An optional second example opens the existing JSON recipe product and downloads 
 
 The controller freezes the GitHub issue, target commit, and contract digest. It calls Crusoe for a plan, then starts native Hermes in the installed OpenShell worker. Hermes investigates with REA, writes the module and tests, and delegates a focused edge-case review. The controller compares the candidate against independently generated expectations, returns development counterexamples for up to two repairs, and evaluates a fresh random seed before delivery.
 
-GitHub credentials remain in the controller. Candidate evaluation has no network, host files, or credentials. The generated module runs in a fresh restricted Docker container; the model calls the controlled executor through a narrow tool interface. Agent tests also execute without network access. GitHub CI must pass for the exact delivered commit before local activation. New or changed requirements remain proposals until their contract and evaluator are reviewed.
+GitHub credentials remain in the controller. Candidate evaluation has no network, host files, or credentials. The generated module runs in a fresh restricted Docker container; the model calls the controlled executor through a narrow tool interface. Agent tests also execute without network access. GitHub CI must pass for the exact delivered commit before local activation. New or changed requirements remain proposals until their contract and evaluator are reviewed. The prototype serializes jobs through one dedicated OpenShell sandbox with a fresh workspace per job. Disposable sandboxes per job are a further isolation step for concurrent or multi-tenant operation.
 
 The SQL gate covers ordering, aggregates, empty data, nulls, zero, Unicode, quoted strings, malformed records, writes, multiple statements, recursive queries, and result limits. Four live Crusoe questions are compared with independently computed SQLite results. This checks the complete provider-to-tool path in addition to the module itself.
 

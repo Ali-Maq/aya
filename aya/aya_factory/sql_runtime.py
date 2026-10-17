@@ -58,6 +58,8 @@ def deployment() -> dict[str, Any] | None:
 
 
 def ask(question: str) -> dict[str, Any]:
+    if not isinstance(question, str) or not 1 <= len(question.strip()) <= 1000:
+        raise ValueError("Ask a question of 1 to 1000 characters")
     path = STATE / "sql-deployment.json"
     if not path.exists():
         raise RuntimeError("Build and verify the repository analyst first")

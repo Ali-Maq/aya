@@ -1,0 +1,336 @@
+[
+  {
+    "question": "Show repo and stars for repositories with an Apache-2.0 license, ordered by stars descending.",
+    "records": [
+      {
+        "repo": "fw-ai/cookbook",
+        "owner": "fw-ai",
+        "stars": 228,
+        "forks": 63,
+        "issues": 82,
+        "license": "Apache-2.0",
+        "description": "Recipes and resources for training, building generative AI with Fireworks",
+        "url": "https://github.com/fw-ai/cookbook"
+      },
+      {
+        "repo": "crusoecloud/crusoe-cookbook",
+        "owner": "crusoecloud",
+        "stars": 2,
+        "forks": 5,
+        "issues": 2,
+        "license": "Apache-2.0",
+        "description": "A collection of recipes for managing GPU infrastructure, cluster monitoring, common training and inference workflows.",
+        "url": "https://github.com/crusoecloud/crusoe-cookbook"
+      },
+      {
+        "repo": "crusoecloud/crusoe-developer-hub",
+        "owner": "crusoecloud",
+        "stars": 9,
+        "forks": 3,
+        "issues": 0,
+        "license": "MIT",
+        "description": "The Crusoe Developer Hub is the technical home for developers building AI applications and infrastructure on Crusoe Cloud. We publish three kinds of content here: foundational lessons that explain how things work, runnable examples that complete a task end to end, and integrations that connect Crusoe to the tools you already use.",
+        "url": "https://github.com/crusoecloud/crusoe-developer-hub"
+      },
+      {
+        "repo": "perplexityai/api-cookbook",
+        "owner": "perplexityai",
+        "stars": 202,
+        "forks": 113,
+        "issues": 16,
+        "license": "MIT",
+        "description": "A collection of projects and guides with Perplexity's API Platform",
+        "url": "https://github.com/perplexityai/api-cookbook"
+      },
+      {
+        "repo": "youdotcom-oss/agent-skills",
+        "owner": "youdotcom-oss",
+        "stars": 92,
+        "forks": 16,
+        "issues": 2,
+        "license": "MIT",
+        "description": "You.com skills and plugins for web search, content extraction, research, finance, and integration discovery, helping AI agents build with up-to-date web context.",
+        "url": "https://github.com/youdotcom-oss/agent-skills"
+      },
+      {
+        "repo": "youdotcom-oss/ydc-research-sample",
+        "owner": "youdotcom-oss",
+        "stars": 6,
+        "forks": 3,
+        "issues": 0,
+        "license": "MIT",
+        "description": "Research API sample \u2014 Python script + Next.js web app",
+        "url": "https://github.com/youdotcom-oss/ydc-research-sample"
+      }
+    ],
+    "result": {
+      "answer": "Repositories with an Apache-2.0 license, ordered by stars descending:\n\n| Repo | Stars |\n|------|-------|\n| fw-ai/cookbook | 228 |\n| crusoecloud/crusoe-cookbook | 2 |",
+      "sql": "SELECT repo, stars FROM repositories WHERE license = 'Apache-2.0' ORDER BY stars DESC",
+      "columns": [
+        "repo",
+        "stars"
+      ],
+      "rows": [
+        [
+          "fw-ai/cookbook",
+          228
+        ],
+        [
+          "crusoecloud/crusoe-cookbook",
+          2
+        ]
+      ],
+      "trace": [
+        {
+          "response_id": "2bf1a05305c24417a126bf61a09bcad9",
+          "model": "deepseek-ai/DeepSeek-V4-Pro",
+          "usage": {
+            "prompt_tokens": 461,
+            "total_tokens": 512,
+            "completion_tokens": 51,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "reasoning_tokens": 0
+          },
+          "tool_calls": [
+            {
+              "id": "call_cfc900c15b1c494c89459cb6",
+              "index": 0,
+              "type": "function",
+              "function": {
+                "name": "get_database_schema",
+                "arguments": "{}"
+              }
+            }
+          ]
+        },
+        {
+          "response_id": "f6c0494e5e904a799e3ae41cd7ddc936",
+          "model": "deepseek-ai/DeepSeek-V4-Pro",
+          "usage": {
+            "prompt_tokens": 562,
+            "total_tokens": 626,
+            "completion_tokens": 64,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "reasoning_tokens": 0
+          },
+          "tool_calls": [
+            {
+              "id": "call_e1addc1ec02845028e6a420d",
+              "index": 1,
+              "type": "function",
+              "function": {
+                "name": "run_sql",
+                "arguments": "{\"sql\": \"SELECT repo, stars FROM repositories WHERE license = 'Apache-2.0' ORDER BY stars DESC\"}"
+              }
+            }
+          ]
+        },
+        {
+          "response_id": "19b1b02f91a24ab189a83b6dcc8cea5d",
+          "model": "deepseek-ai/DeepSeek-V4-Pro",
+          "usage": {
+            "prompt_tokens": 676,
+            "total_tokens": 730,
+            "completion_tokens": 54,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "reasoning_tokens": 0
+          },
+          "tool_calls": null
+        }
+      ],
+      "provider": "Crusoe",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "record_count": 6,
+      "fetched_at": "2026-10-17T22:14:08.564466+00:00",
+      "sources": [
+        "https://github.com/fw-ai/cookbook",
+        "https://github.com/crusoecloud/crusoe-cookbook",
+        "https://github.com/crusoecloud/crusoe-developer-hub",
+        "https://github.com/perplexityai/api-cookbook",
+        "https://github.com/youdotcom-oss/agent-skills",
+        "https://github.com/youdotcom-oss/ydc-research-sample"
+      ],
+      "commit": "8c25ac624af5c913e3f15479414335fbf322c586",
+      "module_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff",
+      "pr_url": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2"
+    },
+    "independently_checked_rows": true
+  },
+  {
+    "question": "Which three repositories have the most stars?",
+    "records": [
+      {
+        "repo": "fw-ai/cookbook",
+        "owner": "fw-ai",
+        "stars": 228,
+        "forks": 63,
+        "issues": 82,
+        "license": "Apache-2.0",
+        "description": "Recipes and resources for training, building generative AI with Fireworks",
+        "url": "https://github.com/fw-ai/cookbook"
+      },
+      {
+        "repo": "crusoecloud/crusoe-cookbook",
+        "owner": "crusoecloud",
+        "stars": 2,
+        "forks": 5,
+        "issues": 2,
+        "license": "Apache-2.0",
+        "description": "A collection of recipes for managing GPU infrastructure, cluster monitoring, common training and inference workflows.",
+        "url": "https://github.com/crusoecloud/crusoe-cookbook"
+      },
+      {
+        "repo": "crusoecloud/crusoe-developer-hub",
+        "owner": "crusoecloud",
+        "stars": 9,
+        "forks": 3,
+        "issues": 0,
+        "license": "MIT",
+        "description": "The Crusoe Developer Hub is the technical home for developers building AI applications and infrastructure on Crusoe Cloud. We publish three kinds of content here: foundational lessons that explain how things work, runnable examples that complete a task end to end, and integrations that connect Crusoe to the tools you already use.",
+        "url": "https://github.com/crusoecloud/crusoe-developer-hub"
+      },
+      {
+        "repo": "perplexityai/api-cookbook",
+        "owner": "perplexityai",
+        "stars": 202,
+        "forks": 113,
+        "issues": 16,
+        "license": "MIT",
+        "description": "A collection of projects and guides with Perplexity's API Platform",
+        "url": "https://github.com/perplexityai/api-cookbook"
+      },
+      {
+        "repo": "youdotcom-oss/agent-skills",
+        "owner": "youdotcom-oss",
+        "stars": 92,
+        "forks": 16,
+        "issues": 2,
+        "license": "MIT",
+        "description": "You.com skills and plugins for web search, content extraction, research, finance, and integration discovery, helping AI agents build with up-to-date web context.",
+        "url": "https://github.com/youdotcom-oss/agent-skills"
+      },
+      {
+        "repo": "youdotcom-oss/ydc-research-sample",
+        "owner": "youdotcom-oss",
+        "stars": 6,
+        "forks": 3,
+        "issues": 0,
+        "license": "MIT",
+        "description": "Research API sample \u2014 Python script + Next.js web app",
+        "url": "https://github.com/youdotcom-oss/ydc-research-sample"
+      }
+    ],
+    "result": {
+      "answer": "The three repositories with the most stars are:\n\n1. **fw-ai/cookbook** (owner: fw-ai) \u2014 228 stars\n2. **perplexityai/api-cookbook** (owner: perplexityai) \u2014 202 stars\n3. **youdotcom-oss/agent-skills** (owner: youdotcom-oss) \u2014 92 stars",
+      "sql": "SELECT repo, owner, stars FROM repositories ORDER BY stars DESC LIMIT 3",
+      "columns": [
+        "repo",
+        "owner",
+        "stars"
+      ],
+      "rows": [
+        [
+          "fw-ai/cookbook",
+          "fw-ai",
+          228
+        ],
+        [
+          "perplexityai/api-cookbook",
+          "perplexityai",
+          202
+        ],
+        [
+          "youdotcom-oss/agent-skills",
+          "youdotcom-oss",
+          92
+        ]
+      ],
+      "trace": [
+        {
+          "response_id": "666649e5480d4a5283cbc586f98d6de0",
+          "model": "deepseek-ai/DeepSeek-V4-Pro",
+          "usage": {
+            "prompt_tokens": 449,
+            "total_tokens": 496,
+            "completion_tokens": 47,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "reasoning_tokens": 0
+          },
+          "tool_calls": [
+            {
+              "id": "call_520ccce236374aafbb32b47d",
+              "index": 0,
+              "type": "function",
+              "function": {
+                "name": "get_database_schema",
+                "arguments": "{}"
+              }
+            }
+          ]
+        },
+        {
+          "response_id": "5689ecbdc10c409dbb137780343ad31e",
+          "model": "deepseek-ai/DeepSeek-V4-Pro",
+          "usage": {
+            "prompt_tokens": 546,
+            "total_tokens": 606,
+            "completion_tokens": 60,
+            "prompt_tokens_details": {
+              "cached_tokens": 256
+            },
+            "reasoning_tokens": 0
+          },
+          "tool_calls": [
+            {
+              "id": "call_f529d32644454fa297dbc1e9",
+              "index": 1,
+              "type": "function",
+              "function": {
+                "name": "run_sql",
+                "arguments": "{\"sql\": \"SELECT repo, owner, stars FROM repositories ORDER BY stars DESC LIMIT 3\"}"
+              }
+            }
+          ]
+        },
+        {
+          "response_id": "ad8ad5d3ebf7472898a084565433db2a",
+          "model": "deepseek-ai/DeepSeek-V4-Pro",
+          "usage": {
+            "prompt_tokens": 691,
+            "total_tokens": 775,
+            "completion_tokens": 84,
+            "prompt_tokens_details": {
+              "cached_tokens": 512
+            },
+            "reasoning_tokens": 0
+          },
+          "tool_calls": null
+        }
+      ],
+      "provider": "Crusoe",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "record_count": 6,
+      "fetched_at": "2026-10-17T22:12:23.523971+00:00",
+      "sources": [
+        "https://github.com/fw-ai/cookbook",
+        "https://github.com/crusoecloud/crusoe-cookbook",
+        "https://github.com/crusoecloud/crusoe-developer-hub",
+        "https://github.com/perplexityai/api-cookbook",
+        "https://github.com/youdotcom-oss/agent-skills",
+        "https://github.com/youdotcom-oss/ydc-research-sample"
+      ],
+      "commit": "8c25ac624af5c913e3f15479414335fbf322c586",
+      "module_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff",
+      "pr_url": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2"
+    },
+    "independently_checked_rows": true
+  }
+]

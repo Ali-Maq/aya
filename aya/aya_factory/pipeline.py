@@ -435,3 +435,43 @@ def build(number: int, directory: Path) -> None:
         journal.emit("run_failed", error=str(exc))
     finally:
         LOCK.release()
+
+
+def resume(identity: str, actor: str) -> dict[str, Any]:
+    from .sql_pipeline import build as sql_build
+
+    directory = RUNS / identity
+    current = detail(identity)["run"]
+    if (
+        current["status"] != "failed"
+        or current.get("profile") != "crusoe-repository-analyst"
+        or current.get("commit")
+        or (directory / "checkout").exists()
+    ):
+        raise ValueError("Only a failed SQL build before GitHub delivery can resume")
+    for required in [
+        "snapshot.json",
+        "plan.json",
+        "investigation-result.json",
+        "evidence.json",
+    ]:
+        if not (directory / required).exists():
+            raise ValueError(
+                "This job has no complete investigation checkpoint; start a new build"
+            )
+    if not LOCK.acquire(blocking=False):
+        raise RuntimeError("One feature job is already using the dedicated worker")
+    Journal(directory).emit(
+        "run_resumed", previous_error=current.get("error"), actor=actor
+    )
+    value = state(
+        directory,
+        status="running",
+        stage="Resuming worker checkpoint",
+        error=None,
+        completed_at=None,
+    )
+    threading.Thread(
+        target=sql_build, args=(current["issue_number"], directory, True), daemon=True
+    ).start()
+    return value

@@ -67,4 +67,5 @@ The first contract supports a bounded jq recipe subset. It does not implement ar
 The OpenShell runtime reports Landlock unavailable on this Docker Desktop host.
 Container and egress controls apply; a Landlock boundary is not verified.
 The agent audit reports descendant calls. No aggregate token budget is enforced across descendants.
+A failed SQL job can resume a native worker checkpoint before delivery. The controller rechecks GitHub identity and reruns acceptance; it preserves failure and resume events. Native status parsing only normalizes one extra closing brace after a complete JSON object, with an explicit journal entry.
 The demo uses fixed model weights. Task repair is not model post-training.

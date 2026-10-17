@@ -17242,6 +17242,10 @@
     "detail_source": "Módulo gerado",
     "detail_report": "Verificações independentes",
     "detail_audits": "Sessões nativas do Hermes",
-    "detail_live_checks": "Verificação real do Crusoe"
+    "detail_live_checks": "Verificação real do Crusoe",
+    "attemptResult": "Tentativa {attempt}: {passed}/{total} — {status}",
+    "checksPassed": "aprovada",
+    "checksRejected": "rejeitada",
+    "modelExplanation": "Explicação do modelo"
   }
 }
