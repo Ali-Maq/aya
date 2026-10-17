@@ -150,8 +150,18 @@
       "spider-dev-0684"
     ],
     "heldout_ids_allowed": false,
-    "automatic_training_submission": false,
-    "claim": "curated final-answer distillation; no full-trajectory or accuracy-improvement claim before measurement"
+    "automatic_training_submission": true,
+    "claim": "curated final-answer distillation; no full-trajectory or accuracy-improvement claim before measurement",
+    "minimum_training_rows": 10,
+    "minimum_validation_rows": 2,
+    "epochs": 1,
+    "student": "Qwen/Qwen3.5-9B",
+    "method": "supervised LoRA",
+    "lora_rank": 16,
+    "lora_alpha": 32,
+    "insufficient_rows": "Stop without submitting a training job",
+    "automatic_deployment": false,
+    "automatic_promotion": false
   },
   "limitations": [
     "18 public questions are not a representative leaderboard result",

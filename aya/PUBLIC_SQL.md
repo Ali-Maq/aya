@@ -30,6 +30,10 @@ database. The other ten development IDs are eligible for training export. These 
 validation IDs never enter gradient training. The six held-out IDs never enter
 workflow search, training, or development trace selection.
 
+A supervised job can start only with ten verified training answers and both fixed
+validation answers. It uses one epoch of Qwen3.5-9B LoRA training, rank 16 and alpha 32.
+Insufficient passing rows stop submission. Deployment and model promotion are not automatic.
+
 ## Boundaries and score
 
 Workers receive question text, CREATE TABLE schemas, and at most two sample rows per
