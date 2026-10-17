@@ -1,122 +1,117 @@
 # AYA
 
-AYA recovers a bounded capability from existing software and delivers a tested module into another product.
-Onyx is the factory frontend. A GitHub issue names the target repository and its versioned contract.
+AYA turns a GitHub feature request into a tested component and a reviewable pull request.
+Onyx is the factory frontend. Hermes works inside OpenShell, using Crusoe inference and installed REA tools.
+An independent controller checks behavior before it accepts code or changes a workflow.
 
-The current example ports **Fireworks SQL tools into a Crusoe repository analyst**.
-[Demo and architecture](DEMO.md) explains the workflow, evidence, provider research, and fine-tuning scope.
-The live request is [Crusoe Developer Hub #1](https://github.com/Ali-Maq/crusoe-developer-hub/issues/1).
-
-The first completed target is **Saved JSON Export Recipes for Open WebUI**.
-Hermes inspects the installed jq 1.8.2 library through REA and Ghidra.
-It then writes a Python component and tests inside OpenShell, using Crusoe inference.
-The delivered component has no jq runtime dependency.
+The factory has two peer tabs: **Reverse engineering** and **Agent improvement**.
+Recover a component in the first tab. Search, evaluate, and curate an agent workflow in the second.
+The SQL example connects both paths, but neither path replaces the other.
 
 ## Open the demo
 
-- Factory: <http://localhost:3021/app/factory>
-- Target product: <http://localhost:3032>
-- Feature request: <https://github.com/Ali-Maq/aya-data-recipes/issues/1>
-- Target code and CI: <https://github.com/Ali-Maq/aya-data-recipes>
+- [Factory](http://localhost:3021/app/factory)
+- [Live MASS feature request](https://github.com/Ali-Maq/aya/issues/2)
+- [Feature contract](specs/mass-sql.json)
+- [Public Spider benchmark](PUBLIC_SQL.md)
+- [Delivered Crusoe SQL component and CI](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2)
+- [Actual MASS adapter and CI](https://github.com/Ali-Maq/mass/pull/1)
 
-These URLs use a separate demo profile. Existing local applications and their data are preserved.
-Sign in with the demo accounts configured on this machine. Credentials are excluded from Git.
+Use the configured demo login. Credentials stay outside Git.
+[MASS.md](MASS.md) explains the experiment, training boundary, and evidence.
+[DEMO.md](DEMO.md) retains the earlier capability-recovery details.
 
-## Verified Crusoe cookbook migration
+## What is verified
 
-Run `492e2ca7851347f5` delivered [Crusoe Developer Hub PR 2](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2).
-Native Hermes wrote the SQL module and 50 tests. The first submitted candidate passed 117/118 independent cases; a whitespace-only query exposed a validation gap. The repaired candidate passed 118/118 development checks, 118/118 checks with a fresh seed, three comparisons with the captured upstream behavior, and four real Crusoe questions. All 54 target tests passed locally and in GitHub Actions.
+The SQL migration run `492e2ca7851347f5` produced a real component for the Crusoe Developer Hub.
+Native Hermes wrote the module and its tests. The first candidate passed 117 of 118 independent checks.
+A whitespace-only query failed. The repaired component passed all 118 checks and another 118 with a fresh seed.
+All 54 target tests passed. Four real Crusoe questions returned correct SQL results.
+[Migration evidence](demo/evidence/492e2ca7851347f5) records the failure, repair, reference comparisons, and delivery.
 
-The run paused when native status output contained an extra closing brace. The controller preserved the failed event, normalized that metadata with an explicit receipt, and resumed the same checkpoint. It reran acceptance before creating the PR. The complete recorded run took about eight minutes, including this recovery.
+MASS run `76f46a90fc23427d` measured the workflow around that fixed component:
 
-The browser returned real result tables and executed SQL, and the standalone cookbook command returned the correct count through actual Crusoe tool calls. [Evidence](demo/evidence/492e2ca7851347f5) includes rejected cases, upstream comparisons, model receipts, native agent lineage, browser results, and access checks. A documentation review corrected the generated README's driver instructions; the generated SQL module and tests remained unchanged.
+| Episode | Independent checks | Result |
+| --- | --- | --- |
+| Bare baseline | 36/36 development | Reference |
+| Initial Hermes workflow, v0 | 36/36 development | Current workflow |
+| MASS-proposed workflow, v1 | 36/36 development | Tie; not promoted |
+| Selected v0 workflow | 36/36 held-out | Final check |
 
-## Verified JSON export demonstration
+The actual MASS optimizer proposed v1 through Crusoe. Both model-judge comparisons returned a tie.
+MASS recorded `beats_reference=false`. The controller retained v0 under its strict improvement rule.
+This run proves a working proposal, execution, comparison, and rejection path. It does not show accuracy improvement.
 
-Run `91ae22817df040e7` completed on October 17, 2026, in 8 minutes and 10 seconds.
-It used real Crusoe responses, native Hermes sessions, REA decompilation, jq execution, and GitHub Actions.
+A separate supervised training test uses ten verified development examples and two development validation examples.
+It targets `Qwen/Qwen3.5-9B` for one epoch. Langfuse API readback must verify the source records first.
+The training job is separate from MASS's winning-teacher rule, because this search found no winner.
+Crusoe reported training success and 10,568 trained tokens for this run. It registered a checkpoint.
+Deployment and an independent check of that trained model remain separate gates.
 
-| Gate | Observed result |
-|---|---|
-| First candidate | 207/210 independent checks; delivery blocked |
-| Agent repair | 210/210 development checks |
-| Fresh held-out seed | 210/210 checks |
-| Target test suite | 62 tests, including 57 agent-written tests |
-| GitHub delivery | [Generated PR and CI](https://github.com/Ali-Maq/aya-data-recipes/pull/2) |
-| Product export | Real CSV download; exact bytes checked |
-| Persistence | Saved recipe reused after reload in a new chat |
-| File access | Another signed-in user received HTTP 404 for the exported file |
+The stored-trajectory selector rechecks Langfuse through its API and verifies independent evaluation receipts.
+It accepts passing development answers, then breaks ties by measured episode calls, tokens, and latency.
+For the earlier run, it selected all twelve baseline answers. Those results tied the larger workflows at lower cost.
+This selection is a new corpus preview. It does not change the earlier training job.
 
-The first candidate mishandled scalar records, empty columns, and non-scalar fallbacks.
-These were actual failures caught outside the agent's test suite.
-Hermes repaired them and retained its own red/green test output.
+The harder benchmark uses a pinned public Spider archive from Hugging Face.
+It includes joins and nested queries across real databases, with disjoint development and held-out databases.
+Its results are execution agreement on a frozen subset, not an official Spider leaderboard score.
 
-[Run records](demo/evidence/91ae22817df040e7) include the rejected cases, verification seeds, native agent lineage, and downloaded CSV bytes.
-They document the completed run. Live builds do not read them or substitute them for service calls.
-The component digest is `58962c252d7c35a92ee45f0ca7bb7f41b2dfa64e52c819d98f94cf60dbf503bf`.
-
-## What the run does
+## How the system works
 
 ```mermaid
 flowchart LR
-  G[GitHub issue and contract] --> O[Onyx Factory]
-  O --> C[Controller / Crusoe plan]
-  C --> H[Hermes in OpenShell]
-  H --> R[REA / Ghidra in network-isolated container]
-  H --> B[Component and agent tests]
-  B --> V[Independent jq comparisons]
-  V --> P[GitHub commit / PR / CI]
-  P --> A[Verified component endpoint]
-  A --> W[Open WebUI saved recipes and CSV]
+  G[GitHub issue and contract] --> O[Onyx factory]
+  O --> H[Hermes in OpenShell]
+  H --> R[REA and reference behavior]
+  R --> C[Candidate component]
+  C --> E[Independent tests]
+  E --> P[GitHub PR and CI]
+  P --> S[Fixed SQL executor]
+  S --> M[MASS workflow proposal]
+  M --> H2[Native workflow episode]
+  H2 --> V[Development comparison and held-out check]
+  V --> L[Verified Langfuse record]
+  L --> T[Separate supervised training test]
+  T --> D[Deployment and evaluation required]
 ```
 
-1. Read the issue from GitHub. Freeze its body, contract digest, and target commit.
-2. Call Crusoe to plan the investigation. Retain the response identity and usage.
-3. Run the installed NemoHermes worker. Require actual REA decompilation calls and retained binary evidence.
-4. Let Hermes write the component and its tests. Use native delegation for one focused review.
-5. Compare valid cases with the pinned jq executable. Check invalid cases against the application contract.
-6. Give the worker failed development cases, with at most two repair attempts.
-7. Evaluate a fresh random seed after repair ends. Keep expected answers outside the worker.
-8. Recheck GitHub freshness. Commit only the allowed module, its tests, and the controller's verification receipt.
-9. Create a pull request. Require successful CI for the exact delivered commit.
-10. Activate that source hash in the local product runtime. Each export runs in a fresh restricted container.
+The worker cannot change the controller's acceptance tests or evaluator.
+The interface shows real requests, tool activity, response IDs, usage, test results, and GitHub links.
+Errors remain visible. Retained evidence is labeled; live runs do not substitute recorded provider responses.
 
-The interface displays real run records. A failure stays failed. GitHub or inference failures have no fixture fallback.
+## Three-minute presentation
 
-## Three-minute demonstration
+1. Show the GitHub request, target repository, and exact feature contract.
+2. Ask a real repository question. Show the SQL and result table from the accepted component.
+3. Open the generated PR. Show the failed check, repair, and successful CI.
+4. Open the completed MASS run. Show the changed workflow and native execution records.
+5. Show the independent tie and the decision to retain v0. Then show the live training status.
 
-Start one complete build before the presentation. Keep its real PR, CI, evidence, and module available.
-A fresh build can exceed three minutes; do not present retained results as a new run.
-
-- **0:00–0:30:** Open the live GitHub issue from Onyx. Show the target and pinned contract.
-- **0:30–1:10:** Show the completed investigation, REA evidence, actual agent lineage, and independent test counts.
-- **1:10–1:40:** Open the generated PR and successful CI. Explain the source hash used by the runtime.
-- **1:40–2:40:** In Open WebUI, select the AYA JSON Recipes model. Upload JSON, save a recipe, and download CSV.
-- **2:40–3:00:** Reuse the saved recipe on a new upload. Start another real factory run if time permits.
-
-The useful edge case is false versus zero. jq's default operator replaces false and null, but preserves zero.
-CSV quoting, missing fields, nested paths, Unicode, and NUL escaping expose additional behavior that a happy-path example misses.
+A new native build can exceed three minutes. Start it before presenting and label it as a recorded run.
+Do not describe a pending training job as a deployed model or a tied evaluation as an improvement.
 
 ## Local services
 
 | Service | Address | Purpose |
-|---|---|---|
-| Onyx frontend | localhost:3021 | Existing application shell, login, and Factory view |
-| Onyx backend | localhost:8082 | Existing authentication and application API |
-| Factory controller | 127.0.0.1:8771 | Token-protected intake and jobs |
-| Component runtime | 127.0.0.1:8772 | Separate token; export operation only |
-| Open WebUI | localhost:3032 | Real upload, per-user recipes, and CSV downloads |
-| REA MCP proxy | 127.0.0.1:8766 | Host protocol bridge to container stdio |
-| REA TLS bridge | private host:8444 | Trusted CA and token for native Hermes MCP |
+| --- | --- | --- |
+| Onyx | `localhost:3021` | Login and factory interface |
+| Onyx backend | `localhost:8082` | Existing application API |
+| Factory controller | `127.0.0.1:8771` | Authenticated jobs and SQL calls |
+| Langfuse | `localhost:3001` | Redacted trajectories and verified API readback |
+| REA MCP proxy | `127.0.0.1:8766` | Host bridge to isolated analysis tools |
+| REA TLS bridge | private host, port `8444` | Trusted CA and token for native Hermes |
 
-The worker is `aya-feature`. It was provisioned with the installed NemoClaw CLI and the existing corporate CA.
-Its provider is Crusoe, model `deepseek-ai/DeepSeek-V4-Pro`.
-The feature owns this sandbox; repeated runs use new work directories within it.
+The installed worker is `aya-feature`. Its current provider is Crusoe and model is `deepseek-ai/DeepSeek-V4-Pro`.
+Each run uses a new work directory. Native execution shares the worker, so builds run one at a time.
 
-## Restart the configured demo
+Use the existing Python 3.12 environment and configured services. Set `AYA_MASS_ROOT` to the MASS adapter checkout.
+The earlier recorded run used adapter revision `9d2f8ac91fc115bcf78ecb5b08d750e68676cb52`.
+The public benchmark uses the revision pinned in its GitHub contract.
+The controller reads `CRUSOE_API_KEY` or the Keychain item `crusoe-api-key`.
+The browser receives neither that key nor the factory token.
 
-Use separate terminals for long-running processes. Check for an existing listener before starting another copy.
-From this directory:
+For the configured local profile, run these from this directory in separate terminals:
 
 ```sh
 docker compose --env-file .env -f deployment/compose.yml up -d
@@ -124,68 +119,31 @@ bash deployment/run-rea.sh
 python3 -m aya_factory.server
 ```
 
-The REA TLS bridge uses `deployment/Caddyfile`. Set `REA_MCP_HOST`, `REA_MCP_TOKEN`, and `REA_CADDY_DATA` from local configuration.
-Use the existing REA CA storage. Do not disable certificate validation.
+Start Onyx from `web` with `bun run dev --port 3021 --hostname 127.0.0.1`.
+Its environment needs `INTERNAL_URL`, `AYA_FACTORY_URL`, and the matching `AYA_FACTORY_TOKEN`.
+Check existing listeners before starting another process. Keep the installed REA CA; do not disable TLS checks.
 
-Start the Onyx frontend from the repository's `web` directory:
+## Checks and limits
 
-```sh
-bun install --frozen-lockfile
-bun run dev --port 3021 --hostname 127.0.0.1
-```
+Run `python3 -m unittest discover -s tests -v` from this directory.
+Some integration checks need Docker, authenticated GitHub access, and the configured services.
+Run the repository pre-commit checks on changed files before publishing.
 
-Its local environment must contain `INTERNAL_URL=http://127.0.0.1:8082`, `AYA_FACTORY_URL=http://127.0.0.1:8771`, and `AYA_FACTORY_TOKEN`.
-Use the same factory token as the controller. The browser receives neither that token nor the Crusoe key.
-The controller reads `CRUSOE_API_KEY` or the macOS Keychain item named `crusoe-api-key`.
+OpenShell reports Landlock unavailable on this Docker Desktop host. We do not claim that boundary.
+The native configuration limits child concurrency and depth to one, child duration to 90 seconds, and parent turns to 40.
+A total limit of one child is also a prompt rule. Inspect the native audit before making a stronger claim.
+The completed MASS v0 and v1 episodes each recorded zero child sessions.
 
-Build the contained analysis image from the installed Ghidra distribution:
+The current demo is local. It is not a public multi-tenant deployment.
+Other coding agents can use the same protocol. These results do not prove general superiority over them.
+No model-weight improvement or completed training-to-deployment loop is claimed without a new independent evaluation.
 
-```sh
-mkdir -p .cache/analysis-image
-cp -R /opt/homebrew/opt/ghidra/libexec .cache/analysis-image/ghidra
-docker build -t aya-rea:6.5.0 -f deployment/Dockerfile.rea .cache/analysis-image
-```
+## Earlier example
 
-To reinstall the reviewed product adapter and Crusoe model, run `python3 -m aya_factory.connect_product`.
-The command uses the local demo administrator session or prompts for an existing demo login.
-
-The reference directory contains only the pinned jq executable and libjq library.
-Their hashes are declared in the target contract and checked by the evaluator.
-The image needs the full JDK, procps, and the Linux ARM64 Ghidra decompiler.
-
-## Checks
-
-From this directory, with Python 3.12, authenticated `gh`, and Docker:
-
-```sh
-python3 -m unittest discover -s tests -v
-```
-
-These checks use actual GitHub requests, actual jq behavior, and a deliberately nonterminating candidate in a container.
-The target repository runs both public contract tests and the generated agent tests in GitHub Actions.
-Run the Onyx pre-commit hooks for changed files before publishing frontend changes.
-
-## Boundaries and scope
-
-- The first evaluator accepts one reviewed contract revision in one allowlisted target repository.
-  Additional capabilities need their own contract review and independent evaluator.
-- The candidate cannot edit the controller, acceptance tests, credentials, workflow, or product adapter.
-- REA runs without network access, host home access, or a Docker socket. Its reference mount is read-only.
-- Candidate execution runs without network access, capabilities, writable root storage, or host mounts.
-- OpenShell reports Landlock unavailable on this Docker Desktop host. A Landlock boundary is not claimed.
-- Agent sessions have turn, depth, concurrency, and time limits. Code cells have a 45-second timeout. Aggregate token usage is measured, not hard-capped.
-- The task can improve through test-driven repair. Model weights do not change, and cross-task self-improvement is not demonstrated.
-- Ghidra uses symbols from a benign open-source library. This is not evidence of general recovery from stripped commercial binaries.
-- The frontend is a local development build. This profile is not a public multi-tenant production deployment.
-
-The distinction is the enforced delivery protocol and its evidence.
-Other coding agents can use the same protocol. No unsupported comparison claims that they must fail.
+The jq-to-Open-WebUI export demo remains available as historical evidence.
+[Its delivered PR](https://github.com/Ali-Maq/aya-data-recipes/pull/2) records 210/210 independent checks and 62 target tests.
+[Its run records](demo/evidence/91ae22817df040e7) include REA decompilation, actual failures, repairs, and product exports.
+It is separate from the current SQL workflow experiment.
 
 Onyx's original source, license, and Git history remain in this fork.
-REA, Hermes, OpenShell, Ghidra, jq, and Open WebUI retain their own licenses and attribution.
-
-## Prepare the SQL reference
-
-From `aya/`, run `python -m aya_factory.prepare_sql` with Python 3.12, GitHub CLI authentication, and network access. This downloads pinned Fireworks files, checks their digests, copies the replay harness, and fetches actual GitHub metadata. The existing REA container reads `.state/reference` through its read-only mount. Run preparation before a factory build, never during one.
-
-The generated cookbook is portable: its `run.py` accepts a question and reads `CRUSOE_API_KEY` from the environment. The browser demo uses the same client and the accepted SQL module in a restricted executor. The public fork preserves Crusoe's original repository and licenses.
+REA, Hermes, OpenShell, Ghidra, jq, and other dependencies retain their own licenses.

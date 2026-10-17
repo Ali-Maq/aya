@@ -31,6 +31,7 @@ Most users never see this component directly. It is the layer that makes search 
 and correct: which documents a query can see, how well a query matches a chunk, and
 whether the index is healthy.
 
+Servers without the optional health endpoint return 404; the popup treats this as unavailable. Other failures remain errors.
 Full admins see a resource-warning popup when entering Onyx, at most once per 24 hours.
 A compact persistent admin banner opens details for disk, JVM heap, and native vector-cache pressure.
 Both direct admins to their system administrator or support@onyx.app.

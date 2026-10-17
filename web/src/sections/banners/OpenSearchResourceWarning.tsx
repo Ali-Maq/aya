@@ -104,13 +104,15 @@ export function OpenSearchResourceBanner(): ReactElement | null {
   );
 }
 
-async function claimPopup(): Promise<ResourcePopupResponse> {
+async function claimPopup(): Promise<ResourcePopupResponse | null> {
   const response: Response = await fetch(
     `${SWR_KEYS.opensearchResourceHealth}/popup`,
     {
       method: "POST",
     }
   );
+  // Older servers do not expose this optional health endpoint.
+  if (response.status === 404) return null;
   if (!response.ok)
     throw new Error("Unable to check OpenSearch resource warning");
   return response.json();
@@ -128,7 +130,7 @@ export function OpenSearchResourcePopup(): ReactElement | null {
   } | null>(null);
   const request = useRef<{
     userId: string;
-    result: Promise<ResourcePopupResponse>;
+    result: Promise<ResourcePopupResponse | null>;
   } | null>(null);
 
   useEffect(() => {
@@ -144,7 +146,7 @@ export function OpenSearchResourcePopup(): ReactElement | null {
     let active: boolean = true;
     request.current.result
       .then((response) => {
-        if (active && response.show_popup) {
+        if (active && response?.show_popup) {
           setWarning({ userId, health: response.health });
         }
       })

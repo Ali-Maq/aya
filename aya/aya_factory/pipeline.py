@@ -9,7 +9,7 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-from . import agents, intake
+from . import agents, intake, trace
 from .core import REPOSITORY, STATE, WORKER, Journal, events, gh, now, run, save, sha
 from .evaluate import EXPECTED_LIB, PYTHON_IMAGE, validate_source, verify
 from .rea import ReaClient
@@ -48,6 +48,7 @@ def detail(identity: str) -> dict[str, Any]:
     return {
         "run": read("state.json"),
         "events": events(directory),
+        "trace": trace.read(directory),
         "snapshot": read("snapshot.json"),
         "plan": read("plan.json"),
         "evidence": read("evidence.json"),
@@ -73,6 +74,8 @@ def start(number: int, actor: str, repository: str = REPOSITORY) -> dict[str, An
     from .sql_pipeline import build as sql_build
 
     profile = for_repository(repository)
+    if agents.worker_busy():
+        raise RuntimeError("The native worker is busy with another recovery command")
     if not LOCK.acquire(blocking=False):
         raise RuntimeError("One feature job is already using the dedicated worker")
     identity = uuid.uuid4().hex[:16]

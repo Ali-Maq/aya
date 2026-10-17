@@ -9,7 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
-from . import intake, pipeline, sql_runtime
+from . import intake, mass_loop, pipeline, sql_runtime
 from .core import REPOSITORY, ROOT, STATE, sha
 from .evaluate import isolated
 
@@ -63,6 +63,14 @@ class Handler(BaseHTTPRequestHandler):
         try:
             if self.path == "/requests":
                 value = intake.requests()
+            elif self.path == "/mass":
+                value = mass_loop.list_runs()
+            elif self.path == "/mass/catalog":
+                value = mass_loop.catalog()
+            elif self.path == "/mass/trajectories":
+                value = mass_loop.trajectory_report()
+            elif re.fullmatch(r"/mass/[a-f0-9]{16}", self.path):
+                value = mass_loop.detail(self.path.rsplit("/", 1)[-1])
             elif self.path == "/deployment":
                 value = sql_runtime.deployment()
             elif self.path == "/runs":
@@ -82,6 +90,19 @@ class Handler(BaseHTTPRequestHandler):
         if not self.authorized("AYA_RUNTIME_TOKEN" if runtime else "AYA_FACTORY_TOKEN"):
             return
         try:
+            if not runtime and self.path == "/mass":
+                payload = self.body(2048)
+                if not isinstance(payload, dict) or not isinstance(
+                    payload.get("benchmark", "repository-fixture"), str
+                ):
+                    raise ValueError("Supply a benchmark identity")
+                return self.send_json(
+                    mass_loop.create(
+                        self.headers.get("X-AYA-User", "local-operator"),
+                        payload.get("benchmark", "repository-fixture"),
+                    ),
+                    202,
+                )
             if not runtime and self.path == "/requests":
                 return self.send_json(intake.create_request(self.body(12000)), 201)
             if not runtime and self.path == "/ask":

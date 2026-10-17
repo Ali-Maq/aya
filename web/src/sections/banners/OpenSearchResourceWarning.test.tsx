@@ -205,3 +205,14 @@ test("healthy status displays neither banner nor popup", async () => {
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
 });
+
+test("older servers without the optional endpoint do not raise a popup error", async () => {
+  const errors = jest.spyOn(console, "error").mockImplementation(() => {});
+  const request = jest
+    .spyOn(global, "fetch")
+    .mockResolvedValue(new Response("{}", { status: 404 }));
+  render(<OpenSearchResourcePopup />);
+  await waitFor(() => expect(request).toHaveBeenCalledTimes(1));
+  expect(errors).not.toHaveBeenCalled();
+  expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
+});

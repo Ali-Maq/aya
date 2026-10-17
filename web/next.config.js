@@ -9,6 +9,7 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   productionBrowserSourceMaps: false,
+  distDir: process.env.AYA_NEXT_DIST_DIR || ".next",
   poweredByHeader: false,
   output: "standalone",
   typescript: {

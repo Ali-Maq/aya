@@ -27,6 +27,11 @@ jobs:
         run: |
           docker pull python@sha256:090ba77e2958f6af52a5341f788b50b032dd4ca28377d2893dcf1ecbdfdfe203
           docker pull ghcr.io/nvidia/nemoclaw/hermes-sandbox@sha256:09cc86372e224afaa4c5308af4157dc4b2d0315d4f872584b3e2fdd32180f74e
+      - name: Install the hosted training client
+        run: python -m pip install -r aya/requirements.txt
+      - name: Verify the pinned public Spider dataset
+        working-directory: aya
+        run: python -m aya_factory.public_sql_benchmark prepare
       - name: Check real GitHub intake and isolated reference execution
         working-directory: aya
         env:

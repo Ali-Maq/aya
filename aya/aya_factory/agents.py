@@ -1,12 +1,15 @@
 """Real Crusoe planning and the installed NemoHermes worker."""
 
+import fcntl
 import json
 import os
+import threading
 import urllib.request
 from pathlib import Path
 from typing import Any
 
-from .core import MODEL, WORKER, Journal, run, save
+from . import trace
+from .core import MODEL, STATE, WORKER, Journal, run, save
 
 
 def plan(spec: dict[str, Any], directory: Path, journal: Journal) -> dict[str, Any]:
@@ -89,7 +92,29 @@ def audit() -> list[dict[str, Any]]:
     )
 
 
+def worker_busy() -> bool:
+    with (STATE / "worker.lock").open("a") as lease:
+        try:
+            fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            return False
+        except BlockingIOError:
+            return True
+
+
 def worker(prompt: str, directory: Path, journal: Journal, role: str) -> dict[str, Any]:
+    with (STATE / "worker.lock").open("a") as lease:
+        try:
+            fcntl.flock(lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise RuntimeError(
+                "The native worker is busy with another recovery command"
+            ) from exc
+        return _worker(prompt, directory, journal, role)
+
+
+def _worker(
+    prompt: str, directory: Path, journal: Journal, role: str
+) -> dict[str, Any]:
     before = {r["id"] for r in audit()}
     workspace = "/sandbox/aya/" + directory.name
     run(
@@ -125,6 +150,7 @@ def worker(prompt: str, directory: Path, journal: Journal, role: str) -> dict[st
         "Finish with exactly one line: FACTORY_RESULT: followed by the requested JSON object.\n"
         + prompt
     )
+    save(directory / f"{role}-prompt.json", {"instruction": instruction})
     launcher = """import subprocess,signal,sys
 sys.path.insert(0,"/opt/hermes")
 from agent.deadline import kill_process_tree
@@ -136,6 +162,11 @@ except subprocess.TimeoutExpired:
  except subprocess.TimeoutExpired:kill_process_tree(p.pid,sig=signal.SIGKILL)
  sys.exit(124)
 """
+    stopped = threading.Event()
+    observer = threading.Thread(
+        target=trace.monitor, args=(directory, stopped), daemon=True
+    )
+    observer.start()
     try:
         output = run(
             [
@@ -156,6 +187,8 @@ except subprocess.TimeoutExpired:
             log=directory / role,
         )
     finally:
+        stopped.set()
+        observer.join(timeout=16)
         try:
             sessions = [r for r in audit() if r["id"] not in before]
             receipt = {
@@ -171,6 +204,7 @@ except subprocess.TimeoutExpired:
             journal.emit("agent_audit_unavailable", role=role, error=str(exc))
     if not (directory / f"{role}-audit.json").exists():
         raise RuntimeError("Native agent audit is missing; delivery is blocked")
+    trace.read(directory, refresh=True)
     return parse_result(output, directory, journal, role)
 
 

@@ -53,3 +53,6 @@ storybook-static
 
 # Generated from the installed PDF.js package before dev and production builds.
 /public/pdfjs/
+
+# Separate production build for the local AYA demo.
+.next-demo/

@@ -27,8 +27,10 @@ async function forward(request: NextRequest, context: RouteContext) {
   const endpoint = path.join("/");
   const allowed =
     request.method === "GET"
-      ? /^(requests|deployment|runs|runs\/[a-f0-9]{16})$/.test(endpoint)
-      : request.method === "POST" && /^(run|requests|ask)$/.test(endpoint);
+      ? /^(requests|deployment|runs|runs\/[a-f0-9]{16}|mass|mass\/(catalog|trajectories|[a-f0-9]{16}))$/.test(
+          endpoint
+        )
+      : request.method === "POST" && /^(run|requests|ask|mass)$/.test(endpoint);
   if (!allowed)
     return NextResponse.json(
       { error: "Unknown factory operation" },
