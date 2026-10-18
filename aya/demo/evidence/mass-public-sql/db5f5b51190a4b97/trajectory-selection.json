@@ -1,0 +1,26 @@
+{
+  "assignments": {
+    "training": 10,
+    "validation": 2
+  },
+  "cost_scope": "Episode totals are reused only as tie-breakers; they are never added across selected questions",
+  "created_at": "2026-10-17T23:25:45.800163+00:00",
+  "criterion": "Independent question pass rate, then measured episode API calls, tokens, latency, stable run ID",
+  "excluded": [
+    {
+      "reason": "Failed, incomplete, or held-out episodes are excluded",
+      "run_id": "db5f5b51190a4b97-heldout"
+    }
+  ],
+  "heldout_rows": 0,
+  "limitations": "Frozen AYA SQL or public Spider development tasks; no generalization or model-improvement claim. No dollar price inferred.",
+  "manifest_sha256": "82525dd318fdf8b56b526c4cc5381871164b1e71dfbb368b6619d362df8e7470",
+  "mode": "final-answer SFT distillation; no job submitted",
+  "schema": "aya-trajectory-selection-v1",
+  "selected_counts": {
+    "db5f5b51190a4b97-baseline": 12
+  },
+  "selected_rows": 12,
+  "selected_sha256": "03480054ace5f97cffca990e295a29ee75c33ea06bc089bc95bc3b035f8d7197",
+  "status": "ready"
+}

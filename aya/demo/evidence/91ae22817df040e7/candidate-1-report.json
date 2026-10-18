@@ -1,0 +1,75 @@
+{
+  "source_sha256": "94822c07ad0e32a656e732a8f77248e43869cb9c2af0764b20e25bd4a39bd922",
+  "total": 210,
+  "passed": 207,
+  "reference_sha256": "9d139c59dea37367a8a8f59bf923ca04f2227313a3bacfeabf1cd775c1719bb0",
+  "library_sha256": "0860ff6f0b18028f50e275e95ce56de0d30f6c2387a6679eed292d81facb6bbe",
+  "evaluator_version": "aya-recipe-v1",
+  "seed": "7948648939978875903",
+  "failures": [
+    {
+      "case": 195,
+      "input": {
+        "records": [
+          1
+        ],
+        "columns": [
+          {
+            "label": "x",
+            "path": [
+              "x"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "error": "invalid_recipe"
+      },
+      "actual": {
+        "error": "path_type"
+      }
+    },
+    {
+      "case": 196,
+      "input": {
+        "records": [
+          {}
+        ],
+        "columns": []
+      },
+      "expected": {
+        "error": "invalid_recipe"
+      },
+      "actual": {
+        "columns": [],
+        "rows": [
+          []
+        ],
+        "csv": "\n\n"
+      }
+    },
+    {
+      "case": 204,
+      "input": {
+        "records": [
+          {}
+        ],
+        "columns": [
+          {
+            "label": "x",
+            "path": [
+              "x"
+            ],
+            "fallback": []
+          }
+        ]
+      },
+      "expected": {
+        "error": "non_scalar"
+      },
+      "actual": {
+        "error": "invalid_recipe"
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "answer_received": false,
+  "recovery": "A later independent attempt used a fresh run directory; this failure was retained.",
+  "score_available": false,
+  "state": {
+    "benchmark": "public-sql",
+    "benchmark_title": "Spider: joins across real databases",
+    "error": "HTTP Error 429: Too Many Requests",
+    "id": "bfe53d67173642b8",
+    "issue_url": "https://github.com/Ali-Maq/aya/issues/2",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "source": "https://github.com/SakanaAI/mass",
+    "source_commit": "af3b5b40113ff2fa8f581813aceb6e4a1ed170f1",
+    "stage": "Needs attention",
+    "started_at": "2026-10-17T23:12:45.500668+00:00",
+    "status": "failed",
+    "training_status": "not_started",
+    "updated_at": "2026-10-17T23:12:46.626882+00:00"
+  }
+}

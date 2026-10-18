@@ -1,0 +1,16 @@
+{
+  "name": "aya-evidence-film",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "render": "bash render-final.sh",
+    "finalize": "bash render-final.sh --finalize-only",
+    "audio": "python3 prepare_audio.py"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "remotion": "4.0.536",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  }
+}

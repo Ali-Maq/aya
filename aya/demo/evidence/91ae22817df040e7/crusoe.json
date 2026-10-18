@@ -1,0 +1,15 @@
+{
+  "provider": "Crusoe",
+  "endpoint": "https://api.inference.crusoecloud.com/v1",
+  "model": "deepseek-ai/DeepSeek-V4-Pro",
+  "response_id": "a407c4016aef4551adafc5a7e9e1cb07",
+  "usage": {
+    "prompt_tokens": 738,
+    "total_tokens": 1611,
+    "completion_tokens": 873,
+    "prompt_tokens_details": {
+      "cached_tokens": 512
+    },
+    "reasoning_tokens": 0
+  }
+}

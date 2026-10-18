@@ -214,6 +214,7 @@ function RecentsSection({
 
 export default function AppSidebar() {
   const t = useTranslations("sidebar");
+  const factoryText = useTranslations("aya");
   const moveChatErrorMessage = t("appSidebar.moveChatError.message");
   const { folded } = useSidebarState();
   const router = useRouter();
@@ -649,6 +650,9 @@ export default function AppSidebar() {
             </div>
           )}
           {folded && moreAgentsButton}
+          <SidebarTab icon={SvgDevKit} href="/app/factory">
+            {factoryText("title")}
+          </SidebarTab>
           <SidebarTab
             icon={SvgPlug}
             href="/app/plugins"

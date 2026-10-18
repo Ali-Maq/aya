@@ -1,0 +1,25 @@
+{
+  "benchmark": "public-sql",
+  "benchmark_title": "Spider: joins across real databases",
+  "development": {
+    "candidate": 11,
+    "initial": 11,
+    "total": 12
+  },
+  "heldout": {
+    "passed": 3,
+    "total": 6
+  },
+  "id": "db5f5b51190a4b97",
+  "issue_url": "https://github.com/Ali-Maq/aya/issues/2",
+  "model": "deepseek-ai/DeepSeek-V4-Pro",
+  "selected": "v0",
+  "source": "https://github.com/SakanaAI/mass",
+  "source_commit": "0fe69eac1290d39115ff51fc0655bc25093c22cd",
+  "stage": "Deployment required",
+  "started_at": "2026-10-17T23:14:01.831229+00:00",
+  "status": "awaiting_deployment",
+  "training_status": "succeeded",
+  "updated_at": "2026-10-17T23:27:50.119169+00:00",
+  "workflow_sha256": "b87ec6340a9e786947a7784029766f1319f9cfa746411c5435d901ad559ef6ec"
+}

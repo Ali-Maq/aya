@@ -1,0 +1,1263 @@
+{
+  "source_sha256": "ed18579afc33c87b26ef0d5d61305ffb2ed7840ff8d674a2cae8bc18eb556ce9",
+  "total": 118,
+  "passed": 107,
+  "seed": "9633811139305601742",
+  "evaluator_version": "aya-sql-v1",
+  "failures": [
+    {
+      "case": 103,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": " "
+      },
+      "expected": {
+        "error": "invalid_request"
+      },
+      "actual": {
+        "columns": [],
+        "rows": []
+      }
+    },
+    {
+      "case": 107,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          },
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "SELECT * FROM repositories"
+      },
+      "expected": {
+        "error": "limit_exceeded"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 109,
+      "input": {
+        "records": [],
+        "sql": "WITH RECURSIVE t(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM t) SELECT SUM(x) FROM t"
+      },
+      "expected": {
+        "error": "limit_exceeded"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 110,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "DELETE FROM repositories"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 111,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "DROP TABLE repositories"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 112,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "UPDATE repositories SET stars=9"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 113,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "CREATE TABLE extra(x)"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 114,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "ATTACH DATABASE ':memory:' AS other"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 115,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "PRAGMA user_version"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 116,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "BEGIN"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    },
+    {
+      "case": 117,
+      "input": {
+        "records": [
+          {
+            "repo": "a/r",
+            "owner": "a",
+            "stars": 0,
+            "forks": 0,
+            "issues": 0,
+            "license": null,
+            "description": "x",
+            "url": "https://github.com/a/r"
+          }
+        ],
+        "sql": "SELECT load_extension('/tmp/anything')"
+      },
+      "expected": {
+        "error": "read_only"
+      },
+      "actual": {
+        "error": "query_error"
+      }
+    }
+  ]
+}

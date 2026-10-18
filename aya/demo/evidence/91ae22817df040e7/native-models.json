@@ -1,0 +1,44 @@
+[
+  {
+    "id": "20261017_213826_80f3c4",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "billing_provider": "custom",
+    "parent_session_id": null,
+    "api_call_count": 16
+  },
+  {
+    "id": "20261017_213853_b50a8e",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "billing_provider": "custom",
+    "parent_session_id": "20261017_213826_80f3c4",
+    "api_call_count": 1
+  },
+  {
+    "id": "20261017_213925_5297c8",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "billing_provider": "custom",
+    "parent_session_id": null,
+    "api_call_count": 39
+  },
+  {
+    "id": "20261017_214009_8969c9",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "billing_provider": "custom",
+    "parent_session_id": "20261017_213925_5297c8",
+    "api_call_count": 2
+  },
+  {
+    "id": "20261017_214143_865c10",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "billing_provider": "custom",
+    "parent_session_id": null,
+    "api_call_count": 33
+  },
+  {
+    "id": "20261017_214334_42e540",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "billing_provider": "custom",
+    "parent_session_id": "20261017_214143_865c10",
+    "api_call_count": 15
+  }
+]

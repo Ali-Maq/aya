@@ -1,0 +1,222 @@
+{
+  "as_of": "2026-10-17",
+  "scope": "Reverse engineering and agent improvement, with the measured SQL example",
+  "factory": {
+    "url": "http://localhost:3021/app/factory",
+    "repository": "https://github.com/Ali-Maq/aya",
+    "pull_request": "https://github.com/Ali-Maq/aya/pull/1",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "provider": "Crusoe",
+    "runtime": "Native Hermes in OpenShell",
+    "runtime_boundary": "Fresh native workspaces within one shared OpenShell worker; no per-job filesystem isolation. Generated SQL uses separate restricted executors.",
+    "screenshot": "factory-recover-live.png"
+  },
+  "sql_feature": {
+    "id": "crusoe-sql",
+    "title": "Fireworks SQL workflow on Crusoe",
+    "status": "complete",
+    "scope": "Schema inspection and read-only query execution over a fresh GitHub repository snapshot",
+    "reference": "https://github.com/fw-ai/cookbook/blob/6ada4081cf7bdb5cec7dcf066dd29d784f55b232/training/case-studies/agentic_rl_text2sql/sql_tools.py",
+    "pull_request": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2",
+    "run_id": "492e2ca7851347f5",
+    "candidate_checks": "117/118",
+    "accepted_checks": "118/118",
+    "fresh_seed_checks": "118/118",
+    "target_tests": 54,
+    "live_questions": "4/4",
+    "evidence": "../demo/evidence/492e2ca7851347f5",
+    "limitation": "This ports SQL behavior. It does not reproduce Fireworks reinforcement learning or embeddings."
+  },
+  "comparison": "../demo/comparison/sql-contract-only-one-shot/summary.json",
+  "mass": {
+    "status": "awaiting_deployment",
+    "task_id": 1001,
+    "source": "https://github.com/SakanaAI/mass",
+    "stage": "RHI workflow search",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "weights_updated": true,
+    "benchmark": "aya-nl-sql-v1",
+    "development_tasks": 12,
+    "heldout_tasks": 12,
+    "datasets_per_task": 3,
+    "checks_per_split": 36,
+    "refusal_tasks_per_split": 2,
+    "workflow_results": [
+      {
+        "name": "One-shot baseline",
+        "development": "36/36",
+        "heldout": "Not evaluated"
+      },
+      {
+        "name": "Initial Hermes workflow v0",
+        "development": "36/36",
+        "heldout": "36/36, retained workflow"
+      },
+      {
+        "name": "MASS candidate v1",
+        "development": "36/36",
+        "heldout": "Not selected"
+      }
+    ],
+    "pull_request": "https://github.com/Ali-Maq/mass/pull/1",
+    "limitation": "All development scores tied at 36/36; v0 retained and passed 36/36 held-out checks. Verified-answer SFT succeeded. This was not training from a winning MASS teacher. Tuned serving and quality evaluation remain pending.",
+    "run_id": "76f46a90fc23427d",
+    "selected": "v0",
+    "result_note": "All development scores are at the benchmark ceiling. Both upstream MASS comparisons returned ties. The independent gate retained v0; no accuracy gain is claimed.",
+    "rhi": {
+      "api_calls": 3,
+      "tokens": 14673,
+      "response_ids": [
+        "37998c5e287748c4b0a56a3d08434f76",
+        "e4cc7180d3584ca999553fb146a3662e",
+        "d8f2cb37f4ab4d14967ae3c943826ffd"
+      ]
+    },
+    "training": {
+      "status": "succeeded",
+      "model": "Qwen/Qwen3.5-9B",
+      "job_id": "ftjob-d9d6409d3a2b4c67adebb74d0398064c",
+      "fine_tuned_model": "ftmodel-cee03aea-b639-4bd6-bd18-40412f3713ac",
+      "trained_tokens": 10568,
+      "training_rows": 10,
+      "validation_rows": 2,
+      "epochs": 1,
+      "mode": "supervised integration smoke test",
+      "deployment_status": "required",
+      "tuned_model_evaluated": false
+    }
+  },
+  "public_sql": {
+    "status": "awaiting_deployment",
+    "title": "Spider \u00b7 18 questions across 9 databases",
+    "source": "https://huggingface.co/datasets/xlangai/spider/resolve/6232cc3fad6d54c62b3ba23a364083a98ff36a17/data/spider.zip",
+    "source_revision": "6232cc3fad6d54c62b3ba23a364083a98ff36a17",
+    "source_sha256": "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1",
+    "license": "CC-BY-SA-4.0",
+    "development_questions": 12,
+    "heldout_questions": 6,
+    "development_databases": 6,
+    "heldout_databases": 3,
+    "results": [
+      {
+        "name": "One-shot baseline",
+        "development": "12 / 12",
+        "heldout": "Not evaluated",
+        "calls": 1,
+        "tokens": 4544,
+        "elapsed_seconds": 13.92
+      },
+      {
+        "name": "Initial Hermes v0",
+        "development": "11 / 12",
+        "heldout": "3 / 6",
+        "calls": 8,
+        "tokens": 48451,
+        "elapsed_seconds": 182.71,
+        "children": 1
+      },
+      {
+        "name": "MASS candidate v1",
+        "development": "11 / 12",
+        "heldout": "Not selected",
+        "calls": 22,
+        "tokens": 68667,
+        "elapsed_seconds": 315.38,
+        "children": 1
+      }
+    ],
+    "status_note": "Evaluation complete; public SQL SFT succeeded. Dedicated serving and tuned-model evaluation are required.",
+    "limitation": "Single-database execution agreement on a fixed 18-question subset; not the official Spider test-suite metric or a leaderboard result. Public questions may occur in model training. Native trace comments claimed familiarity with Spider answers; possible memorization must be considered.",
+    "run_id": "db5f5b51190a4b97",
+    "result_note": "Baseline 12/12; both native workflows 11/12. The v0/v1 tie retains v0. No MASS accuracy gain is established.",
+    "mass_revision": "2818e476eafd415d573c27d94b3335391a194605",
+    "contract": "../specs/mass-public-sql.json",
+    "selection_manifest": "../specs/spider-benchmark.json",
+    "executor": "public_db_executor.py",
+    "checks_per_question": 1,
+    "runtime_observation": "The v0 native trace accessed an unrelated prior repository-fixture file from a sibling workspace. No current Spider reference SQL was observed.",
+    "baseline_response_id": "2cf646cdf216408884acba66a90684b6",
+    "selected": "v0",
+    "heldout": {
+      "passed": 3,
+      "total": 6
+    },
+    "heldout_usage": {
+      "calls": 9,
+      "tokens": 35003,
+      "elapsed_seconds": 101.34,
+      "children": 0
+    },
+    "heldout_note": "Retained v0: 3 / 6 held out. Baseline held-out performance was not evaluated.",
+    "training": {
+      "id": "ftjob-3f54c5ea7cee4dbcb1819004d2c1d7a9",
+      "status": "succeeded",
+      "model": "Qwen/Qwen3.5-9B",
+      "fine_tuned_model": "ftmodel-2ac55e69-6a3c-4b2d-a3d1-0fd93bf5455a",
+      "trained_tokens": 26624,
+      "error": null,
+      "updated_at": "2026-10-17T23:27:50.118500+00:00",
+      "url": "https://console.crusoecloud.com/foundry/fine-tuning/jobs/ftjob-3f54c5ea7cee4dbcb1819004d2c1d7a9/overview",
+      "deployment_status": "required",
+      "promotion": "blocked until tuned inference passes independent evaluation"
+    },
+    "training_manifest": {
+      "format": "assistant-only supervised chat",
+      "teacher": "deepseek-ai/DeepSeek-V4-Pro",
+      "student": "Qwen/Qwen3.5-9B",
+      "kind": "distilled final SQL outputs from ranked verified trajectories",
+      "mode": "supervised integration smoke test",
+      "selection_sha256": "82525dd318fdf8b56b526c4cc5381871164b1e71dfbb368b6619d362df8e7470",
+      "selection_rule": "Independent question pass rate, then measured episode API calls, tokens, latency, stable run ID",
+      "source_runs": [
+        "db5f5b51190a4b97-baseline"
+      ],
+      "source_readback": [
+        {
+          "run_id": "db5f5b51190a4b97-baseline",
+          "trace_id": "2b4a2864da8a7660c35556732f6245b0",
+          "trajectory_revision": "a8b32f778a735507c0edd283c69863268a038bd9ac2aab773653aaa9f719a559"
+        }
+      ],
+      "verified_at": "2026-10-17T23:25:45.908183+00:00",
+      "training_rows": 10,
+      "validation_rows": 2,
+      "question_ids": {
+        "training": [
+          "spider-dev-0176",
+          "spider-dev-0177",
+          "spider-dev-0278",
+          "spider-dev-0293",
+          "spider-dev-0426",
+          "spider-dev-0427",
+          "spider-dev-0843",
+          "spider-dev-0856",
+          "spider-dev-0896",
+          "spider-dev-0900"
+        ],
+        "validation": [
+          "spider-dev-0667",
+          "spider-dev-0684"
+        ]
+      },
+      "heldout_rows": 0,
+      "submission_eligible": true,
+      "submission_gate": "At least ten passing training tasks and two preassigned passing validation tasks",
+      "mass_winning_teacher_sources": [],
+      "mass_eligibility": "Includes non-winning sources; final-answer distillation, not a MASS winning-teacher round",
+      "workflow_sha256": "cff98d9905afef42cb94a65581d11a5bef2236c510ec0aacfbe463e779ed0f8d",
+      "files": {
+        "training": "2846135616058556c030e632d1757a883bf09576f4ab1a8efa2b6c45804e00bc",
+        "validation": "099468bdfe2719841785d71aeee64162bfc1f4d83d8c5ffdd592900b54ca4a14"
+      },
+      "limitations": "Small final-answer corpus; no full tool-trajectory training or model-improvement claim"
+    },
+    "selection_note": "All 12 selected answers came from the independently verified bare baseline.\n10 training rows \u00b7 2 fixed validation rows \u00b7 0 held-out rows.",
+    "training_note": "Crusoe SFT succeeded: 26,624 trained tokens.\nFinal-answer distillation; serving and tuned-quality evaluation remain required.",
+    "rhi": {
+      "calls": 3,
+      "tokens": 40840,
+      "beats_reference": false
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "experiment": "sql-contract-only-one-shot",
+  "model": "deepseek-ai/DeepSeek-V4-Pro",
+  "contract_sha256": "7c56492fc8333c3a770e2b692ee8df12652266bd6bb768dec1cde2486b2a5ee6",
+  "evaluator": "aya-sql-v1",
+  "evaluator_source_sha256": "5655684c8fbdd5a0ef9cf862978d865ad83aac70d6fd00096cac19c42ebd5c80",
+  "one_shot": {
+    "source_sha256": "ed18579afc33c87b26ef0d5d61305ffb2ed7840ff8d674a2cae8bc18eb556ce9",
+    "response_id": "b192491f60204bc6a85d69190e49abb9",
+    "development": {
+      "passed": 107,
+      "total": 118,
+      "seed": "15388528694062393949"
+    },
+    "fresh_seed": {
+      "passed": 107,
+      "total": 118,
+      "seed": "9633811139305601742"
+    },
+    "model_calls": 1,
+    "usage": {
+      "prompt_tokens": 659,
+      "total_tokens": 2268,
+      "completion_tokens": 1609,
+      "prompt_tokens_details": null,
+      "reasoning_tokens": 0
+    },
+    "inference_seconds": 9.301,
+    "evaluation_seconds": 0.589,
+    "reference_source": false,
+    "tool_use": false,
+    "repair_feedback": false,
+    "source_modified": false
+  },
+  "aya_completed_run": {
+    "run_id": "492e2ca7851347f5",
+    "source_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff",
+    "first_candidate": {
+      "passed": 117,
+      "total": 118
+    },
+    "accepted_development": {
+      "passed": 118,
+      "total": 118,
+      "seed": "15388528694062393949"
+    },
+    "fresh_seed": {
+      "passed": 118,
+      "total": 118,
+      "seed": "9633811139305601742"
+    },
+    "planning_and_native_model_calls": 98,
+    "planning_and_native_usage": {
+      "input_tokens": 138162,
+      "output_tokens": 53392,
+      "total_tokens": 191554
+    },
+    "usage_exclusions": [
+      "Four live verification questions",
+      "Later browser and CLI product calls"
+    ],
+    "reference_source": true,
+    "tool_use": true,
+    "repair_feedback": true,
+    "pull_request": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2"
+  },
+  "limits": [
+    "One task and one baseline sample, not a benchmark or statistical significance claim.",
+    "Same model, reviewed contract, evaluator and evaluation seeds; unequal inference budget and tool access.",
+    "Does not isolate the effect of REA, reference access, native tools, delegation or repairs separately.",
+    "No Claude Code or Codex baseline ran. Do not attribute this result to those products.",
+    "Fresh-seed evaluation changes generated data; it reuses the contract's error checks.",
+    "Baseline source was never repaired or activated in a product."
+  ]
+}

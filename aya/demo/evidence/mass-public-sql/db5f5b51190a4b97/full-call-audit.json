@@ -1,0 +1,376 @@
+{
+  "call_count": 29,
+  "calls": [
+    {
+      "argument_chars": 138,
+      "argument_sha256": "31ec2f58d40b5a85995e42be63abe003b3897bc241f0880acdd39dfe3ffa41a9",
+      "episode": "v0",
+      "event_id": "764:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v0",
+        "<sandbox_workspace>/db5f5b51190a4b97-v0/"
+      ],
+      "session": "20261017_231441_7e2d25",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2,
+      "argument_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "episode": "v0",
+      "event_id": "766:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231441_7e2d25",
+      "tool": "skills_list",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 59,
+      "argument_sha256": "bc863d4382e8c012089340341c12eeb5417623ef4cfa7bcfaabac77f8e5a420a",
+      "episode": "v0",
+      "event_id": "766:1",
+      "markers": {},
+      "paths": [
+        "/sandbox/aya"
+      ],
+      "session": "20261017_231441_7e2d25",
+      "tool": "search_files",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 57,
+      "argument_sha256": "067423f31ba7bb620a04380a9ddd2ca052bcc42631e83cd723c125def0d4f1f3",
+      "episode": "v0",
+      "event_id": "769:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/76f46a90fc23427d-v1/queries.json"
+      ],
+      "session": "20261017_231441_7e2d25",
+      "tool": "read_file",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 62,
+      "argument_sha256": "3dffd855424bbd3bf31cbbcc0182123d9834030fa8113a4368d14cf595e4958c",
+      "episode": "v0",
+      "event_id": "769:1",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/76f46a90fc23427d-heldout/queries.json"
+      ],
+      "session": "20261017_231441_7e2d25",
+      "tool": "read_file",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2532,
+      "argument_sha256": "1861c79c8caacf77316fc8764f8b25de519a24ed6af3690726808351315ad8f5",
+      "episode": "v0",
+      "event_id": "772:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v0/queries.json"
+      ],
+      "session": "20261017_231441_7e2d25",
+      "tool": "write_file",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 6355,
+      "argument_sha256": "73ba6f3eeabc50c0af0fa89f60afadb87693cc47ff1f5098431c910b2e6adeec",
+      "episode": "v0",
+      "event_id": "774:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v0/queries.json"
+      ],
+      "session": "20261017_231441_7e2d25",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2151,
+      "argument_sha256": "772bdeeea125985af19057a20f6c062a81a52a68a61877aa13504b0dc0e6a2b6",
+      "episode": "v0",
+      "event_id": "776:0",
+      "markers": {
+        "\\bfetch\\b": 1
+      },
+      "paths": [],
+      "session": "20261017_231441_7e2d25",
+      "tool": "delegate_task",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 144,
+      "argument_sha256": "f19cb70999e2db334117071433f8ae87ccfd9413fde5de40f3649cb8080bfb64",
+      "episode": "v1",
+      "event_id": "782:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v1",
+        "<sandbox_workspace>/db5f5b51190a4b97-v1/"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2,
+      "argument_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "episode": "v1",
+      "event_id": "782:1",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "skills_list",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 102,
+      "argument_sha256": "73ab262393ecf1397a915f630616d97dd31caef4412507397a9c6d53b1e10e4f",
+      "episode": "v1",
+      "event_id": "785:0",
+      "markers": {},
+      "paths": [
+        "/sandbox/aya",
+        "<sandbox_workspace>/"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 393,
+      "argument_sha256": "02ef61ca2e938e04ba3416957e1c9cbafaf4d2e7fd46d9691228019541ee3987",
+      "episode": "v1",
+      "event_id": "787:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/76f46a90fc23427d-heldout/queries.json",
+        "<sandbox_workspace>/76f46a90fc23427d-heldout/validate.py",
+        "<sandbox_workspace>/db5f5b51190a4b97-v0/",
+        "<sandbox_workspace>/db5f5b51190a4b97-v0/queries.json"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 192,
+      "argument_sha256": "11f1ba70d3d340706be02f9e940f9258fb790e64b33a029a2c83e30864c833f1",
+      "episode": "v1",
+      "event_id": "789:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 599,
+      "argument_sha256": "1093c3536018ba3dc66d04cd8f0f19dc8df9b769a04870d574e2cfde50f6fc03",
+      "episode": "v1",
+      "event_id": "791:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v1/logs.txt"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "write_file",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 6781,
+      "argument_sha256": "1bc7e3ca44ae3c9c30007530e0cbe29596487214a9a7f21ff9215c121b841b1d",
+      "episode": "v1",
+      "event_id": "793:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 6022,
+      "argument_sha256": "8d3224d1d532b87066d784657c1cee1c37364b5e49858402485fa700887b9475",
+      "episode": "v1",
+      "event_id": "795:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 3580,
+      "argument_sha256": "35ad8005fe83b758b0863850868475c46b428c9b9da70efff2193f14d792cecc",
+      "episode": "v1",
+      "event_id": "797:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2250,
+      "argument_sha256": "337e0b10701dfee8db282df68aba02d59b5330aa4a416774700b8bfc101addd3",
+      "episode": "v1",
+      "event_id": "799:0",
+      "markers": {
+        "\\bgold\\b": 1
+      },
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 3448,
+      "argument_sha256": "ae21a60e620f2c463254a295f48dcb7721c483bc43d114e9014a984baffadda8",
+      "episode": "v1",
+      "event_id": "801:0",
+      "markers": {
+        "\\bgold\\b": 5
+      },
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 3115,
+      "argument_sha256": "49debef3fcc11990f51619a34ea87b6603c1b9a6da1fc144e20fe1cd4171946d",
+      "episode": "v1",
+      "event_id": "803:0",
+      "markers": {
+        "\\bgold\\b": 4
+      },
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 4432,
+      "argument_sha256": "6fa7bb00b91b2f303f413ac2db92882616dd40d118796b269373e50538e996d4",
+      "episode": "v1",
+      "event_id": "805:0",
+      "markers": {
+        "\\bfetch\\b": 1
+      },
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "delegate_task",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2012,
+      "argument_sha256": "a633d0368d13da9f61635e8746a40c7638809aa692a46d5ab87aa349d7be1bc8",
+      "episode": "v1",
+      "event_id": "817:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2554,
+      "argument_sha256": "e97430e37fb8bb09afc209d9eba10f42769238781d2b996f3aa701729bc20f68",
+      "episode": "v1",
+      "event_id": "819:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v1/queries.json"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "write_file",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 2964,
+      "argument_sha256": "8700d75189f726ee2c31bebca2785eff171ac5865a41e3350454689832b00d64",
+      "episode": "v1",
+      "event_id": "821:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v1/logs.txt"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "write_file",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 350,
+      "argument_sha256": "1f174a2b2840e31e6dbf2514267c0bb2b247993050fe985a063c3e74034e39e9",
+      "episode": "v1",
+      "event_id": "823:0",
+      "markers": {},
+      "paths": [
+        "<sandbox_workspace>/db5f5b51190a4b97-v1/queries.json"
+      ],
+      "session": "20261017_231833_e1c267",
+      "tool": "execute_code",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 111,
+      "argument_sha256": "43ae817b0d1a4bb357e73abe6f03ac4628b453a16378616449d86aeaf2b1b1d4",
+      "episode": "v1",
+      "event_id": "807:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_232147_c5390f",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 98,
+      "argument_sha256": "05630cf1a9a15ff9398c9cf97bf7f27dedd456f505bee57d21aa6d10dfa7106f",
+      "episode": "v1",
+      "event_id": "809:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_232147_c5390f",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 1070,
+      "argument_sha256": "af31e3510e82bd6a991dbd65e1752ba6e4da70e5f98ca3991aeba9ee24c9aeab",
+      "episode": "v1",
+      "event_id": "811:0",
+      "markers": {},
+      "paths": [],
+      "session": "20261017_232147_c5390f",
+      "tool": "terminal",
+      "url_hosts": []
+    },
+    {
+      "argument_chars": 3599,
+      "argument_sha256": "a8309f3d4f7410592b65e3850a13fea73b326736c2d6880da60915af86cac761",
+      "episode": "v1",
+      "event_id": "813:0",
+      "markers": {},
+      "paths": [
+        "/sandbox/reviews_output.json"
+      ],
+      "session": "20261017_232147_c5390f",
+      "tool": "write_file",
+      "url_hosts": []
+    }
+  ],
+  "complete_argument_inspection": true,
+  "sessions": {
+    "20261017_231441_7e2d25": "v0",
+    "20261017_231653_75eb1e": "v0",
+    "20261017_231833_e1c267": "v1",
+    "20261017_232147_c5390f": "v1"
+  },
+  "source": "read-only Hermes SQLite tool_calls for explicit current-run sessions"
+}

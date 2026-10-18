@@ -1,0 +1,38 @@
+{
+  "sessions": [
+    {
+      "id": "20261017_214009_8969c9",
+      "source": "subagent",
+      "parent_session_id": "20261017_213925_5297c8",
+      "tool_call_count": 2,
+      "input_tokens": 20991,
+      "output_tokens": 3600,
+      "api_call_count": 2,
+      "tools": [
+        "read_file"
+      ]
+    },
+    {
+      "id": "20261017_213925_5297c8",
+      "source": "cli",
+      "parent_session_id": null,
+      "tool_call_count": 39,
+      "input_tokens": 36948,
+      "output_tokens": 16722,
+      "api_call_count": 39,
+      "tools": [
+        "delegate_task",
+        "patch",
+        "read_file",
+        "search_files",
+        "skill_view",
+        "terminal",
+        "write_file"
+      ]
+    }
+  ],
+  "child_sessions": 1,
+  "api_calls": 41,
+  "input_tokens": 57939,
+  "output_tokens": 20322
+}

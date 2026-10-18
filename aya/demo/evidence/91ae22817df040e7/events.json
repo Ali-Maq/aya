@@ -1,0 +1,239 @@
+[
+  {
+    "at": "2026-10-17T21:38:16.065330+00:00",
+    "event": "request_frozen",
+    "issue": "https://github.com/Ali-Maq/aya-data-recipes/issues/1",
+    "target": "Ali-Maq/aya-data-recipes",
+    "contract_sha256": "b2f301300170295fd0a9236105d274ea88580b2beccf9289205c8a4c98763261",
+    "base_commit": "84910189c3eaac2227fa9c55bc05c4ad02958a2a"
+  },
+  {
+    "at": "2026-10-17T21:38:21.623933+00:00",
+    "event": "plan_completed",
+    "provider": "Crusoe",
+    "endpoint": "https://api.inference.crusoecloud.com/v1",
+    "model": "deepseek-ai/DeepSeek-V4-Pro",
+    "response_id": "a407c4016aef4551adafc5a7e9e1cb07",
+    "usage": {
+      "prompt_tokens": 738,
+      "total_tokens": 1611,
+      "completion_tokens": 873,
+      "prompt_tokens_details": {
+        "cached_tokens": 512
+      },
+      "reasoning_tokens": 0
+    }
+  },
+  {
+    "at": "2026-10-17T21:38:23.071339+00:00",
+    "event": "worker_started",
+    "role": "investigation",
+    "sandbox": "aya-feature",
+    "workspace": "/sandbox/aya/91ae22817df040e7",
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T21:39:21.122879+00:00",
+    "event": "worker_completed",
+    "role": "investigation",
+    "sessions": [
+      {
+        "id": "20261017_213853_b50a8e",
+        "source": "subagent",
+        "parent_session_id": "20261017_213826_80f3c4",
+        "tool_call_count": 0,
+        "input_tokens": 13093,
+        "output_tokens": 1457,
+        "api_call_count": 1,
+        "tools": []
+      },
+      {
+        "id": "20261017_213826_80f3c4",
+        "source": "cli",
+        "parent_session_id": null,
+        "tool_call_count": 19,
+        "input_tokens": 22662,
+        "output_tokens": 6483,
+        "api_call_count": 16,
+        "tools": [
+          "delegate_task",
+          "execute_code",
+          "mcp__rea__binary_session",
+          "mcp__rea__procedure_pseudo_code",
+          "mcp__rea__search_procedures",
+          "skill_view",
+          "terminal",
+          "tool_call",
+          "tool_describe",
+          "write_file"
+        ]
+      }
+    ],
+    "child_sessions": 1,
+    "api_calls": 17,
+    "input_tokens": 35755,
+    "output_tokens": 7940
+  },
+  {
+    "at": "2026-10-17T21:39:21.131999+00:00",
+    "event": "binary_investigated",
+    "reference_sha256": "0860ff6f0b18028f50e275e95ce56de0d30f6c2387a6679eed292d81facb6bbe",
+    "evidence_ids": [
+      "ev_f0dc53526d238e24894f589f8f70452d508e746ad7d7a98447526bc5b82c9df6",
+      "ev_2d8d709cd28a5888d1b913b473d4ca9162cd30a3828b3bce73c691e6ee6161b2",
+      "ev_67adea7c86a55783b71197388d4678425cc1dcaddc3bc4508c3b15147e9f9288"
+    ]
+  },
+  {
+    "at": "2026-10-17T21:39:22.694631+00:00",
+    "event": "worker_started",
+    "role": "implementation-1",
+    "sandbox": "aya-feature",
+    "workspace": "/sandbox/aya/91ae22817df040e7",
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T21:41:37.393799+00:00",
+    "event": "worker_completed",
+    "role": "implementation-1",
+    "sessions": [
+      {
+        "id": "20261017_214009_8969c9",
+        "source": "subagent",
+        "parent_session_id": "20261017_213925_5297c8",
+        "tool_call_count": 2,
+        "input_tokens": 20991,
+        "output_tokens": 3600,
+        "api_call_count": 2,
+        "tools": [
+          "read_file"
+        ]
+      },
+      {
+        "id": "20261017_213925_5297c8",
+        "source": "cli",
+        "parent_session_id": null,
+        "tool_call_count": 39,
+        "input_tokens": 36948,
+        "output_tokens": 16722,
+        "api_call_count": 39,
+        "tools": [
+          "delegate_task",
+          "patch",
+          "read_file",
+          "search_files",
+          "skill_view",
+          "terminal",
+          "write_file"
+        ]
+      }
+    ],
+    "child_sessions": 1,
+    "api_calls": 41,
+    "input_tokens": 57939,
+    "output_tokens": 20322
+  },
+  {
+    "at": "2026-10-17T21:41:39.653530+00:00",
+    "event": "candidate_evaluated",
+    "attempt": 1,
+    "passed": 207,
+    "total": 210,
+    "source_sha256": "94822c07ad0e32a656e732a8f77248e43869cb9c2af0764b20e25bd4a39bd922"
+  },
+  {
+    "at": "2026-10-17T21:41:41.306447+00:00",
+    "event": "worker_started",
+    "role": "implementation-2",
+    "sandbox": "aya-feature",
+    "workspace": "/sandbox/aya/91ae22817df040e7",
+    "provider": "Crusoe",
+    "model": "deepseek-ai/DeepSeek-V4-Pro"
+  },
+  {
+    "at": "2026-10-17T21:45:47.789947+00:00",
+    "event": "worker_completed",
+    "role": "implementation-2",
+    "sessions": [
+      {
+        "id": "20261017_214334_42e540",
+        "source": "subagent",
+        "parent_session_id": "20261017_214143_865c10",
+        "tool_call_count": 19,
+        "input_tokens": 26916,
+        "output_tokens": 13714,
+        "api_call_count": 15,
+        "tools": [
+          "read_file",
+          "terminal"
+        ]
+      },
+      {
+        "id": "20261017_214143_865c10",
+        "source": "cli",
+        "parent_session_id": null,
+        "tool_call_count": 42,
+        "input_tokens": 55073,
+        "output_tokens": 29332,
+        "api_call_count": 33,
+        "tools": [
+          "delegate_task",
+          "patch",
+          "read_file",
+          "search_files",
+          "skill_view",
+          "skills_list",
+          "terminal"
+        ]
+      }
+    ],
+    "child_sessions": 1,
+    "api_calls": 48,
+    "input_tokens": 81989,
+    "output_tokens": 43046
+  },
+  {
+    "at": "2026-10-17T21:45:50.111207+00:00",
+    "event": "candidate_evaluated",
+    "attempt": 2,
+    "passed": 210,
+    "total": 210,
+    "source_sha256": "58962c252d7c35a92ee45f0ca7bb7f41b2dfa64e52c819d98f94cf60dbf503bf"
+  },
+  {
+    "at": "2026-10-17T21:45:50.876029+00:00",
+    "event": "acceptance_passed",
+    "checks": 210,
+    "source_sha256": "58962c252d7c35a92ee45f0ca7bb7f41b2dfa64e52c819d98f94cf60dbf503bf",
+    "split": "fresh held-out seed"
+  },
+  {
+    "at": "2026-10-17T21:45:55.876584+00:00",
+    "event": "target_tests_passed",
+    "command": "python -m unittest discover -s tests -v"
+  },
+  {
+    "at": "2026-10-17T21:46:00.860492+00:00",
+    "event": "pull_request_created",
+    "url": "https://github.com/Ali-Maq/aya-data-recipes/pull/2",
+    "commit": "8b98a8c804fefa69d9c4232d2997c744ae8dc244"
+  },
+  {
+    "at": "2026-10-17T21:46:24.237012+00:00",
+    "event": "ci_passed",
+    "commit": "8b98a8c804fefa69d9c4232d2997c744ae8dc244",
+    "checks": [
+      "https://github.com/Ali-Maq/aya-data-recipes/actions/runs/39072316520/job/117512287454",
+      "https://github.com/Ali-Maq/aya-data-recipes/actions/runs/39072311006/job/117512271897"
+    ]
+  },
+  {
+    "at": "2026-10-17T21:46:24.238364+00:00",
+    "event": "module_activated",
+    "commit": "8b98a8c804fefa69d9c4232d2997c744ae8dc244",
+    "source_sha256": "58962c252d7c35a92ee45f0ca7bb7f41b2dfa64e52c819d98f94cf60dbf503bf",
+    "product": "http://localhost:3032"
+  }
+]

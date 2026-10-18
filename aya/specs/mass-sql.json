@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "id": "mass-sql-v1",
+  "title": "Measured SQL workflow improvement with MASS",
+  "issue_url": "https://github.com/Ali-Maq/aya/issues/2",
+  "target_repository": "Ali-Maq/aya",
+  "frontend": "Onyx factory",
+  "scope": {
+    "unit_of_optimization": "natural-language-to-SQL agent workflow",
+    "fixed_executor": "Accepted Crusoe Developer Hub SQL component",
+    "executor_pull_request": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2",
+    "excluded": [
+      "executor rewrites during workflow search",
+      "held-out data in optimizer inputs",
+      "automatic promotion from training loss",
+      "claims of general coding-agent superiority"
+    ]
+  },
+  "dependencies": {
+    "native_worker": "Installed NemoClaw/NemoHermes in OpenShell",
+    "inference_provider": "Crusoe",
+    "native_model": "deepseek-ai/DeepSeek-V4-Pro",
+    "mass_repository": "Ali-Maq/mass",
+    "mass_revision": "9d2f8ac91fc115bcf78ecb5b08d750e68676cb52",
+    "mass_pull_request": "https://github.com/Ali-Maq/mass/pull/1",
+    "trajectory_store": "Installed Langfuse with verified API readback"
+  },
+  "inputs": {
+    "task": "immutable natural-language task",
+    "contract": "versioned GitHub contract",
+    "dataset": "public development questions, schema and fixture",
+    "evaluator": "controller-owned SQLite oracle; source hash frozen",
+    "answers": {
+      "container": "JSON object keyed by supplied question IDs",
+      "allowed_values": [
+        {
+          "sql": "SQLite SELECT text"
+        },
+        {
+          "refused": true
+        }
+      ],
+      "extra_ids_allowed": false
+    }
+  },
+  "workflow": [
+    "Freeze inputs and evaluator hash",
+    "Run bare baseline",
+    "Run initial native workflow v0",
+    "Call actual MASS RHI proposal through Crusoe",
+    "Run revised native workflow v1",
+    "Compare actual artifacts through upstream RHI",
+    "Apply independent development score gate",
+    "Evaluate selected workflow on held-out split",
+    "Verify Langfuse API readback",
+    "Submit separately labeled supervised integration test"
+  ],
+  "evaluation": {
+    "development_questions": 12,
+    "heldout_questions": 12,
+    "datasets_per_question": 3,
+    "checks_per_split": 36,
+    "selection": "Strict development score improvement; ties retain prior workflow",
+    "judge_authority": "Upstream model judgment cannot override the independent result gate",
+    "heldout_access": "Controller only; aggregate telemetry; excluded from training"
+  },
+  "execution_limits": {
+    "child_concurrency": 1,
+    "spawn_depth": 1,
+    "child_timeout_seconds": 90,
+    "parent_max_turns": 40,
+    "total_children_prompt_limit": 1,
+    "total_children_hard_limit_claimed": false,
+    "landlock_available": false
+  },
+  "training": {
+    "mode": "supervised integration smoke test",
+    "teacher": "deepseek-ai/DeepSeek-V4-Pro",
+    "student": "Qwen/Qwen3.5-9B",
+    "training_examples": 10,
+    "validation_examples": 2,
+    "heldout_examples": 0,
+    "epochs": 1,
+    "method": "supervised LoRA",
+    "input": "Verified final SQL answers from Langfuse development records",
+    "requires": [
+      "verified Langfuse trace and trajectory revision",
+      "matching task, workflow and dataset hashes",
+      "independently passing development answers",
+      "disjoint training and validation IDs"
+    ],
+    "mass_eligibility": "No winning-teacher claim when beats_reference is false",
+    "paper_equivalence_claimed": false
+  },
+  "promotion_gates": [
+    "Provider reports training success",
+    "A real self-serve deployment serves the trained checkpoint alias",
+    "Independent evaluation of that deployed model passes",
+    "A measured comparison supports any improvement claim"
+  ],
+  "evidence_required": [
+    "feature issue and contract revision",
+    "fixed executor source hash",
+    "observable native trace and child count",
+    "provider model and response IDs",
+    "token usage and unknown-cost labeling",
+    "independent development and held-out counts",
+    "actual RHI prompts and comparison verdicts",
+    "independent workflow selection",
+    "Langfuse API readback",
+    "real training job status",
+    "GitHub PR and CI for delivered source"
+  ],
+  "recorded_run": {
+    "id": "76f46a90fc23427d",
+    "baseline": {
+      "passed": 36,
+      "total": 36
+    },
+    "v0": {
+      "passed": 36,
+      "total": 36
+    },
+    "v1": {
+      "passed": 36,
+      "total": 36
+    },
+    "heldout": {
+      "passed": 36,
+      "total": 36
+    },
+    "selected_workflow": "v0",
+    "mass_beats_reference": false,
+    "accuracy_improvement_demonstrated": false,
+    "closed_weight_update_loop_demonstrated": false,
+    "training_status": "succeeded",
+    "trained_tokens": 10568,
+    "training_job": "ftjob-d9d6409d3a2b4c67adebb74d0398064c",
+    "trained_checkpoint": "ftmodel-cee03aea-b639-4bd6-bd18-40412f3713ac",
+    "trained_checkpoint_inference_verified": false
+  }
+}

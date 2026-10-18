@@ -1,0 +1,9 @@
+{
+  "commit": "0fe69eac1290d39115ff51fc0655bc25093c22cd",
+  "contract_sha256": "40feabbc6597f2f9e469ebc13ccd1fca07720051c495b4a5a70761ddb0dbb4fc",
+  "fetched_at": "2026-10-17T23:14:01.827941+00:00",
+  "issue_title": "Recover SQL capabilities and improve workflows with verified public-dataset trajectories",
+  "issue_updated_at": "2026-10-17T23:12:36Z",
+  "issue_url": "https://github.com/Ali-Maq/aya/issues/2",
+  "repository": "Ali-Maq/aya"
+}

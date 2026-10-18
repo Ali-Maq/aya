@@ -1,0 +1,6 @@
+Save an export recipe named "orders" with these columns, in order:
+Customer: path ["customer","name"].
+Amount: path ["amount"], fallback "missing", mode "jq".
+Approval: path ["approved"], fallback "pending", mode "jq".
+Region: path ["region"], fallback "unknown", mode "null".
+Then export the attached JSON file with that recipe. Use the real AYA tools and give me the CSV download link.

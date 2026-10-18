@@ -1,0 +1,5 @@
+"Customer","Amount","Approval","Region"
+"Mina, Inc.",0,"pending","unknown"
+"Luca ""Studio""",42,true,"EU"
+"東京",17,"pending","unknown"
+"Aster",125,true,"US"

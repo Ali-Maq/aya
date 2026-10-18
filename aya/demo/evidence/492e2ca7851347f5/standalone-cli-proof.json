@@ -1,0 +1,77 @@
+{
+  "answer": "There are **6 repositories** in the snapshot.",
+  "sql": "SELECT COUNT(*) AS repo_count FROM repositories",
+  "columns": [
+    "repo_count"
+  ],
+  "rows": [
+    [
+      6
+    ]
+  ],
+  "trace": [
+    {
+      "response_id": "364eb5a5305149e595d68ef70179eca7",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "usage": {
+        "prompt_tokens": 449,
+        "total_tokens": 493,
+        "completion_tokens": 44,
+        "prompt_tokens_details": null,
+        "reasoning_tokens": 0
+      },
+      "tool_calls": [
+        {
+          "id": "call_e4712ca5d2134220af11d67e",
+          "index": 0,
+          "type": "function",
+          "function": {
+            "name": "get_database_schema",
+            "arguments": "{}"
+          }
+        }
+      ]
+    },
+    {
+      "response_id": "da87a439f80d4f94ae7d37f8d631adad",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "usage": {
+        "prompt_tokens": 543,
+        "total_tokens": 595,
+        "completion_tokens": 52,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "reasoning_tokens": 0
+      },
+      "tool_calls": [
+        {
+          "id": "call_735315b325214c0680005419",
+          "index": 1,
+          "type": "function",
+          "function": {
+            "name": "run_sql",
+            "arguments": "{\"sql\": \"SELECT COUNT(*) AS repo_count FROM repositories\"}"
+          }
+        }
+      ]
+    },
+    {
+      "response_id": "f0e271a01cc8464495f1314ccbec884c",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "usage": {
+        "prompt_tokens": 619,
+        "total_tokens": 630,
+        "completion_tokens": 11,
+        "prompt_tokens_details": {
+          "cached_tokens": 512
+        },
+        "reasoning_tokens": 0
+      },
+      "tool_calls": null
+    }
+  ],
+  "provider": "Crusoe",
+  "model": "deepseek-ai/DeepSeek-V4-Pro",
+  "record_count": 6
+}

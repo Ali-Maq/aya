@@ -1,0 +1,15 @@
+{
+  "id": "91ae22817df040e7",
+  "status": "complete",
+  "stage": "Available in Open WebUI",
+  "issue_number": 1,
+  "started_at": "2026-10-17T21:38:13.974359+00:00",
+  "sandbox": "aya-feature",
+  "passed": 210,
+  "total": 210,
+  "commit": "8b98a8c804fefa69d9c4232d2997c744ae8dc244",
+  "pr_url": "https://github.com/Ali-Maq/aya-data-recipes/pull/2",
+  "completed_at": "2026-10-17T21:46:24.237933+00:00",
+  "duration_seconds": 490.263574,
+  "note": "Recorded live run. These artifacts are evidence, never a fallback for live APIs."
+}

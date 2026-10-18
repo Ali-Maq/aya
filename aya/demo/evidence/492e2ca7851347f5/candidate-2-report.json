@@ -1,0 +1,8 @@
+{
+  "source_sha256": "c79ae1a51002b2132b511e4fad4be785dd5e60fb54088a9ba90e771b92a897ff",
+  "total": 118,
+  "passed": 118,
+  "seed": "15388528694062393949",
+  "evaluator_version": "aya-sql-v1",
+  "failures": []
+}

@@ -1,0 +1,7 @@
+{
+  "benchmark": "public-sql",
+  "benchmark_sha256": "dbf310aae359ecb81ec2396ce0c0859ede1adcf0e27e9151e861a5a4fe66c166",
+  "executor_sha256": "8a7c2bd181dd974afce8d17ea49d00449700c6eeeda6a49dbb815a4ac8a18ae2",
+  "started_at": "2026-10-17T23:14:02.074613+00:00",
+  "teacher": "deepseek-ai/DeepSeek-V4-Pro"
+}

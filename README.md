@@ -1,3 +1,18 @@
+# AYA
+
+AYA recovers software capabilities and measures improvements to the agents that build them.
+Its Onyx frontend has two peer tabs: Reverse engineering and Agent improvement.
+Hermes runs through NemoClaw/OpenShell, with REA/Ghidra for reference analysis and Crusoe for inference and training.
+
+Start with [the AYA guide](aya/README.md).
+The SQL example connects a [tested Fireworks-to-Crusoe component](https://github.com/Ali-Maq/crusoe-developer-hub/pull/2)
+to [actual MASS workflow search](https://github.com/Ali-Maq/mass/pull/1), a [public Spider benchmark](aya/PUBLIC_SQL.md),
+and verified Langfuse trajectory selection. Independent results control acceptance; no general superiority is claimed.
+
+The original Onyx source and history are retained below. AYA additions are in `aya/` and the Factory view.
+
+---
+
 <a name="readme-top"></a>
 
 <h2 align="center">

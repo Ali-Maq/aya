@@ -1,0 +1,4 @@
+[
+  {"customer":{"name":"Second upload"},"amount":0,"approved":false,"region":""},
+  {"customer":{"name":"New customer"},"amount":88,"approved":true,"region":null}
+]

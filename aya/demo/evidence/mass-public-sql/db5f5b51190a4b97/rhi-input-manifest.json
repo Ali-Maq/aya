@@ -1,0 +1,23 @@
+{
+  "endpoint": "https://api.inference.crusoecloud.com/v1",
+  "format": 1,
+  "implementation_sha256": {
+    "evaluation/artifacts.py": "6d17e8698b11073070244bc379f76904127e9d92e2d1e6c102748fad0cc859c5",
+    "evaluation/bundle.py": "597ec397598f3871d9cf1b1d39e81151cfe8eb667260b3fe5f9df0996d01ad33",
+    "evaluation_claudecodex/pairwise_judge.py": "74e301bfd968cba022dcb3ea04d5d0fd5060f70c1564cba067b10923d9602b22",
+    "evaluation_claudecodex/pairwise_prompts.py": "377301a7d1d1fea2014de665b85d6d154b2d0149d3ed1984efdf6cf19fb49266",
+    "evaluation_claudecodex/pairwise_schema.py": "2074839d256817120a15fbcc54e27e3b109ed2710336abdb74532643a873218b",
+    "harness_improvement/iterate_multi_agent_prompt.py": "b7c3672b1b580259139465a5680a830e2c100c8dfc6eac8fa861ddbfba8f3b3a",
+    "harness_improvement/llm_backend.py": "3a83206e807ba3ab560189f12e28df127a51ff74bbf3be1d8d91a911cf97656c",
+    "mass/aya_sql.py": "5fa2500e13e86973113505a432a3cb8e2c54697f7a042c24064c032445192d2b"
+  },
+  "max_output_tokens": 4000,
+  "model": "deepseek-ai/DeepSeek-V4-Pro",
+  "sha256": {
+    "contract": "a30826986451ae523170674f5fd4df572b19ab113426fcd2e785efff1650b66e",
+    "dataset": "f532d6ebe04eb3195867cc351b8eb51fb932ef799721fdc80e9c5f7e601ac33d",
+    "evaluator": "dbf310aae359ecb81ec2396ce0c0859ede1adcf0e27e9151e861a5a4fe66c166",
+    "task_file": "0a341618350658a1205e09585022d57c47b139c4e87b1d02a32ff8ce4d99ed41"
+  },
+  "task": 1001
+}

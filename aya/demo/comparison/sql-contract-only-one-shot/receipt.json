@@ -1,0 +1,30 @@
+{
+  "experiment": "sql-contract-only-one-shot",
+  "started_at": "2026-10-17T22:31:06.499039+00:00",
+  "finished_at": "2026-10-17T22:31:16.048804+00:00",
+  "elapsed_seconds": 9.301,
+  "provider": "Crusoe",
+  "endpoint": "https://api.inference.crusoecloud.com/v1/chat/completions",
+  "requested_model": "deepseek-ai/DeepSeek-V4-Pro",
+  "response_model": "deepseek-ai/DeepSeek-V4-Pro",
+  "response_id": "b192491f60204bc6a85d69190e49abb9",
+  "usage": {
+    "prompt_tokens": 659,
+    "total_tokens": 2268,
+    "completion_tokens": 1609,
+    "prompt_tokens_details": null,
+    "reasoning_tokens": 0
+  },
+  "finish_reason": "stop",
+  "max_tokens": 6000,
+  "temperature": 0.1,
+  "model_calls": 1,
+  "contract_sha256": "7c56492fc8333c3a770e2b692ee8df12652266bd6bb768dec1cde2486b2a5ee6",
+  "source_sha256": "ed18579afc33c87b26ef0d5d61305ffb2ed7840ff8d674a2cae8bc18eb556ce9",
+  "request_sha256": "0ca6cdcafd35d93a2943c366ec8c77dc50ec2d7b85f3ae9d4582fce3421a12ee",
+  "normalization": "trim_outer_whitespace;strip_one_python_code_fence",
+  "reference_source_access": false,
+  "tools": [],
+  "repair_feedback": false,
+  "source_modified_by_human_or_controller": false
+}

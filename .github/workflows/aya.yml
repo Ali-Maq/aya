@@ -1,0 +1,55 @@
+name: AYA validation
+
+on:
+  push:
+    branches: [main, aya/factory]
+    paths: ['aya/**', 'web/src/app/app/factory/**', 'web/src/app/api/aya/**', '.github/workflows/aya.yml']
+  pull_request:
+    branches: [main]
+    paths: ['aya/**', 'web/src/app/app/factory/**', 'web/src/app/api/aya/**', '.github/workflows/aya.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  factory:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Pull pinned execution and reference images
+        run: |
+          docker pull python@sha256:090ba77e2958f6af52a5341f788b50b032dd4ca28377d2893dcf1ecbdfdfe203
+          docker pull ghcr.io/nvidia/nemoclaw/hermes-sandbox@sha256:09cc86372e224afaa4c5308af4157dc4b2d0315d4f872584b3e2fdd32180f74e
+      - name: Install the hosted training client
+        run: python -m pip install -r aya/requirements.txt
+      - name: Verify the pinned public Spider dataset
+        working-directory: aya
+        run: python -m aya_factory.public_sql_benchmark prepare
+      - name: Check real GitHub intake and isolated reference execution
+        working-directory: aya
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m unittest discover -s tests -v
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: '1.3.5'
+      - name: Install the existing Onyx frontend dependencies
+        working-directory: web
+        run: bun install --frozen-lockfile
+      - name: Check the Onyx frontend
+        working-directory: web
+        run: bun run types:check

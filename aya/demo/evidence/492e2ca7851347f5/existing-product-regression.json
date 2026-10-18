@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "actual": {
+    "columns": [
+      "value"
+    ],
+    "rows": [
+      [
+        "missing"
+      ],
+      [
+        0
+      ],
+      [
+        "missing"
+      ]
+    ],
+    "csv": "\"value\"\n\"missing\"\n0\n\"missing\"\n",
+    "module_sha256": "58962c252d7c35a92ee45f0ca7bb7f41b2dfa64e52c819d98f94cf60dbf503bf",
+    "commit": "8b98a8c804fefa69d9c4232d2997c744ae8dc244"
+  },
+  "expected": {
+    "columns": [
+      "value"
+    ],
+    "rows": [
+      [
+        "missing"
+      ],
+      [
+        0
+      ],
+      [
+        "missing"
+      ]
+    ],
+    "csv": "\"value\"\n\"missing\"\n0\n\"missing\"\n"
+  }
+}

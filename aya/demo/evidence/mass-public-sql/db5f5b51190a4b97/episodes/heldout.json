@@ -1,0 +1,51 @@
+{
+  "native_audit": {
+    "api_calls": 9,
+    "child_sessions": 0,
+    "input_tokens": 25697,
+    "output_tokens": 9306,
+    "provider_cost_usd": null,
+    "session_count": 1
+  },
+  "results": {
+    "benchmark": "public-sql",
+    "case_manifest_sha256": "e372da054ff1028d336d28830454ef4c9900c1a064f11c35970777e809a3a4b0",
+    "case_sha256": "e372da054ff1028d336d28830454ef4c9900c1a064f11c35970777e809a3a4b0",
+    "dataset_sha256": "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1",
+    "dataset_source_sha256": "5ddff97bb1d421282c593e8d30ce0ce107270f4dd4a21d60eba4bf287d5956b1",
+    "evaluator_sha256": "dbf310aae359ecb81ec2396ce0c0859ede1adcf0e27e9151e861a5a4fe66c166",
+    "executor_source_sha256": "8a7c2bd181dd974afce8d17ea49d00449700c6eeeda6a49dbb815a4ac8a18ae2",
+    "metric": "single-database execution agreement; not Spider official test-suite accuracy",
+    "passed": 3,
+    "protocol_valid": true,
+    "split": "heldout",
+    "task_passed": 3,
+    "task_total": 6,
+    "total": 6
+  },
+  "status": {
+    "passed": 3,
+    "split": "heldout",
+    "status": "completed",
+    "total": 6
+  },
+  "telemetry": {
+    "observations": 0,
+    "observed_count": 0,
+    "recorded_at": "2026-10-17T23:25:37.148105+00:00",
+    "run_id": "db5f5b51190a4b97-heldout",
+    "scores": 1,
+    "status": "verified",
+    "trace_id": "aa891b7b9cada476da17bb88a2c39908",
+    "trajectory_revision": "f0e7a3b00f94ec1042e985c74db020c851bc67c8ee541a4f25d1d53d1f8c5a38",
+    "verified_at": "2026-10-17T23:25:44.287917+00:00"
+  },
+  "usage": {
+    "api_calls": 9,
+    "child_sessions": 0,
+    "elapsed_seconds": 101.34,
+    "input_tokens": 25697,
+    "output_tokens": 9306,
+    "provider_cost_usd": null
+  }
+}

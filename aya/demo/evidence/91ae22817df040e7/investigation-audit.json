@@ -1,0 +1,39 @@
+{
+  "sessions": [
+    {
+      "id": "20261017_213853_b50a8e",
+      "source": "subagent",
+      "parent_session_id": "20261017_213826_80f3c4",
+      "tool_call_count": 0,
+      "input_tokens": 13093,
+      "output_tokens": 1457,
+      "api_call_count": 1,
+      "tools": []
+    },
+    {
+      "id": "20261017_213826_80f3c4",
+      "source": "cli",
+      "parent_session_id": null,
+      "tool_call_count": 19,
+      "input_tokens": 22662,
+      "output_tokens": 6483,
+      "api_call_count": 16,
+      "tools": [
+        "delegate_task",
+        "execute_code",
+        "mcp__rea__binary_session",
+        "mcp__rea__procedure_pseudo_code",
+        "mcp__rea__search_procedures",
+        "skill_view",
+        "terminal",
+        "tool_call",
+        "tool_describe",
+        "write_file"
+      ]
+    }
+  ],
+  "child_sessions": 1,
+  "api_calls": 17,
+  "input_tokens": 35755,
+  "output_tokens": 7940
+}

@@ -1,0 +1,114 @@
+{
+  "total": 3,
+  "passed": 3,
+  "reference": {
+    "source_sha256": "3d362c60eb258dba706b838092dc41cc892dee00b541c9ff1b924c35bd2e9b64",
+    "schema_observed": true,
+    "results": [
+      {
+        "sql": "SELECT repo, stars FROM repositories ORDER BY stars DESC, repo LIMIT 3",
+        "rows": [
+          [
+            "fw-ai/cookbook",
+            228
+          ],
+          [
+            "perplexityai/api-cookbook",
+            202
+          ],
+          [
+            "youdotcom-oss/agent-skills",
+            92
+          ]
+        ]
+      },
+      {
+        "sql": "SELECT owner, SUM(stars) AS stars FROM repositories GROUP BY owner ORDER BY owner",
+        "rows": [
+          [
+            "crusoecloud",
+            11
+          ],
+          [
+            "fw-ai",
+            228
+          ],
+          [
+            "perplexityai",
+            202
+          ],
+          [
+            "youdotcom-oss",
+            98
+          ]
+        ]
+      },
+      {
+        "sql": "SELECT COUNT(*) AS total FROM repositories",
+        "rows": [
+          [
+            6
+          ]
+        ]
+      }
+    ],
+    "scope": "Executed selected unmodified upstream AST functions; training and embeddings excluded"
+  },
+  "actual": [
+    {
+      "columns": [
+        "repo",
+        "stars"
+      ],
+      "rows": [
+        [
+          "fw-ai/cookbook",
+          228
+        ],
+        [
+          "perplexityai/api-cookbook",
+          202
+        ],
+        [
+          "youdotcom-oss/agent-skills",
+          92
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "owner",
+        "stars"
+      ],
+      "rows": [
+        [
+          "crusoecloud",
+          11
+        ],
+        [
+          "fw-ai",
+          228
+        ],
+        [
+          "perplexityai",
+          202
+        ],
+        [
+          "youdotcom-oss",
+          98
+        ]
+      ]
+    },
+    {
+      "columns": [
+        "total"
+      ],
+      "rows": [
+        [
+          6
+        ]
+      ]
+    }
+  ],
+  "dataset_sha256": "7fa4760f3851c981b0e15b9d1f1da568aa5e4ac39f5af6f68d9cd752e98378d0"
+}

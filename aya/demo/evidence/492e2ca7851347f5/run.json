@@ -1,0 +1,16 @@
+{
+  "id": "492e2ca7851347f5",
+  "status": "complete",
+  "stage": "Ready to try",
+  "issue_number": 1,
+  "target_repository": "Ali-Maq/crusoe-developer-hub",
+  "profile": "crusoe-repository-analyst",
+  "started_at": "2026-10-17T22:03:53.513055+00:00",
+  "sandbox": "aya-feature",
+  "passed": 118,
+  "total": 118,
+  "error": null,
+  "completed_at": "2026-10-17T22:12:00.678041+00:00",
+  "commit": "8c25ac624af5c913e3f15479414335fbf322c586",
+  "pr_url": "https://github.com/Ali-Maq/crusoe-developer-hub/pull/2"
+}

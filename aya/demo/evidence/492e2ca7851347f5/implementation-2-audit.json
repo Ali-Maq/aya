@@ -1,0 +1,42 @@
+{
+  "sessions": [
+    {
+      "id": "20261017_220818_229b52",
+      "source": "subagent",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "billing_provider": "custom",
+      "parent_session_id": "20261017_220731_282eb8",
+      "tool_call_count": 14,
+      "input_tokens": 26210,
+      "output_tokens": 11664,
+      "api_call_count": 14,
+      "tools": [
+        "execute_code",
+        "read_file"
+      ]
+    },
+    {
+      "id": "20261017_220731_282eb8",
+      "source": "cli",
+      "model": "deepseek-ai/DeepSeek-V4-Pro",
+      "billing_provider": "custom",
+      "parent_session_id": null,
+      "tool_call_count": 33,
+      "input_tokens": 29869,
+      "output_tokens": 11379,
+      "api_call_count": 30,
+      "tools": [
+        "delegate_task",
+        "patch",
+        "read_file",
+        "search_files",
+        "skill_view",
+        "terminal"
+      ]
+    }
+  ],
+  "child_sessions": 1,
+  "api_calls": 44,
+  "input_tokens": 56079,
+  "output_tokens": 23043
+}
