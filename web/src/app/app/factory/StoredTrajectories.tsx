@@ -41,7 +41,7 @@ type SelectionResponse = TrajectorySelection | PreparingSelection;
 
 async function fetchSelection(url: string): Promise<SelectionResponse> {
   const response = await fetch(url);
-  const value = await response.json();
+  const value: SelectionResponse & { error?: string } = await response.json();
   if (!response.ok) throw new Error(value.error || response.statusText);
   return value;
 }

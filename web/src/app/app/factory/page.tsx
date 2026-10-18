@@ -80,7 +80,7 @@ interface Answer {
 
 async function fetchJson<T>(url: string): Promise<T> {
   const response = await fetch(url);
-  const value = await response.json();
+  const value: T & { error?: string } = await response.json();
   if (!response.ok) throw new Error(value.error || response.statusText);
   return value;
 }
@@ -95,7 +95,7 @@ async function post<T>(path: string, body: FactoryCommand): Promise<T> {
     headers: { "Content-Type": "application/json", "X-AYA-Request": "1" },
     body: JSON.stringify(body),
   });
-  const value = await response.json();
+  const value: T & { error?: string } = await response.json();
   if (!response.ok) throw new Error(value.error || response.statusText);
   return value;
 }
@@ -483,7 +483,7 @@ export default function FactoryPage() {
                         </Button>
                       ))}
                     {detail.run.status === "complete" &&
-                      detail.run.profile !== "crusoe-repository-analyst" && (
+                      detail.run.profile === "saved-json-export" && (
                         <Button
                           size="sm"
                           prominence="tertiary"
@@ -559,7 +559,7 @@ export default function FactoryPage() {
                           active === run.id ? "secondary" : "tertiary"
                         }
                         onClick={() => setSelected(run.id)}
-                      >{`${run.profile === "crusoe-repository-analyst" ? t("sqlDemo") : t("jsonDemo")} · ${format.dateTime(new Date(run.started_at), { hour: "numeric", minute: "numeric" })} · ${run.status}`}</Button>
+                      >{`${run.target_repository || run.profile || t("jsonDemo")} · ${format.dateTime(new Date(run.started_at), { hour: "numeric", minute: "numeric" })} · ${run.status}`}</Button>
                     ))}
                   </div>
                 </details>

@@ -81,7 +81,7 @@ interface MassDetail {
 
 async function fetchMass<T>(url: string): Promise<T> {
   const response = await fetch(url);
-  const value = await response.json();
+  const value: T & { error?: string } = await response.json();
   if (!response.ok) throw new Error(value.error || response.statusText);
   return value;
 }
