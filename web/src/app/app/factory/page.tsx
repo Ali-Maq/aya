@@ -469,7 +469,9 @@ export default function FactoryPage() {
                       ?.filter(
                         (check) =>
                           check.conclusion === "success" &&
-                          ["aya-sql", "contract"].includes(check.name)
+                          ["aya-sql", "contract", "aya-usage"].includes(
+                            check.name
+                          )
                       )
                       .slice(0, 1)
                       .map((check) => (
@@ -564,102 +566,105 @@ export default function FactoryPage() {
                   </div>
                 </details>
               </section>
-              <section className="flex min-w-0 flex-col gap-4 rounded-16 border border-border-01 bg-background-neutral-00 p-6">
-                <div>
-                  <Text as="h3" font="heading-h3">
-                    {t("tryFeature")}
-                  </Text>
-                  <Text as="p" color="text-03">
-                    {deployed ? t("tryDescription") : t("tryPending")}
-                  </Text>
-                </div>
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <div className="min-w-0 flex-1">
-                    <InputTypeIn
-                      aria-label={t("questionLabel")}
-                      value={question}
-                      onChange={(event) => setQuestion(event.target.value)}
-                      placeholder={t("exampleQuestion")}
-                      maxLength={1000}
-                    />
+              {(!detail ||
+                detail.run.profile === "crusoe-repository-analyst") && (
+                <section className="flex min-w-0 flex-col gap-4 rounded-16 border border-border-01 bg-background-neutral-00 p-6">
+                  <div>
+                    <Text as="h3" font="heading-h3">
+                      {t("tryFeature")}
+                    </Text>
+                    <Text as="p" color="text-03">
+                      {deployed ? t("tryDescription") : t("tryPending")}
+                    </Text>
                   </div>
-                  <Button disabled={!deployed || asking} onClick={ask}>
-                    {asking ? t("asking") : t("askCrusoe")}
-                  </Button>
-                </div>
-                {answer && (
-                  <div className="flex min-w-0 flex-col gap-4">
-                    <details>
-                      <summary className="cursor-pointer">
-                        <Text font="secondary-action">
-                          {t("modelExplanation")}
-                        </Text>
-                      </summary>
-                      <MinimalMarkdown content={answer.answer} />
-                    </details>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left">
-                        <thead>
-                          <tr>
-                            {answer.columns.map((column, index) => (
-                              <th
-                                key={`${column}-${index}`}
-                                className="border-b border-border-01 p-3"
-                              >
-                                <Text font="secondary-action">{column}</Text>
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {answer.rows.map((row, index) => (
-                            <tr key={index}>
-                              {row.map((cell, column) => (
-                                <td
-                                  key={column}
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <div className="min-w-0 flex-1">
+                      <InputTypeIn
+                        aria-label={t("questionLabel")}
+                        value={question}
+                        onChange={(event) => setQuestion(event.target.value)}
+                        placeholder={t("exampleQuestion")}
+                        maxLength={1000}
+                      />
+                    </div>
+                    <Button disabled={!deployed || asking} onClick={ask}>
+                      {asking ? t("asking") : t("askCrusoe")}
+                    </Button>
+                  </div>
+                  {answer && (
+                    <div className="flex min-w-0 flex-col gap-4">
+                      <details>
+                        <summary className="cursor-pointer">
+                          <Text font="secondary-action">
+                            {t("modelExplanation")}
+                          </Text>
+                        </summary>
+                        <MinimalMarkdown content={answer.answer} />
+                      </details>
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                          <thead>
+                            <tr>
+                              {answer.columns.map((column, index) => (
+                                <th
+                                  key={`${column}-${index}`}
                                   className="border-b border-border-01 p-3"
                                 >
-                                  <Text font="secondary-body">
-                                    {cell === null ? "null" : String(cell)}
-                                  </Text>
-                                </td>
+                                  <Text font="secondary-action">{column}</Text>
+                                </th>
                               ))}
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                    <pre className="overflow-x-auto rounded-12 bg-background-neutral-02 p-4">
-                      <Text font="secondary-mono">{answer.sql}</Text>
-                    </pre>
-                    <Text font="secondary-body" color="text-03">
-                      {t("liveProof", {
-                        model: answer.model,
-                        count: answer.sources.length,
-                        commit: answer.commit.slice(0, 8),
-                      })}
-                    </Text>
-                    <details>
-                      <summary className="cursor-pointer">
-                        <Text>{t("queryEvidence")}</Text>
-                      </summary>
-                      <pre className="max-h-80 overflow-auto whitespace-pre-wrap break-words p-3">
-                        <Text font="secondary-mono">
-                          {JSON.stringify(
-                            {
-                              fetched_at: answer.fetched_at,
-                              sources: answer.sources,
-                              trace: answer.trace,
-                            },
-                            null,
-                            2
-                          )}
-                        </Text>
+                          </thead>
+                          <tbody>
+                            {answer.rows.map((row, index) => (
+                              <tr key={index}>
+                                {row.map((cell, column) => (
+                                  <td
+                                    key={column}
+                                    className="border-b border-border-01 p-3"
+                                  >
+                                    <Text font="secondary-body">
+                                      {cell === null ? "null" : String(cell)}
+                                    </Text>
+                                  </td>
+                                ))}
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      <pre className="overflow-x-auto rounded-12 bg-background-neutral-02 p-4">
+                        <Text font="secondary-mono">{answer.sql}</Text>
                       </pre>
-                    </details>
-                  </div>
-                )}
-              </section>
+                      <Text font="secondary-body" color="text-03">
+                        {t("liveProof", {
+                          model: answer.model,
+                          count: answer.sources.length,
+                          commit: answer.commit.slice(0, 8),
+                        })}
+                      </Text>
+                      <details>
+                        <summary className="cursor-pointer">
+                          <Text>{t("queryEvidence")}</Text>
+                        </summary>
+                        <pre className="max-h-80 overflow-auto whitespace-pre-wrap break-words p-3">
+                          <Text font="secondary-mono">
+                            {JSON.stringify(
+                              {
+                                fetched_at: answer.fetched_at,
+                                sources: answer.sources,
+                                trace: answer.trace,
+                              },
+                              null,
+                              2
+                            )}
+                          </Text>
+                        </pre>
+                      </details>
+                    </div>
+                  )}
+                </section>
+              )}
               {detail && (
                 <details className="min-w-0 rounded-16 border border-border-01 p-5">
                   <summary className="cursor-pointer">

@@ -8,7 +8,7 @@ The verification includes the AYA working changes on this base.
 
 ## 1. What the user experiences
 
-An administrator opens the Factory view in Onyx. Two peer tabs separate component recovery from agent improvement. The reverse-engineering tab shows GitHub requests, delivery evidence, and live component use. The agent-improvement tab shows bounded MASS text-to-SQL experiments, public agent actions, strategy changes, verified Langfuse records, and Crusoe training status. Tab selection persists in the URL. Run history shows each target repository. Only the saved JSON profile links to Open WebUI.
+An administrator opens the Factory view in Onyx. Two peer tabs separate component recovery from agent improvement. The reverse-engineering tab shows GitHub requests, delivery evidence, and live component use. The agent-improvement tab shows bounded MASS text-to-SQL experiments, public agent actions, strategy changes, verified Langfuse records, and Crusoe training status. Tab selection persists in the URL. Run history shows each target repository. Only the saved JSON profile links to Open WebUI. The live SQL form appears only for SQL runs. Reference and live-check labels also cover documentation-based experiments, including the operator-run NemoClaw usage build.
 Each request names a target repository. Onyx is the factory interface.
 
 ## 2. Surfaces
